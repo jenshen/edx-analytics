@@ -1,0 +1,31 @@
+nav#visualizations{
+    padding: 0;
+
+    ul{
+        list-style: none;
+    }
+
+    li{
+
+        border-right: 5px solid $gray;
+        @include box-sizing(border-box);
+        padding: 1em 0.5em;
+        text-align: right;
+        color: $black;
+        @include transition(background-color .25s, border .25s ease);
+
+        &:hover{
+            background-color: lighten($red,20);
+            border-right: 15px solid $red;
+            color: white;
+            // box-shadow: 0px 2px 5px $red inset;
+        }
+        &.selected{
+            background-color: lighten($red,20);
+            border-right: 5px solid $red;
+            color: white;
+        }
+
+
+    }
+}
