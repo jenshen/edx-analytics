@@ -12,42 +12,66 @@ var dropDownLabel = function(options, select) {
     }
   };
   
+// Generates random data when filter selected
+
+
 $(document).ready(function() {
+    var filter = function(element, checked) {
+      var n = 4, // number of layers
+      m = 50, // number of samples per layer
+      stack = d3.layout.stack(),
+      layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
+      yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+      yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+        layer = svg.selectAll(".layer")
+            .data(layers)
+            .attr("class", "layer")
+            .style("fill", function(d, i) { return color(i); });
+
+        rect = layer.selectAll("rect")
+            .data(function(d) { return d; })
+            .attr("x", function(d) { return x(d.x); })
+            .attr("y", height)
+            .attr("width", x.rangeBand())
+            .attr("height", 0);
+    };
+
     $('.multiselect.video-filter').multiselect({
     	includeSelectAllOption: true,
     	includeSelectAllDivider: true,
-        enableCaseInsensitiveFiltering: true,
-      	filterBehavior: 'both',
-      	buttonWidth: '240px',
-        nonSelectedText: 'All Videos',
+      enableCaseInsensitiveFiltering: true,
+      filterBehavior: 'both',
+      buttonWidth: '240px',
+      nonSelectedText: 'All Videos',
     	buttonText: dropDownLabel,
-        onChange: filter,
+      onChange: filter
     });
 
     $('.geo-filter').multiselect({
     	includeSelectAllOption: true,
     	includeSelectAllDivider: true,
-        enableCaseInsensitiveFiltering: true,
-      	filterBehavior: 'both',
-        nonSelectedText: 'All Countries',
+      enableCaseInsensitiveFiltering: true,
+      filterBehavior: 'both',
+      nonSelectedText: 'All Countries',
     	buttonText: dropDownLabel,
-        onChange: filter,
+      onChange: filter
     });
 
     $('.edu-filter').multiselect({
     	includeSelectAllOption: true,
     	includeSelectAllDivider: true,
-        enableCaseInsensitiveFiltering: true,
-      	filterBehavior: 'both',
-        nonSelectedText: 'All Educations',
+      enableCaseInsensitiveFiltering: true,
+      filterBehavior: 'both',
+      nonSelectedText: 'All Educations',
     	buttonText: dropDownLabel,
-        onChange: filter,
+      onChange: filter
     });
 
     $('.time-filter').multiselect({
-        enableCaseInsensitiveFiltering: true,
-      	filterBehavior: 'both',
-        onChange: filter,
+      enableCaseInsensitiveFiltering: true,
+    	filterBehavior: 'both',
+      onChange: filter
     });
 
     var n = 4, // number of layers
@@ -80,10 +104,8 @@ $(document).ready(function() {
       .orient("bottom");
 
     var svg = d3.select(".graph").append("svg").append("g");
-
-      console.log(svg);
-
-      var layer = svg.selectAll(".layer")
+    
+    var layer = svg.selectAll(".layer")
           .data(layers)
           .enter().append("g")
           .attr("class", "layer")
@@ -164,29 +186,5 @@ $(document).ready(function() {
         for (i = 0; i < 5; ++i) bump(a);
         return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
       }
-
-      // Generates random data when filter selected
-      function filter () {
-        console.log("hi");
-        var n = 4, // number of layers
-        m = 50, // number of samples per layer
-        stack = d3.layout.stack(),
-        layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
-        yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-        yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
-
-          layer = svg.selectAll(".layer")
-              .data(layers)
-              .attr("class", "layer")
-              .style("fill", function(d, i) { return color(i); });
-
-          rect = layer.selectAll("rect")
-              .data(function(d) { return d; })
-              .attr("x", function(d) { return x(d.x); })
-              .attr("y", height)
-              .attr("width", x.rangeBand())
-              .attr("height", 0);
-      }
-
 });
 
