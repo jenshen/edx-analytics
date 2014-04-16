@@ -1,8 +1,4 @@
-$red: rgb(152,51,50);
-$black: #444;
-$blue: #1693A5;
-$green: #55aa74;
-$gray: #999;
+@import "utilities/colors";
 
 @mixin box-sizing($type){
     -webkit-box-sizing: $type;

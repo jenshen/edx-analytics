@@ -2,15 +2,17 @@ Visualizations = new Meteor.Collection("visualizations");
 
 if (Meteor.isClient) {
   UI.registerHelper('overview',function() {
-    summary = Visualizations.findOne({name: 'Course Summary'});
-    if(typeof(summary) != 'undefined') {
-      if (typeof(Session.get('selected')) == 'undefined'){
+    if (typeof(Session.get('selected')) == 'undefined'){
+      summary = Visualizations.findOne({name: 'Course Summary'});
+      if(typeof(summary) != 'undefined') {
         console.log('test')
         Session.set('selected', summary._id);
+      }else{
+       return []; 
       }
+
+    }else{
       return Visualizations.findOne({_id: Session.get('selected')})
-    }else {
-      return [];
     }
   });
   Template.visualizations.standard = function() {
