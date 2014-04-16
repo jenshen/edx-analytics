@@ -2,7 +2,16 @@ Visualizations = new Meteor.Collection("visualizations");
 
 if (Meteor.isClient) {
   UI.registerHelper('overview',function() {
-    return Visualizations.findOne({name: 'Course Summary'})
+    summary = Visualizations.findOne({name: 'Course Summary'});
+    if(typeof(summary) != 'undefined') {
+      if (typeof(Session.get('selected')) == 'undefined'){
+        console.log('test')
+        Session.set('selected', summary._id);
+      }
+      return Visualizations.findOne({_id: Session.get('selected')})
+    }else {
+      return [];
+    }
   });
   Template.visualizations.standard = function() {
     return Visualizations.find({
@@ -15,13 +24,9 @@ if (Meteor.isClient) {
   Template.visualizations.events = {
     'click li': function(event) {
       Session.set("selected", this._id);
-      console.log(this);
-      $('#content').html('');
-      UI.insert(UI.renderWithData(Template.visualization,this), $('#content').get(0));
     }
   };
   Template.visualization.rendered = function () {
-    console.log(this.find('.data'))
     $(this.firstNode).css('opacity', 1);
   }
 }
