@@ -1,0 +1,106 @@
+$red: rgb(152,51,50);
+$black: #444;
+$blue: #1693A5;
+$green: #55aa74;
+$gray: #999;
+
+@mixin box-sizing($type){
+    -webkit-box-sizing: $type;
+    -moz-box-sizing: $type;
+    box-sizing: $type;
+}
+
+html, body{
+    color: $black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    background-color: lighten($gray,20);
+}
+
+
+#app{
+    
+}
+
+header{
+    border-bottom: 1px solid lighten($gray,20);
+    overflow: hidden;
+    padding: 0.5em;
+    background-color: white;
+
+    #logo{
+        float: left;
+    }
+
+    #welcome{
+        float: right;
+        line-height: 57px;
+        font-size: 1.5em;
+    }
+}
+
+#content{
+    background-color: white;
+    height: 1000px;
+}
+
+#visualization{
+    opacity: 0;
+    transition: opacity 250ms;
+    .heading{
+        border-bottom: 1px solid lighten($gray,20);
+
+        h1{
+            font-size: 2em;
+            font-weight: 300;
+        }
+    }
+
+    .data{
+        
+        margin-top: 1em;
+        
+    }
+
+    iframe{
+        width: 100%;
+        border: 0;
+        height: 600px;
+    }
+}
+
+nav#visualizations{
+    padding: 0;
+
+    ul{
+        list-style: none;
+    }
+
+    li{
+
+        border-right: 5px solid $gray;
+        @include box-sizing(border-box);
+        padding: 1em 0.5em;
+        text-align: left;
+        color: $black;
+        -webkit-transition: background-color .25s, border .25s ease;
+        transition: background-color .25s, border .25s ease;
+
+        &:hover{
+            background-color: lighten($red,20);
+            border-right: 15px solid $red;
+            color: white;
+            // box-shadow: 0px 2px 5px $red inset;
+        }
+        &.selected{
+            background-color: lighten($red,20);
+            border-right: 5px solid $red;
+            color: white;
+        }
+
+
+    }
+}

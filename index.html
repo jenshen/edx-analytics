@@ -3,11 +3,44 @@
 </head>
 
 <body>
-  {{> hello}}
+    <div id="app">
+        <header>
+            <div id="logo">
+                <img src="img/mitx.png">
+            </div>
+            <div id="welcome">
+                Hi Bob! Welcome to PhilosophyX
+            </div>
+        </header>
+        <nav id='visualizations' class="small-2 columns">
+            {{> visualizations}}
+        </nav>
+        <section id="content" class="small-10 columns">
+            {{> visualization overview}}
+        </section>
+    </div>
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="visualizations">
+    <ul>
+        {{#each standard}}
+            <li class="{{selected}}">{{name}}</li>
+        {{else}}
+            <li>No Visualizations</li>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="visualization">
+    <div id='visualization'>
+        <div class='heading'>
+            <h1>{{name}}</h1>
+        </div>
+
+        <div class='data'>
+            <iframe src="{{url}}">
+                
+            </iframe>
+        </div>
+    </div>
 </template>

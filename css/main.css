@@ -1,0 +1,62 @@
+html, body {
+  color: #444444;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #cccccc; }
+
+header {
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+  padding: 0.5em;
+  background-color: white; }
+  header #logo {
+    float: left; }
+  header #welcome {
+    float: right;
+    line-height: 57px;
+    font-size: 1.5em; }
+
+#content {
+  background-color: white;
+  height: 1000px; }
+
+#visualization {
+  opacity: 0;
+  transition: opacity 250ms; }
+  #visualization .heading {
+    border-bottom: 1px solid #cccccc; }
+    #visualization .heading h1 {
+      font-size: 2em;
+      font-weight: 300; }
+  #visualization .data {
+    margin-top: 1em; }
+  #visualization iframe {
+    width: 100%;
+    border: 0;
+    height: 600px; }
+
+nav#visualizations {
+  padding: 0; }
+  nav#visualizations ul {
+    list-style: none; }
+  nav#visualizations li {
+    border-right: 5px solid #999999;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1em 0.5em;
+    text-align: left;
+    color: #444444;
+    -webkit-transition: background-color .25s, border .25s ease;
+    transition: background-color .25s, border .25s ease; }
+    nav#visualizations li:hover {
+      background-color: #cc6564;
+      border-right: 15px solid #983332;
+      color: white; }
+    nav#visualizations li.selected {
+      background-color: #cc6564;
+      border-right: 5px solid #983332;
+      color: white; }
