@@ -15,6 +15,8 @@ if (Meteor.isClient) {
       return Visualizations.findOne({_id: Session.get('selected')})
     }
   });
+
+  // Visualizations Templates
   Template.visualizations.standard = function() {
     return Visualizations.find({
       standard: true
@@ -28,6 +30,23 @@ if (Meteor.isClient) {
       Session.set("selected", this._id);
     }
   };
+
+  // Favorites Templates
+  Template.favorites.events = {
+    'click li': function(event) {
+      Session.set("selected", this._id);
+    }
+  };
+  Template.favorites.favs = function() {
+      return Visualizations.find({
+        favorite: true
+      });
+  }
+  Template.favorites.selected = function() {
+    return Session.equals("selected", this._id) ? "selected" : '';
+  };
+
+  // Visualization Template
   Template.visualization.rendered = function () {
     $(this.firstNode).css('opacity', 1);
   };
@@ -56,7 +75,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'http://www.w3schools.com'
+        url: 'filter.html'
       });
       Visualizations.insert({
         name: 'Demographics',
@@ -64,7 +83,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'http://www.w3schools.com'
+        url: 'filter.html'
       });
       Visualizations.insert({
         name: 'Video Activity',
@@ -72,7 +91,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'http://www.w3schools.com'
+        url: 'filter.html'
       });
       Visualizations.insert({
         name: 'Forum Activity',
@@ -80,7 +99,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'http://www.w3schools.com'
+        url: 'filter.html'
       });
       Visualizations.insert({
         name: 'Certifications',
@@ -88,7 +107,7 @@ if (Meteor.isServer) {
         ready: false,
         iframe: true,
         favorite: false,
-        url: 'http://www.w3schools.com'
+        url: 'filter.html'
       });
     }
   });
