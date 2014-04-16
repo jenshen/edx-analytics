@@ -1,6 +1,6 @@
 .main {
 	margin: 0 auto;
-	width: 80%;
+	width: 60%;
 	border: solid 1px gray;
 }
 
@@ -9,4 +9,16 @@
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.multiselect {
+	text-align: left;
+	width: 160px;
+	margin: auto 6px;
+}
+
+.multiselect b.caret {
+	position: absolute;
+	top: 14px;
+	right: 8px;
 }
