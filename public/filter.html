@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="bootstrap-multiselect/css/bootstrap.min.css" type="text/css"/>
 <link rel="stylesheet" href="bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css"/>
-<link rel="stylesheet" href="css/style.css" type="text/css"/>
+<link rel="stylesheet" href="css/filter.css" type="text/css"/>
 
 <script type="text/javascript" src="bootstrap-multiselect/js/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap-multiselect/js/bootstrap.min.js"></script>
@@ -40,11 +40,13 @@
 	  <option>Last Month</option>
 	  <option>All Time</option>
 	</select>
+
+	<form>
+    	<label><input type="radio" name="mode" value="grouped"> Grouped</label>
+		<label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+	</form>
+	<div class="graph">
+	
+	</div>
 </div>
-
-<form>
-    <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-	<label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-</form>
-
 </html>
