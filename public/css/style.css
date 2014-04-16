@@ -3,3 +3,10 @@
 	width: 80%;
 	border: solid 1px gray;
 }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
