@@ -1,10 +1,6 @@
+@import "compass/reset";
+@import "compass";
 @import "utilities/colors";
-
-@mixin box-sizing($type){
-    -webkit-box-sizing: $type;
-    -moz-box-sizing: $type;
-    box-sizing: $type;
-}
 
 html, body{
     color: $black;
@@ -15,7 +11,6 @@ html, body{
     margin: 0;
     background-color: lighten($gray,20);
 }
-
 
 #app{
     
