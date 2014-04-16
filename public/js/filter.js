@@ -21,7 +21,7 @@ $(document).ready(function() {
       	buttonWidth: '240px',
         nonSelectedText: 'All Videos',
     	buttonText: dropDownLabel,
-        onChange: change
+        onChange: filter,
     });
 
     $('.geo-filter').multiselect({
@@ -48,13 +48,13 @@ $(document).ready(function() {
     });
 
     var n = 4, // number of layers
-        m = 58, // number of samples per layer
+        m = 50, // number of samples per layer
         stack = d3.layout.stack(),
         layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
         yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
         yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
-    var margin = {top: 40, right: 10, bottom: 20, left: 10},
+    var margin = {top: 40, right: 100, bottom: 20, left: 100},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -160,5 +160,29 @@ $(document).ready(function() {
         for (i = 0; i < 5; ++i) bump(a);
         return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
       }
+
+      // Generates random data when filter selected
+      function filter () {
+        console.log("hi");
+        var n = 4, // number of layers
+        m = 50, // number of samples per layer
+        stack = d3.layout.stack(),
+        layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
+        yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+        yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+          layer = svg.selectAll(".layer")
+              .data(layers)
+              .attr("class", "layer")
+              .style("fill", function(d, i) { return color(i); });
+
+          rect = layer.selectAll("rect")
+              .data(function(d) { return d; })
+              .attr("x", function(d) { return x(d.x); })
+              .attr("y", height)
+              .attr("width", x.rangeBand())
+              .attr("height", 0);
+      }
+
 });
 
