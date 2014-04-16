@@ -12,19 +12,23 @@
                 Hi Bob! Welcome to PhilosophyX
             </div>
         </header>
-        <nav id='visualizations' class="small-2 columns">
-            {{> visualizations}}
-        </nav>
-        <section id="content" class="small-10 columns">
-            {{> visualization overview}}
-        </section>
+        <div id="main-wrapper">
+            <aside id='visualizations'>
+                {{> visualizations}}
+            </aside>
+            <section id="content">
+                {{> visualization overview}}
+            </section>
+        </div>
     </div>
 </body>
 
 <template name="visualizations">
     <ul>
         {{#each standard}}
-            <li class="{{selected}}">{{name}}</li>
+            <li class="{{selected}}">
+                <a href='#'>{{name}}</a>
+            </li>
         {{else}}
             <li>No Visualizations</li>
         {{/each}}
