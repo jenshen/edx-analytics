@@ -14,31 +14,48 @@
         </header>
         <div id="main-wrapper">
             <aside id='visualizations'>
-                {{> visualizations}}
+                <ul>
+                    {{> visualizations}}
+                    {{> favorites}}
+                </ul>
             </aside>
             <section id="content">
-                {{> visualization overview}}
+                {{> visualization mainContent}}
             </section>
         </div>
     </div>
 </body>
 
 <template name="visualizations">
-    <ul>
-        {{#each standard}}
-            <li class="{{selected}}">
-                <a href='#'>{{name}}</a>
-            </li>
-        {{else}}
-            <li>No Visualizations</li>
-        {{/each}}
-    </ul>
+    {{#each standard}}
+        <li class="{{selected}}">
+            <a href='#'>{{name}}</a>
+        </li>
+    {{else}}
+        <li>No Visualizations</li>
+    {{/each}}
+</template>
+<template name="favorites">
+    {{#each favorites}}
+        <li class="favorites {{selected}}">
+            <a href='#'>{{name}}</a>
+        </li>
+    {{else}}
+        <li class='favorites'>
+            <a href='#'>No Favorites</a>
+        </li>
+    {{/each}}
 </template>
 
 <template name="visualization">
     <div id='visualization'>
         <div class='heading'>
             <h1>{{name}}</h1>
+            <ul class="controls">
+                <li id="favorite">Favorite</li>
+                <li id="share">Share</li>
+                <li id="download">Download</li>
+            </ul>
         </div>
 
         <div class='data'>

@@ -1,10 +1,12 @@
-/* line 1, ../scss/elements/_headings.scss */
+/* line 4, ../scss/elements/_headings.scss */
 h1 {
-  font-size: 2em;
+  font-size: 32px;
   font-weight: 300;
+  line-height: 48px;
+  margin: 0;
 }
 
-/* line 6, ../scss/elements/_headings.scss */
+/* line 11, ../scss/elements/_headings.scss */
 h2 {
   font-size: 1.5em;
   font-weight: 300;
@@ -78,14 +80,29 @@ html, body {
   box-sizing: border-box;
   border-bottom: 1px solid #cccccc;
 }
-/* line 14, ../scss/compounds/_visualization.scss */
+/* line 13, ../scss/compounds/_visualization.scss */
+#visualization .heading h1 {
+  float: left;
+}
+/* line 17, ../scss/compounds/_visualization.scss */
+#visualization .controls {
+  float: right;
+}
+/* line 22, ../scss/compounds/_visualization.scss */
+#visualization .controls li {
+  line-height: 48px;
+  display: inline-block;
+  list-style: none;
+  padding: 0em 1em;
+}
+/* line 29, ../scss/compounds/_visualization.scss */
 #visualization .data {
   position: absolute;
   top: 76px;
   bottom: 0;
   width: 100%;
 }
-/* line 20, ../scss/compounds/_visualization.scss */
+/* line 35, ../scss/compounds/_visualization.scss */
 #visualization iframe {
   width: 100%;
   height: 100%;
@@ -127,19 +144,19 @@ header #welcome {
 }
 /* line 30, ../scss/compounds/_navigation.scss */
 #visualizations li {
-  border-right: 5px solid #999999;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-bottom: 1px solid #cccccc;
-  padding: 1em;
-  padding-right: 0;
-  text-align: right;
-  color: #444444;
   -webkit-transition: background-color 0.25s, border 0.25s ease;
   -moz-transition: background-color 0.25s, border 0.25s ease;
   -o-transition: background-color 0.25s, border 0.25s ease;
   transition: background-color 0.25s, border 0.25s ease;
+  border-bottom: 1px solid #cccccc;
+  border-right: 5px solid #999999;
+  padding: 1em;
+  padding-right: 0;
+  text-align: right;
+  color: #444444;
 }
 /* line 39, ../scss/compounds/_navigation.scss */
 #visualizations li:hover {

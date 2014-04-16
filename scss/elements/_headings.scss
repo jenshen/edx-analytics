@@ -1,6 +1,11 @@
+$h1-height: 3*$font-size;
+$h1-font-size: 2*$font-size;
+
 h1{
-    font-size: 2em;
+    font-size: $h1-font-size;
     font-weight: 300;
+    line-height: $h1-height;
+    margin: 0;
 }
 
 h2{

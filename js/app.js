@@ -1,7 +1,7 @@
 Visualizations = new Meteor.Collection("visualizations");
 
 if (Meteor.isClient) {
-  UI.registerHelper('overview',function() {
+  UI.registerHelper('mainContent',function() {
     if (typeof(Session.get('selected')) == 'undefined'){
       summary = Visualizations.findOne({name: 'Course Summary'});
       if(typeof(summary) != 'undefined') {
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
   };
   Template.visualizations.selected = function() {
     return Session.equals("selected", this._id) ? "selected" : '';
-  }
+  };
   Template.visualizations.events = {
     'click li': function(event) {
       Session.set("selected", this._id);
@@ -30,11 +30,25 @@ if (Meteor.isClient) {
   };
   Template.visualization.rendered = function () {
     $(this.firstNode).css('opacity', 1);
-  }
+  };
+  Template.visualization.events = {
+    'click #favorite': function(event){
+      console.log('Favorited');
+      Visualizations.update(this._id, {$set: {favorite: true}});
+    },
+    'click #share': function(event){
+      console.log('Share');
+    },
+    'click #download': function(event){
+      console.log('Download');
+    }
+  };
+
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function() {
+    Visualizations.remove({});
     if (Visualizations.find().count() === 0) {
       Visualizations.insert({
         name: 'Course Summary',
