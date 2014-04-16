@@ -22,3 +22,8 @@
 	top: 14px;
 	right: 8px;
 }
+
+.container {
+	margin: 0 auto;
+	width: 960px;
+}
