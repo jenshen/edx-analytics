@@ -191,3 +191,7 @@ header #welcome {
   display: block;
   width: 100%;
 }
+/* line 68, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite {
+  background-color: #55aa74;
+}
