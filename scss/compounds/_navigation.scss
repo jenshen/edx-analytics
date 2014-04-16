@@ -29,7 +29,9 @@ header{
 
     li{
         @include box-sizing(border-box);
-        @include transition(background-color .25s, border .25s ease);
+        @include transition(background-color .25s ease-in-out,
+            background-image .25s ease-in-out,
+            border .25s ease);
         border-bottom: 1px solid lighten($gray,20);
         border-right: 5px solid $gray;
         padding: 1em;
@@ -66,6 +68,12 @@ header{
     }
 
     li.favorite{
-        background-color: $green;
+        // background-image: url('img/favorite.png');
+        // background-repeat: no-repeat;
+        // background-position: 10% 50%;
+        // background-size: 1.5em 1.5em;
+        // &:hover, &.selected{
+        //     background-size: 0em 0em;
+        // }
     }
 }

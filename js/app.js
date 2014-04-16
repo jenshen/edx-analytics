@@ -67,7 +67,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function() {
-    Visualizations.remove({});
+    // Visualizations.remove({});
     if (Visualizations.find().count() === 0) {
       Visualizations.insert({
         name: 'Course Summary',
