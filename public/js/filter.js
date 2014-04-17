@@ -75,15 +75,15 @@ $(document).ready(function() {
     });
 
     var n = 4, // number of layers
-        m = 40, // number of samples per layer
+        m = 30, // number of samples per layer
         stack = d3.layout.stack(),
         layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
         yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
         yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
     var margin = {top: 30, right: 30, bottom: 30, left: 30},
-        width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 700 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal()
         .domain(d3.range(m))
