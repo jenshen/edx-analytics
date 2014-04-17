@@ -125,11 +125,20 @@ header #logo {
   float: left;
   width: 300px;
 }
+<<<<<<< HEAD
 /* line 14, ../scss/compounds/_navigation.scss */
 header #img-logo {
   width: 100%;
 }
 /* line 18, ../scss/compounds/_navigation.scss */
+=======
+
+header #logo img {
+  max-height: 90%;
+}
+
+/* line 13, ../scss/compounds/_navigation.scss */
+>>>>>>> cdd0aeb762ac221509e160e34a3ace791bc12214
 header #welcome {
   float: right;
   line-height: 57px;
