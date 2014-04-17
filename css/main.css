@@ -124,6 +124,11 @@ header {
 header #logo {
   float: left;
 }
+
+header #logo img {
+  max-height: 90%;
+}
+
 /* line 13, ../scss/compounds/_navigation.scss */
 header #welcome {
   float: right;
