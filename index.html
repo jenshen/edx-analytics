@@ -12,7 +12,7 @@
             </div>
             <div id="welcome">
                 <span id="welcome-message">
-                    Hi Bob! Welcome to
+                    Welcome to
                 </span>
                 <select id="course-select">
                     <option value="PhilosophyX"><b>PhilosophyX</b></option>
@@ -23,7 +23,7 @@
             <aside id='visualizations'>
                 <ul>
                     {{> visualizations}}
-                    {{> favorites}}
+                    <!-- {{> favorites}} -->
                 </ul>
             </aside>
             <section id="content">
@@ -44,7 +44,9 @@
 <template name="visualizations">
     {{#each standard}}
         <li class="{{selected}}">
-            <a href='#'>{{name}}</a>
+            <div class="wrapper">
+                <a href='#'>{{name}}</a>
+            </div>
         </li>
     {{else}}
         <li>No Visualizations</li>
@@ -67,12 +69,12 @@
         <div class='heading'>
             <p>{{name}}</p>
             <ul class="controls">
-                <li id="favorite">
+<!--                 <li id="favorite">
                     <a href="#">Favorite</a>
                 </li>
                 <li id="share">
                     <a href="#">Share</a>
-                </li>
+                </li> -->
                 <li id="download">
                     <a href="data:text/csv;charset=utf-8,hello,world">Download</a>
                 </li>

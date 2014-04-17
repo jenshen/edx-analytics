@@ -75,7 +75,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'course_summary.html'
       });
       Visualizations.insert({
         name: 'Demographics',
@@ -83,7 +83,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter2.html'
+        url: 'demographics.html'
       });
       Visualizations.insert({
         name: 'Video Activity',
@@ -91,7 +91,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'video_activity.html'
       });
       Visualizations.insert({
         name: 'Forum Activity',
@@ -99,7 +99,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'forum_activity.html'
       });
       Visualizations.insert({
         name: 'Certifications',
@@ -107,7 +107,7 @@ if (Meteor.isServer) {
         ready: false,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'certifications.html'
       });
     }
   });

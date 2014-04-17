@@ -1,5 +1,11 @@
-$red: rgb(70,0,37);
+$edx-purple: rgb(179,38,104);
+$edx-blue: rgb(30,161,229);
+
+$red: rgb(152,51,50);
 $black: #444;
 $blue: #1693A5;
 $green: #55aa74;
 $gray: #999;
+
+$primary-color: darken($edx-blue, 20);
+$second-color: $edx-purple;
