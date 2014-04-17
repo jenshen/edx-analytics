@@ -83,7 +83,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'filter2.html'
       });
       Visualizations.insert({
         name: 'Video Activity',
