@@ -53,6 +53,8 @@ html, body {
 
 /* line 36, ../scss/elements/_containers.scss */
 #content {
+  position: relative;
+  left: -5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -62,6 +64,7 @@ html, body {
   overflow: hidden;
   padding: 1em;
   padding-bottom: 0;
+  border-left: 5px solid #999999;
 }
 
 /* line 3, ../scss/compounds/_visualization.scss */
@@ -132,11 +135,12 @@ header #img-logo {
 }
 /* line 18, ../scss/compounds/_navigation.scss */
 header #welcome {
+  padding-top: 15px;
   float: right;
   line-height: 57px;
   font-size: 1.4em;
 }
-/* line 24, ../scss/compounds/_navigation.scss */
+/* line 25, ../scss/compounds/_navigation.scss */
 header #course-select {
   font-weight: bold;
   width: 170px;
@@ -146,18 +150,18 @@ header #course-select {
   color: #2795B6;*/
 }
 
-/* line 34, ../scss/compounds/_navigation.scss */
+/* line 35, ../scss/compounds/_navigation.scss */
 #visualizations {
   padding: 0;
   width: 12em;
   display: block;
   float: left;
 }
-/* line 40, ../scss/compounds/_navigation.scss */
+/* line 41, ../scss/compounds/_navigation.scss */
 #visualizations ul {
   list-style: none;
 }
-/* line 44, ../scss/compounds/_navigation.scss */
+/* line 45, ../scss/compounds/_navigation.scss */
 #visualizations li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -174,40 +178,40 @@ header #course-select {
   text-align: right;
   color: #444444;
 }
-/* line 56, ../scss/compounds/_navigation.scss */
+/* line 57, ../scss/compounds/_navigation.scss */
 #visualizations li:hover {
   background-color: #ac005b;
   border-right: 15px solid #460025;
   color: white;
   border-bottom: 1px solid #ac005b;
 }
-/* line 61, ../scss/compounds/_navigation.scss */
+/* line 62, ../scss/compounds/_navigation.scss */
 #visualizations li:hover a {
   color: white;
 }
-/* line 65, ../scss/compounds/_navigation.scss */
+/* line 66, ../scss/compounds/_navigation.scss */
 #visualizations li:last-child {
   border-bottom: 0px solid #cccccc;
 }
-/* line 68, ../scss/compounds/_navigation.scss */
+/* line 69, ../scss/compounds/_navigation.scss */
 #visualizations li.selected {
   background-color: #ac005b;
   border-right: 5px solid #460025;
   color: white;
   border-bottom: 1px solid #ac005b;
 }
-/* line 73, ../scss/compounds/_navigation.scss */
+/* line 74, ../scss/compounds/_navigation.scss */
 #visualizations li.selected a {
   color: white;
 }
-/* line 77, ../scss/compounds/_navigation.scss */
+/* line 78, ../scss/compounds/_navigation.scss */
 #visualizations li a {
   padding-right: 1em;
   color: #444444;
   display: block;
   width: 100%;
 }
-/* line 85, ../scss/compounds/_navigation.scss */
+/* line 86, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite {
   background-color: lightgray;
 }
