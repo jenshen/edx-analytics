@@ -81,28 +81,29 @@ html, body {
   border-bottom: 1px solid #cccccc;
 }
 /* line 13, ../scss/compounds/_visualization.scss */
-#visualization .heading h1 {
+#visualization .heading p {
+  font-size: 2em;
   float: left;
 }
-/* line 17, ../scss/compounds/_visualization.scss */
+/* line 18, ../scss/compounds/_visualization.scss */
 #visualization .controls {
   float: right;
 }
-/* line 22, ../scss/compounds/_visualization.scss */
+/* line 23, ../scss/compounds/_visualization.scss */
 #visualization .controls li {
   line-height: 48px;
   display: inline-block;
   list-style: none;
   padding: 0em 1em;
 }
-/* line 29, ../scss/compounds/_visualization.scss */
+/* line 30, ../scss/compounds/_visualization.scss */
 #visualization .data {
   position: absolute;
   top: 76px;
   bottom: 0;
   width: 100%;
 }
-/* line 35, ../scss/compounds/_visualization.scss */
+/* line 36, ../scss/compounds/_visualization.scss */
 #visualization iframe {
   width: 100%;
   height: 100%;
