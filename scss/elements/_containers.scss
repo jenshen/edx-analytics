@@ -31,8 +31,6 @@ html, body{
     bottom: 0; 
 }
 #content{
-    position:relative;
-    left: -5px;
     @include box-sizing(border-box);
     background-color: white;
     height: 100%;

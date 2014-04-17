@@ -53,8 +53,6 @@ html, body {
 
 /* line 33, ../scss/elements/_containers.scss */
 #content {
-  position: relative;
-  left: -5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -73,7 +71,7 @@ html, body {
   transition: opacity 250ms;
   height: 100%;
 }
-/* line 8, ../scss/compounds/_visualization.scss */
+/* line 9, ../scss/compounds/_visualization.scss */
 #visualization .heading {
   overflow: hidden;
   height: 60px;
@@ -82,30 +80,30 @@ html, body {
   box-sizing: border-box;
   border-bottom: 1px solid #cccccc;
 }
-/* line 13, ../scss/compounds/_visualization.scss */
+/* line 14, ../scss/compounds/_visualization.scss */
 #visualization .heading p {
   font-size: 2em;
   float: left;
 }
-/* line 18, ../scss/compounds/_visualization.scss */
+/* line 19, ../scss/compounds/_visualization.scss */
 #visualization .controls {
   float: right;
 }
-/* line 23, ../scss/compounds/_visualization.scss */
+/* line 24, ../scss/compounds/_visualization.scss */
 #visualization .controls li {
   line-height: 48px;
   display: inline-block;
   list-style: none;
   padding: 0em 1em;
 }
-/* line 30, ../scss/compounds/_visualization.scss */
+/* line 31, ../scss/compounds/_visualization.scss */
 #visualization .data {
   position: absolute;
   top: 76px;
   bottom: 0;
   width: 100%;
 }
-/* line 36, ../scss/compounds/_visualization.scss */
+/* line 37, ../scss/compounds/_visualization.scss */
 #visualization iframe {
   width: 100%;
   height: 100%;
@@ -152,37 +150,44 @@ header #course-select {
 /* line 35, ../scss/compounds/_navigation.scss */
 #visualizations {
   padding: 0;
-  width: 12em;
+  width: 192px;
   display: block;
   float: left;
-  border-right: 15px solid #10628d;
+  border-right: 5px solid #999999;
   height: 100%;
+  position: relative;
 }
-/* line 43, ../scss/compounds/_navigation.scss */
+/* line 44, ../scss/compounds/_navigation.scss */
 #visualizations ul {
   list-style: none;
 }
-/* line 47, ../scss/compounds/_navigation.scss */
+/* line 48, ../scss/compounds/_navigation.scss */
 #visualizations li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
-  -moz-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
-  -o-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
-  transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
+  -webkit-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease-in-out;
+  -o-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease-in-out;
+  transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease-in-out;
   font-size: 1.025em;
+  width: 192px;
   text-align: right;
   color: #444444;
+  border-right: 5px solid #999999;
 }
-/* line 55, ../scss/compounds/_navigation.scss */
+/* line 58, ../scss/compounds/_navigation.scss */
 #visualizations li a {
+  -webkit-transition: color 0.25s ease-in-out;
+  -moz-transition: color 0.25s ease-in-out;
+  -o-transition: color 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out;
   padding-right: 1em;
   color: #444444;
   display: block;
   width: 100%;
 }
-/* line 61, ../scss/compounds/_navigation.scss */
+/* line 65, ../scss/compounds/_navigation.scss */
 #visualizations li .wrapper {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -197,39 +202,39 @@ header #course-select {
   padding-right: 0;
   border-bottom: 1px solid #cccccc;
 }
-/* line 71, ../scss/compounds/_navigation.scss */
+/* line 75, ../scss/compounds/_navigation.scss */
 #visualizations li:hover {
-  background-color: #1ea1e5;
-  border-right: 10px solid #10628d;
+  background-color: #b32668;
+  border-right: 15px solid #5f1437;
   color: white;
 }
-/* line 75, ../scss/compounds/_navigation.scss */
+/* line 79, ../scss/compounds/_navigation.scss */
 #visualizations li:hover a {
   color: white;
 }
-/* line 78, ../scss/compounds/_navigation.scss */
+/* line 82, ../scss/compounds/_navigation.scss */
 #visualizations li:hover .wrapper {
-  border-bottom: 1px solid #1ea1e5;
+  border-bottom: 1px solid #b32668;
 }
-/* line 83, ../scss/compounds/_navigation.scss */
+/* line 87, ../scss/compounds/_navigation.scss */
 #visualizations li:last-child .wrapper {
   border-bottom: 0px solid #cccccc;
 }
-/* line 87, ../scss/compounds/_navigation.scss */
+/* line 91, ../scss/compounds/_navigation.scss */
 #visualizations li.selected {
-  background-color: #1ea1e5;
-  border-right: 0px;
+  background-color: #b32668;
+  border-right: 5px solid #5f1437;
   color: white;
 }
-/* line 91, ../scss/compounds/_navigation.scss */
+/* line 95, ../scss/compounds/_navigation.scss */
 #visualizations li.selected a {
   color: white;
 }
-/* line 94, ../scss/compounds/_navigation.scss */
+/* line 98, ../scss/compounds/_navigation.scss */
 #visualizations li.selected .wrapper {
-  border-bottom: 1px solid #1ea1e5;
+  border-bottom: 1px solid #b32668;
 }
-/* line 100, ../scss/compounds/_navigation.scss */
+/* line 104, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite {
   background-color: lightgray;
 }

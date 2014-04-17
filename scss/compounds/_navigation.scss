@@ -34,11 +34,12 @@ header{
 
 #visualizations{
     padding: 0;
-    width: 12em;
+    width: 12*$font-size;
     display: block;
     float: left;
-    border-right: 15px solid $primary-color;
+    border-right: $content-border solid $gray;
     height: 100%;
+    position: relative;
 
     ul{
         list-style: none;
@@ -48,11 +49,14 @@ header{
         @include box-sizing(border-box);
         @include transition(background-color .25s ease-in-out,
             background-image .25s ease-in-out,
-            border .25s ease);
+            border .25s ease-in-out);
         font-size: 1.025em;
+        width: 12*$font-size;
         text-align: right;
         color: $black;
+        border-right: $content-border solid $gray;
         a{
+            @include transition(color .25s ease-in-out);
             padding-right: 1em;
             color: $black;
             display: block;
@@ -70,7 +74,7 @@ header{
         }
         &:hover{
             background-color: lighten($primary-color,20);
-            border-right: 10px solid $primary-color;
+            border-right: $content-border+10 solid $primary-color;
             color: white;
             a{
                 color: white;
@@ -86,7 +90,7 @@ header{
         }
         &.selected{
             background-color: lighten($primary-color,20);
-            border-right: 0px;
+            border-right: $content-border solid $primary-color;
             color: white;
             a{
                 color: white;
