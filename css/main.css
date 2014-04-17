@@ -166,7 +166,7 @@ header #course-select {
   -moz-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
   -o-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
   transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
-  font-size: 1.1em;
+  font-size: 1.05em;
   border-bottom: 1px solid #cccccc;
   border-right: 5px solid #999999;
   padding: 1em;
