@@ -73,25 +73,22 @@ $(document).ready(function() {
 
     // Generates random data when filter selected
     function filter () {
-      console.log("hi");
-      var n = 4, // number of layers
-      m = 50, // number of samples per layer
-      stack = d3.layout.stack(),
-      layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
-      yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-      yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
-      layer = svg.selectAll(".layer")
-          .data(layers)
-          .attr("class", "layer")
-          .style("fill", function(d, i) { return color(i); });
+      var new_dataset = [];              //Initialize empty array
+      for (var i = 0; i < 25; i++) {       //Loop 25 times
+        var newNumber = Math.random() * 30;  //New random number (0-30)
+        new_dataset = new_dataset.concat(newNumber); //Add new number to array
+      }
 
-      rect = layer.selectAll("rect")
-          .data(function(d) { return d; })
-          .attr("x", function(d) { return x(d.x); })
-          .attr("y", height)
-          .attr("width", x.rangeBand())
-          .attr("height", 0);
+      d3.select(".graph").selectAll("div")
+        .data(new_dataset)
+        .enter()
+        .append("div")
+        .attr("class", "bar")
+        .style("height", function(d) {
+          return (d * 5) + "px";
+        })
+        .transition(1000);
     }
 
 });
