@@ -91,7 +91,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'filter3.html'
       });
       Visualizations.insert({
         name: 'Forum Activity',
@@ -99,7 +99,7 @@ if (Meteor.isServer) {
         ready: true,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'filter4.html'
       });
       Visualizations.insert({
         name: 'Certifications',
@@ -107,7 +107,7 @@ if (Meteor.isServer) {
         ready: false,
         iframe: true,
         favorite: false,
-        url: 'filter.html'
+        url: 'filter5.html'
       });
     }
   });
