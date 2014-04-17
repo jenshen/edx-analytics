@@ -123,26 +123,40 @@ header {
 /* line 9, ../scss/compounds/_navigation.scss */
 header #logo {
   float: left;
+  width: 300px;
 }
-/* line 13, ../scss/compounds/_navigation.scss */
+/* line 14, ../scss/compounds/_navigation.scss */
+header #img-logo {
+  width: 100%;
+}
+/* line 18, ../scss/compounds/_navigation.scss */
 header #welcome {
   float: right;
   line-height: 57px;
-  font-size: 1.5em;
+  font-size: 1.4em;
+}
+/* line 24, ../scss/compounds/_navigation.scss */
+header #course-select {
+  font-weight: bold;
+  width: 170px;
+  /*background-color: white;
+  border: none;
+  text-decoration: underline;
+  color: #2795B6;*/
 }
 
-/* line 20, ../scss/compounds/_navigation.scss */
+/* line 34, ../scss/compounds/_navigation.scss */
 #visualizations {
   padding: 0;
   width: 12em;
   display: block;
   float: left;
 }
-/* line 26, ../scss/compounds/_navigation.scss */
+/* line 40, ../scss/compounds/_navigation.scss */
 #visualizations ul {
   list-style: none;
 }
-/* line 30, ../scss/compounds/_navigation.scss */
+/* line 44, ../scss/compounds/_navigation.scss */
 #visualizations li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -151,6 +165,7 @@ header #welcome {
   -moz-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
   -o-transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
   transition: background-color 0.25s ease-in-out, background-image 0.25s ease-in-out, border 0.25s ease;
+  font-size: 1.1em;
   border-bottom: 1px solid #cccccc;
   border-right: 5px solid #999999;
   padding: 1em;
@@ -158,36 +173,40 @@ header #welcome {
   text-align: right;
   color: #444444;
 }
-/* line 41, ../scss/compounds/_navigation.scss */
+/* line 56, ../scss/compounds/_navigation.scss */
 #visualizations li:hover {
-  background-color: #cc6564;
-  border-right: 15px solid #983332;
+  background-color: #ac005b;
+  border-right: 15px solid #460025;
   color: white;
-  border-bottom: 1px solid #cc6564;
+  border-bottom: 1px solid #ac005b;
 }
-/* line 46, ../scss/compounds/_navigation.scss */
+/* line 61, ../scss/compounds/_navigation.scss */
 #visualizations li:hover a {
   color: white;
 }
-/* line 50, ../scss/compounds/_navigation.scss */
+/* line 65, ../scss/compounds/_navigation.scss */
 #visualizations li:last-child {
   border-bottom: 0px solid #cccccc;
 }
-/* line 53, ../scss/compounds/_navigation.scss */
+/* line 68, ../scss/compounds/_navigation.scss */
 #visualizations li.selected {
-  background-color: #cc6564;
-  border-right: 5px solid #983332;
+  background-color: #ac005b;
+  border-right: 5px solid #460025;
   color: white;
-  border-bottom: 1px solid #cc6564;
+  border-bottom: 1px solid #ac005b;
 }
-/* line 58, ../scss/compounds/_navigation.scss */
+/* line 73, ../scss/compounds/_navigation.scss */
 #visualizations li.selected a {
   color: white;
 }
-/* line 62, ../scss/compounds/_navigation.scss */
+/* line 77, ../scss/compounds/_navigation.scss */
 #visualizations li a {
   padding-right: 1em;
   color: #444444;
   display: block;
   width: 100%;
+}
+/* line 85, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite {
+  background-color: lightgray;
 }
