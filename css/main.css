@@ -65,6 +65,19 @@ html, body {
   padding-bottom: 0;
 }
 
+/* line 1, ../scss/elements/_links.scss */
+a {
+  color: #1ea1e5;
+}
+/* line 3, ../scss/elements/_links.scss */
+a:hover {
+  color: #1682ba;
+}
+/* line 6, ../scss/elements/_links.scss */
+a:active {
+  color: #10628d;
+}
+
 /* line 3, ../scss/compounds/_visualization.scss */
 #visualization {
   position: relative;
