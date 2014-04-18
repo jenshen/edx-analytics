@@ -1,14 +1,14 @@
 <head>
-  <title>Edx Analytics</title>
+  <title>edX Analytics</title>
   <link rel="shortcut icon" href="img/favicon.ico">
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
     <div id="app">
         <header>
             <div id="logo">
-                <img id="img-logo" src="img/logo.png">
+                <img id="img-logo" alt = "edX Analytics" src="img/logo.png">
+                <!-- Analytics -->
             </div>
             <div id="welcome">
                 <span id="welcome-message">
@@ -23,7 +23,7 @@
             <nav id='visualizations'>
                 <ul>
                     {{> visualizations}}
-                    <!-- {{> favorites}} -->
+                    {{> favorites}}
                 </ul>
             </nav>
             <section id="content">
@@ -31,14 +31,6 @@
             </section>
         </div>
     </div>
-
-<!--<div id="share-modal" class="reveal-modal large">
-    <p>Please enter the email of the colleague you wish to share this graphic with.</p>
-    <p>Note: To ensure data privacy, your colleague's email address must be registered with EdX Analytics.<p>
-    E-mail: <input id="email-input" type="email" name="email">
-</div>-->
-
-
 </body>
 
 <template name="visualizations">
@@ -53,14 +45,18 @@
     {{/each}}
 </template>
 <template name="favorites">
+    <li class='favorites-heading'>
+        <div class="wrapper">
+            <a>Favorites ▼</a>
+        </div>
+    </li>
     {{#each favs}}
-        <li class="favorite {{selected}}">
-            <a href='#'>{{name}}</a>
+        <li class="favorite">
+            <div class="wrapper">
+                <a href='#'>{{name}}</a>
+            </div>
         </li>
-    {{else}}
-        <li class='favorites'>
-            <a href='#'>No Favorites</a>
-        </li>
+        
     {{/each}}
 </template>
 
@@ -69,10 +65,10 @@
         <div class='heading'>
             <p>{{name}}</p>
             <ul class="controls">
-<!--                 <li id="favorite">
+                <li id="favorite">
                     <a href="#">Favorite</a>
                 </li>
-                <li id="share">
+<!--                 <li id="share">
                     <a href="#">Share</a>
                 </li> -->
                 <li id="download">

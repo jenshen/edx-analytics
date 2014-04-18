@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 /* line 4, ../scss/elements/_headings.scss */
 h1 {
   font-size: 32px;
@@ -18,7 +19,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   color: #444444;
-  font-family: "Raleway", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Open Sans",Arial,Helvetica,sans-serif;
   font-weight: 300;
   font-size: 16px;
   padding: 0;
@@ -234,7 +235,51 @@ header #course-select {
 #visualizations li.selected .wrapper {
   border-bottom: 1px solid #b32668;
 }
-/* line 104, ../scss/compounds/_navigation.scss */
+/* line 106, ../scss/compounds/_navigation.scss */
+#visualizations li.favorites-heading.selected {
+  background-color: #1ea1e5;
+  border-right: 5px solid #10628d;
+}
+/* line 109, ../scss/compounds/_navigation.scss */
+#visualizations li.favorites-heading.selected .wrapper {
+  border-bottom: 1px solid #1ea1e5;
+}
+/* line 113, ../scss/compounds/_navigation.scss */
+#visualizations li.favorites-heading:hover {
+  background-color: #1ea1e5;
+  border-right: 15px solid #10628d;
+}
+/* line 116, ../scss/compounds/_navigation.scss */
+#visualizations li.favorites-heading:hover .wrapper {
+  border-bottom: 1px solid #1ea1e5;
+}
+/* line 122, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite {
+  margin-left: 20px;
+  width: 172px;
+  display: none;
+  border-right: 5px solid #999999;
   background-color: lightgray;
+}
+/* line 127, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite .wrapper {
+  border-bottom: 1px solid white;
+}
+/* line 130, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite.selected {
+  background-color: #1ea1e5;
+  border-right: 5px solid #10628d;
+}
+/* line 133, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite.selected .wrapper {
+  border-bottom: 1px solid #1ea1e5;
+}
+/* line 137, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite:hover {
+  background-color: #1ea1e5;
+  border-right: 15px solid #10628d;
+}
+/* line 140, ../scss/compounds/_navigation.scss */
+#visualizations li.favorite:hover .wrapper {
+  border-bottom: 1px solid #1ea1e5;
 }

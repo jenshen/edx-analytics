@@ -95,7 +95,7 @@ $(document).ready(function() {
 
     var color = d3.scale.linear()
       .domain([0, n - 1])
-      .range(["#aad", "#556"]);
+      .range(["#b32668", "#5f1437"]);
 
     var xAxis = d3.svg.axis()
       .scale(x)

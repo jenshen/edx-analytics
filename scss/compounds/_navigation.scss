@@ -100,8 +100,48 @@ header{
             }
         }
     }
+    li.favorites-heading{
+        // border-top: $content-border solid $gray;
 
+        &.selected{
+            background-color: $edx-blue;
+            border-right: $content-border solid darken($edx-blue, 20);
+            .wrapper{
+                border-bottom: 1px solid $edx-blue;
+            }
+        }
+        &:hover{
+            background-color: $edx-blue;
+            border-right: $content-border+10 solid darken($edx-blue, 20);
+            .wrapper{
+                border-bottom: 1px solid $edx-blue;
+            }
+        }
+
+    }
     li.favorite{
+        margin-left: 20px;
+        width: 12*$font-size - 20px;
+        display: none;
+        border-right: $content-border solid $gray;
+        .wrapper{
+            border-bottom: 1px solid white;
+        }
+        &.selected{
+            background-color: $edx-blue;
+            border-right: $content-border solid darken($edx-blue, 20);
+            .wrapper{
+                border-bottom: 1px solid $edx-blue;
+            }
+        }
+        &:hover{
+            background-color: $edx-blue;
+            border-right: $content-border+10 solid darken($edx-blue, 20);
+            .wrapper{
+                border-bottom: 1px solid $edx-blue;
+            }
+        }
+
         // background-image: url('img/favorite.png');
         // background-repeat: no-repeat;
         // background-position: 10% 50%;
