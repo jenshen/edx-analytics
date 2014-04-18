@@ -34,8 +34,9 @@ if (Meteor.isClient) {
   // Favorites Templates
   Template.favorites.events = {
     'click li': function(event) {
-      Session.set("selected", this._id);
-      console.log(this);
+      if (typeof(this._id) != 'undefined'){
+        Session.set("selected", this._id);
+      }
     },
     'click .favorites-heading': function(event){
       $('.favorites-heading').toggleClass('selected');
