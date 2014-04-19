@@ -67,13 +67,14 @@ html, body {
 
 /* line 1, ../scss/elements/_links.scss */
 a {
+  text-decoration: none;
   color: #1ea1e5;
 }
-/* line 3, ../scss/elements/_links.scss */
+/* line 4, ../scss/elements/_links.scss */
 a:hover {
   color: #1682ba;
 }
-/* line 6, ../scss/elements/_links.scss */
+/* line 7, ../scss/elements/_links.scss */
 a:active {
   color: #10628d;
 }
