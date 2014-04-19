@@ -1,0 +1,1 @@
+Visualizations = new Meteor.Collection("visualizations");

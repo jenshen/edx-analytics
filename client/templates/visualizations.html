@@ -1,0 +1,11 @@
+<template name="visualizations">
+    {{#each standard}}
+        <li class="{{selected}}">
+            <div class="wrapper">
+                <a href='#'>{{name}}</a>
+            </div>
+        </li>
+    {{else}}
+        <li>No Visualizations</li>
+    {{/each}}
+</template>

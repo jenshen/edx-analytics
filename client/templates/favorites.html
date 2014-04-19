@@ -1,0 +1,15 @@
+<template name="favorites">
+    <li class='favorites-heading'>
+        <div class="wrapper">
+            <a>Favorites ▼</a>
+        </div>
+    </li>
+    {{#each favs}}
+        <li class="favorite">
+            <div class="wrapper">
+                <a href='#'>{{name}}</a>
+            </div>
+        </li>
+        
+    {{/each}}
+</template>

@@ -1,0 +1,24 @@
+<template name="visualization">
+    <div id='visualization'>
+        <div class='heading'>
+            <p>{{name}}</p>
+            <ul class="controls">
+                <li id="favorite">
+                    <a href="#">Favorite</a>
+                </li>
+<!--                 <li id="share">
+                    <a href="#">Share</a>
+                </li> -->
+                <li id="download">
+                    <a href="data:text/csv;charset=utf-8,hello,world">Download</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class='data'>
+            <iframe src="{{url}}">
+                
+            </iframe>
+        </div>
+    </div>
+</template>
