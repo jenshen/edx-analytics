@@ -8290,8 +8290,7 @@ html, body {
   height: 100%;
   width: auto;
   overflow: hidden;
-  padding: 1em;
-  padding-bottom: 0;
+  padding: 1em 0em 0em 2em;
 }
 
 /* line 1, ../scss/elements/_links.scss */
@@ -8318,36 +8317,35 @@ a:active {
 /* line 9, ../scss/compounds/_visualization.scss */
 #visualization .heading {
   overflow: hidden;
-  height: 60px;
+  height: 48px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #bebfc1;
 }
 /* line 14, ../scss/compounds/_visualization.scss */
-#visualization .heading p {
-  font-size: 2em;
+#visualization .heading h1 {
   float: left;
 }
-/* line 19, ../scss/compounds/_visualization.scss */
+/* line 18, ../scss/compounds/_visualization.scss */
 #visualization .controls {
   float: right;
 }
-/* line 24, ../scss/compounds/_visualization.scss */
+/* line 23, ../scss/compounds/_visualization.scss */
 #visualization .controls li {
   line-height: 48px;
   display: inline-block;
   list-style: none;
   padding: 0em 1em;
 }
-/* line 31, ../scss/compounds/_visualization.scss */
+/* line 30, ../scss/compounds/_visualization.scss */
 #visualization .data {
   position: absolute;
-  top: 76px;
+  top: 64px;
   bottom: 0;
   width: 100%;
 }
-/* line 37, ../scss/compounds/_visualization.scss */
+/* line 36, ../scss/compounds/_visualization.scss */
 #visualization iframe {
   width: 100%;
   height: 100%;
@@ -8359,7 +8357,7 @@ header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #bebfc1;
   overflow: hidden;
   padding: 1em;
   height: 89px;
@@ -8391,22 +8389,22 @@ header #course-select {
   color: #2795B6;*/
 }
 
-/* line 35, ../scss/compounds/_navigation.scss */
+/* line 52, ../scss/compounds/_navigation.scss */
 #visualizations {
   padding: 0;
   width: 192px;
   display: block;
   float: left;
-  border-right: 5px solid #999999;
+  border-right: 5px solid #8a8c8f;
   height: 100%;
   position: relative;
 }
-/* line 44, ../scss/compounds/_navigation.scss */
+/* line 61, ../scss/compounds/_navigation.scss */
 #visualizations ul {
   margin: 0;
   list-style: none;
 }
-/* line 49, ../scss/compounds/_navigation.scss */
+/* line 66, ../scss/compounds/_navigation.scss */
 #visualizations li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -8419,9 +8417,9 @@ header #course-select {
   width: 192px;
   text-align: right;
   color: #444444;
-  border-right: 5px solid #999999;
+  border-right: 5px solid #8a8c8f;
 }
-/* line 59, ../scss/compounds/_navigation.scss */
+/* line 76, ../scss/compounds/_navigation.scss */
 #visualizations li a {
   -webkit-transition: color 0.25s ease-in-out;
   -moz-transition: color 0.25s ease-in-out;
@@ -8432,7 +8430,7 @@ header #course-select {
   display: block;
   width: 100%;
 }
-/* line 66, ../scss/compounds/_navigation.scss */
+/* line 83, ../scss/compounds/_navigation.scss */
 #visualizations li .wrapper {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -8445,85 +8443,85 @@ header #course-select {
   width: 100%;
   padding: 1em;
   padding-right: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #bebfc1;
 }
-/* line 76, ../scss/compounds/_navigation.scss */
+/* line 93, ../scss/compounds/_navigation.scss */
 #visualizations li:hover {
   background-color: #b32668;
   border-right: 15px solid #5f1437;
   color: white;
 }
-/* line 80, ../scss/compounds/_navigation.scss */
+/* line 97, ../scss/compounds/_navigation.scss */
 #visualizations li:hover a {
   color: white;
 }
-/* line 83, ../scss/compounds/_navigation.scss */
+/* line 100, ../scss/compounds/_navigation.scss */
 #visualizations li:hover .wrapper {
   border-bottom: 1px solid #b32668;
 }
-/* line 88, ../scss/compounds/_navigation.scss */
+/* line 105, ../scss/compounds/_navigation.scss */
 #visualizations li:last-child .wrapper {
-  border-bottom: 0px solid #cccccc;
+  border-bottom: 0px solid #bebfc1;
 }
-/* line 92, ../scss/compounds/_navigation.scss */
+/* line 109, ../scss/compounds/_navigation.scss */
 #visualizations li.selected {
   background-color: #b32668;
   border-right: 5px solid #5f1437;
   color: white;
 }
-/* line 96, ../scss/compounds/_navigation.scss */
+/* line 113, ../scss/compounds/_navigation.scss */
 #visualizations li.selected a {
   color: white;
 }
-/* line 99, ../scss/compounds/_navigation.scss */
+/* line 116, ../scss/compounds/_navigation.scss */
 #visualizations li.selected .wrapper {
   border-bottom: 1px solid #b32668;
 }
-/* line 107, ../scss/compounds/_navigation.scss */
+/* line 124, ../scss/compounds/_navigation.scss */
 #visualizations li.favorites-heading.selected {
   background-color: #1ea1e5;
   border-right: 5px solid #10628d;
 }
-/* line 110, ../scss/compounds/_navigation.scss */
+/* line 127, ../scss/compounds/_navigation.scss */
 #visualizations li.favorites-heading.selected .wrapper {
   border-bottom: 1px solid #1ea1e5;
 }
-/* line 114, ../scss/compounds/_navigation.scss */
+/* line 131, ../scss/compounds/_navigation.scss */
 #visualizations li.favorites-heading:hover {
   background-color: #1ea1e5;
   border-right: 15px solid #10628d;
 }
-/* line 117, ../scss/compounds/_navigation.scss */
+/* line 134, ../scss/compounds/_navigation.scss */
 #visualizations li.favorites-heading:hover .wrapper {
   border-bottom: 1px solid #1ea1e5;
 }
-/* line 123, ../scss/compounds/_navigation.scss */
+/* line 140, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite {
   margin-left: 20px;
   width: 172px;
   display: none;
-  border-right: 5px solid #999999;
+  border-right: 5px solid #8a8c8f;
   background-color: lightgray;
 }
-/* line 128, ../scss/compounds/_navigation.scss */
+/* line 145, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite .wrapper {
   border-bottom: 1px solid white;
 }
-/* line 131, ../scss/compounds/_navigation.scss */
+/* line 148, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite.selected {
   background-color: #1ea1e5;
   border-right: 5px solid #10628d;
 }
-/* line 134, ../scss/compounds/_navigation.scss */
+/* line 151, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite.selected .wrapper {
   border-bottom: 1px solid #1ea1e5;
 }
-/* line 138, ../scss/compounds/_navigation.scss */
+/* line 155, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite:hover {
   background-color: #1ea1e5;
   border-right: 15px solid #10628d;
 }
-/* line 141, ../scss/compounds/_navigation.scss */
+/* line 158, ../scss/compounds/_navigation.scss */
 #visualizations li.favorite:hover .wrapper {
   border-bottom: 1px solid #1ea1e5;
 }

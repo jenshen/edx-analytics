@@ -1,4 +1,4 @@
-$heading-height: 60px;
+$heading-height: $h1-height;
 
 #visualization{
     position: relative;
@@ -11,8 +11,7 @@ $heading-height: 60px;
         height: $heading-height;
         @include box-sizing(border-box);
         border-bottom: 1px solid lighten($gray,20);
-        p{
-            font-size: 2em;
+        h1{
             float: left;
         }
     }
