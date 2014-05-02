@@ -11,180 +11,95 @@ var dropDownLabel = function(options, select) {
         return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
     }
   };
-  
-// Generates random data when filter selected
 
 
 $(document).ready(function() {
-    var filter = function(element, checked) {
-      var n = 3, // number of layers
-      m = 35, // number of samples per layer
-      stack = d3.layout.stack(),
-      layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
-      yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-      yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
-
-        layer = svg.selectAll(".layer")
-            .data(layers)
-            .attr("class", "layer")
-            .style("fill", function(d, i) { return color(i); });
-
-        rect = layer.selectAll("rect")
-            .data(function(d) { return d; })
-            .attr("x", function(d) { return x(d.x); })
-            .attr("y", height)
-            .attr("width", x.rangeBand())
-            .attr("height", 0);
+    var chart;
+    var filter = function() {
+      d3.select('#chart1 svg')
+      .datum(exampleData())
+      .call(chart);
     };
 
     $('.multiselect.video-filter').multiselect({
-    	includeSelectAllOption: true,
-    	includeSelectAllDivider: true,
+      includeSelectAllOption: true,
+      includeSelectAllDivider: true,
       enableCaseInsensitiveFiltering: true,
       filterBehavior: 'both',
       buttonWidth: '240px',
       nonSelectedText: 'All Videos',
-    	buttonText: dropDownLabel,
+      buttonText: dropDownLabel,
       onChange: filter
     });
 
     $('.geo-filter').multiselect({
-    	includeSelectAllOption: true,
-    	includeSelectAllDivider: true,
+      includeSelectAllOption: true,
+      includeSelectAllDivider: true,
       enableCaseInsensitiveFiltering: true,
       filterBehavior: 'both',
       nonSelectedText: 'All Countries',
-    	buttonText: dropDownLabel,
+      buttonText: dropDownLabel,
       onChange: filter
     });
 
     $('.edu-filter').multiselect({
-    	includeSelectAllOption: true,
-    	includeSelectAllDivider: true,
+      includeSelectAllOption: true,
+      includeSelectAllDivider: true,
       enableCaseInsensitiveFiltering: true,
       filterBehavior: 'both',
       nonSelectedText: 'All Educations',
-    	buttonText: dropDownLabel,
+      buttonText: dropDownLabel,
       onChange: filter
     });
 
     $('.time-filter').multiselect({
       enableCaseInsensitiveFiltering: true,
-    	filterBehavior: 'both',
+      filterBehavior: 'both',
       onChange: filter
     });
 
-    var n = 3, // number of layers
-        m = 35, // number of samples per layer
-        stack = d3.layout.stack(),
-        layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
-        yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-        yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+    function exampleData() {
+      return stream_layers(3,20,.1).map(function(data, i) {
+        //var test_data = stream_layers(3,1,.1).map(function(data, i) { //for testing single data point
+        return {
+          key: 'Stream' + i,
+          values: data
+        };
+      });
+    }
 
-    var margin = {top: 40, right: 30, bottom: 30, left: 30},
-        width = 700 - margin.left - margin.right,
-        height = 350 - margin.top - margin.bottom;
+    nv.addGraph(function() {
+        chart = nv.models.multiBarChart()
+          .barColor(d3.scale.category20().range())
+          .transitionDuration(350)
+          .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+          .rotateLabels(0)      //Angle to rotate x-axis labels.
+          .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+          .groupSpacing(0.1)    //Distance between each group of bars.
+          ;
 
-    var x = d3.scale.ordinal()
-        .domain(d3.range(m))
-        .rangeRoundBands([0, width], .08);
+        chart.multibar
+          .hideable(true);
 
-    var y = d3.scale.linear()
-        .domain([0, yStackMax])
-        .range([height, 0]);
+        chart.reduceXTicks(false).staggerLabels(true);
 
-    var color = d3.scale.linear()
-      .domain([0, n - 1])
-      .range(["#b32668", "#5f1437"]);
+        chart.xAxis
+            .axisLabel("DATE")
+            .showMaxMin(true)
+            .tickFormat(d3.format(',f'));
 
-    var xAxis = d3.svg.axis()
-      .scale(x)
-      .tickSize(0)
-      .tickPadding(6)
-      .orient("bottom");
+        chart.yAxis
+            .tickFormat(d3.format(',.1f'))
 
-    var svg = d3.select(".graph").append("svg").append("g");
-    
-    var layer = svg.selectAll(".layer")
-          .data(layers)
-          .enter().append("g")
-          .attr("class", "layer")
-          .style("fill", function(d, i) { return color(i); });
+        d3.select('#chart1 svg')
+            .datum(exampleData())
+           .call(chart);
 
-      var rect = layer.selectAll("rect")
-          .data(function(d) { return d; })
-          .enter().append("rect")
-          .attr("x", function(d) { return x(d.x); })
-          .attr("y", height)
-          .attr("width", x.rangeBand())
-          .attr("height", 0);
+        nv.utils.windowResize(chart.update);
 
-      rect.transition()
-          .delay(function(d, i) { return i * 10; })
-          .attr("y", function(d) { return y(d.y0 + d.y); })
-          .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+        chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
-      svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .attr("width", width)
-          .call(xAxis);
+        return chart;
+    });
 
-      d3.selectAll("input").on("change", change);
-
-      var timeout = setTimeout(function() {
-        d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
-      }, 2000);
-
-      function change() {
-        clearTimeout(timeout);
-        if (this.value === "grouped") transitionGrouped();
-        else transitionStacked();
-      }
-
-      function transitionGrouped() {
-        y.domain([0, yGroupMax]);
-
-        rect.transition()
-            .duration(500)
-            .delay(function(d, i) { return i * 10; })
-            .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
-            .attr("width", x.rangeBand() / n)
-          .transition()
-            .attr("y", function(d) { return y(d.y); })
-            .attr("height", function(d) { return height - y(d.y); });
-      }
-
-      function transitionStacked() {
-        y.domain([0, yStackMax]);
-
-        rect.transition()
-            .duration(500)
-            .delay(function(d, i) { return i * 10; })
-            .attr("y", function(d) { return y(d.y0 + d.y); })
-            .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
-          .transition()
-            .attr("x", function(d) { return x(d.x); })
-            .attr("width", x.rangeBand());
-      }
-
-      // Inspired by Lee Byron's test data generator.
-      function bumpLayer(n, o) {
-
-        function bump(a) {
-          var x = 1 / (.1 + Math.random()),
-              y = 2 * Math.random() - .5,
-              z = 10 / (.1 + Math.random());
-          for (var i = 0; i < n; i++) {
-            var w = (i / n - y) * z;
-            a[i] += x * Math.exp(-w * w);
-          }
-        }
-
-        var a = [], i;
-        for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
-        for (i = 0; i < 5; ++i) bump(a);
-        return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
-      }
 });
-
