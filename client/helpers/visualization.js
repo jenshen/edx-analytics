@@ -2,7 +2,6 @@ UI.registerHelper('mainContent',function() {
   if (typeof(Session.get('selected')) == 'undefined'){
     summary = Visualizations.findOne({name: 'Course Summary'});
     if(typeof(summary) != 'undefined') {
-      console.log('test')
       Session.set('selected', summary._id);
     }else{
      return []; 
