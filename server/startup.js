@@ -5,6 +5,21 @@ Meteor.startup(function() {
   if (CourseAxis.find().count() === 0){
     root.CourseAxisFactory.create(courses[0]);
   }
+
+  course = CourseAxis.findOne({category: 'course'})
+  video = CourseAxis.findOne({
+    category: 'video',
+    course_id: course.course_id
+  })
+
+  root.VideoActivityGenerator.create({
+    video: video,
+    course: course,
+    educationLevels: educationLevels,
+    countries: countries,
+    scalingConstant: 10000,
+    SNR: 10
+  })
   
   // Visualizations.remove({});
   if (Visualizations.find().count() === 0) {

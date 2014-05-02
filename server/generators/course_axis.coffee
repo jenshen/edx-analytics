@@ -9,7 +9,8 @@ root.CourseAxisFactory =
       name: @course.name
       course_id: @course.course_id
       start_date: this._parseDate(@startDate)
-      end_date: this._parseDate(@startDate)
+      end_date: this._parseDate(@course.end_date)
+      category: 'course'
 
     # console.log courseDoc
     CourseAxis.insert(courseDoc)
