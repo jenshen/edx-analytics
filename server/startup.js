@@ -1,4 +1,11 @@
+var root = typeof exports !== "undefined" && exports !== null ? exports : this;
+
 Meteor.startup(function() {
+  // CourseAxis.remove({});
+  if (CourseAxis.find().count() === 0){
+    root.CourseAxisFactory.create(courses[0]);
+  }
+  
   // Visualizations.remove({});
   if (Visualizations.find().count() === 0) {
     Visualizations.insert({
