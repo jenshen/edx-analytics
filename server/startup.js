@@ -5,41 +5,41 @@ Meteor.startup(function() {
       name: 'Course Summary',
       standard: true,
       ready: true,
-      iframe: true,
+      iframe: false,
       favorite: false,
-      url: 'course_summary.html'
+      url: 'course_summary'
     });
     Visualizations.insert({
       name: 'Demographics',
       standard: true,
       ready: true,
-      iframe: true,
+      iframe: false,
       favorite: false,
-      url: 'demographics.html'
+      url: 'demographics'
     });
     Visualizations.insert({
       name: 'Video Activity',
       standard: true,
       ready: true,
-      iframe: true,
+      iframe: false,
       favorite: false,
-      url: 'video_activity.html'
+      url: 'video_activity'
     });
     Visualizations.insert({
       name: 'Forum Activity',
       standard: true,
       ready: true,
-      iframe: true,
+      iframe: false,
       favorite: false,
-      url: 'forum_activity.html'
+      url: 'forum_activity'
     });
     Visualizations.insert({
       name: 'Certifications',
       standard: true,
       ready: false,
-      iframe: true,
+      iframe: false,
       favorite: false,
-      url: 'certifications.html'
+      url: 'certifications'
     });
   }
 });
