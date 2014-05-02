@@ -3,8 +3,10 @@ a{
     color: $secondary-color;
     &:hover{
         color: darken($secondary-color, 10);
+        text-decoration: none;
     }
     &:active{
         color: darken($secondary-color, 20);
+        text-decoration: none;
     }
 }
