@@ -1,31 +1,36 @@
 // Visualization Template
 Template.visualization.rendered = function () {
-  $(this.firstNode).css('opacity', 1);
-    params = {
-      pipe: [{
-        $match: {
-          module_id: {$in: ["MITx/Spring_2014/test_course1/C0_LS1_V3"]},
-          loe: {$in: ["p"]},
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-02-05 05:00:00"
-          },
-          cc: {$in: ["US"]}
-        }
-      },{
-        $group: {
-          _id: {date: "$date"},
-          count: {$sum: "$count"}
-        }
-      }],
-      collection: 'daily_count'
-    }
-  Meteor.call('aggregate',
-    params,
-    function (error, result) {
-      console.log(error);
-      console.log(result);
-    }) 
+  console.log(this.find('.data'));
+  UI.insert(
+      UI.render(Template.test), this.find('.data')
+  );
+  // UI.insert()
+  // $(this.firstNode).css('opacity', 1);
+  //   params = {
+  //     pipe: [{
+  //       $match: {
+  //         module_id: {$in: ["MITx/Spring_2014/test_course1/C0_LS1_V3"]},
+  //         loe: {$in: ["p"]},
+  //         date: {
+  //           $gt: "2020-02-03 05:00:00",
+  //           $lt: "2020-02-05 05:00:00"
+  //         },
+  //         cc: {$in: ["US"]}
+  //       }
+  //     },{
+  //       $group: {
+  //         _id: {date: "$date"},
+  //         count: {$sum: "$count"}
+  //       }
+  //     }],
+  //     collection: 'daily_count'
+  //   }
+  // Meteor.call('aggregate',
+  //   params,
+  //   function (error, result) {
+  //     console.log(error);
+  //     console.log(result);
+  //   }) 
 };
 Template.visualization.events = {
   'click #favorite': function(event){
