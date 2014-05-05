@@ -4,20 +4,29 @@
 </head>
 
 <body>
-    {{> offcanvas}}
-    <div class="show-for-large-up" id="app">
-        <header>            
-            <div id="logo">
+    <div id="app" class="off-canvas-wrap" data-offcanvas >
+    <div class="inner-wrap">
+        <nav class="tab-bar"> 
+            <section class="left-small hide-for-large-up">
+                    <a class="left-off-canvas-toggle menu-icon" href="#">
+                        <span>
+                        </span>
+                    </a>
+            </section>
+            <section id="logo" class="middle tab-bar-section">
                 <img id="img-logo" alt = "edX Analytics" src="img/logo.png">
-            </div>
-            <div id="welcome">
-                <span id="welcome-message">
-                    Welcome to PhilosophyX
-                </span>            
-            </div>
-        </header>
-        <div id="main-wrapper">
-            <nav id='visualizations'>
+            </section>
+        </nav>
+        <aside class="left-off-canvas-menu">
+            <ul class="off-canvas-list">
+                <li><label>Visualizations</label></li>
+                {{> visualizations}}
+                <li><label>Favorites</label></li>
+                {{> favorites}}
+            </ul>
+        </aside>
+        <section id="main-wrapper" class='main-section'>
+            <nav id='visualizations' class='show-for-large-up'>
                 <ul>
                     {{> visualizations}}
                     {{> favorites}}
@@ -26,7 +35,8 @@
             <section id="content">
                 {{> visualization mainContent}}
             </section>
-        </div>
+        </section>
+    </div>
     </div>
 </body>
 

@@ -1,53 +1,8 @@
-header{
-    @include box-sizing(border-box);
-    border-bottom: 1px solid lighten($gray,20);
-    overflow: hidden;
-    padding: 1em;
-    height: $header-height;
-    background-color: white;
-
-    #logo{
-        float: left;
-        width: 300px;
-    }
-
-    #img-logo {
-         width: 100%;
-    }
-
-    #welcome{
-        padding-top: 15px;
-        float: right;
-        line-height: 57px;
-        font-size: 1.4em;
-    }
-
-    #course-select {
-        font-weight: bold;
-        width: 170px;
-        /*background-color: white;
-        border: none;
-        text-decoration: underline;
-        color: #2795B6;*/
+nav.tab-bar{
+    .left-small{
+        border-right: solid 1px transparent;
     }
 }
-
-// #logo{
-//     height: $header-height;
-//     overflow: hidden;
-//     margin: 0;
-//     padding: 0;
-//     float: left;
-//     #edx-logo{
-//         top: -$font-size;
-//         position: relative;
-//         height: $header-height;
-//     }
-//     span{
-//        font-size: 3em;
-//        line-height: $header-height;
-//     }
-// }
 
 #visualizations{
     padding: 0;
@@ -75,10 +30,9 @@ header{
         border-right: $content-border solid $gray;
         a{
             &:hover{
-                background-color: transparent;}
-            @include transition(background-color .25s ease-in, 
-                                background-color .25s ease-out,
-                                color .25s ease-in-out);
+                background-color: transparent;
+            }
+            @include transition(color .25s ease-in-out);
             padding-right: 1em;
             color: $black;
             display: block;
