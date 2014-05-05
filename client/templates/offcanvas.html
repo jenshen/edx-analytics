@@ -1,0 +1,35 @@
+<template name="offcanvas">
+	<div class="off-canvas-wrap hide-for-large-up" data-offcanvas>
+		<div class="inner-wrap">
+			<nav class="tab-bar">
+			<section class="left-small">
+				<a class="left-off-canvas-toggle menu-icon" href="#">
+					<span>
+					</span>
+				</a>
+				</section>
+				<section class="middle tab-bar-section">
+					<div id="logo">
+		                <img id="img-logo" alt = "edX Analytics" src="img/logo.png">
+		            </div>
+				</section>
+				<section id="welcome" class="right tab-bar-section">
+	                <span class = "right" id="welcome-message">
+	                    Welcome to PhilosophyX
+	                </span>            
+	            </section>
+			</nav>
+			<nav class="left-off-canvas-menu" id='visualizations'>
+            	<ul class="off-canvas-list">
+                	{{> visualizations}}
+                	{{> favorites}}
+            	</ul>
+        	</nav> 
+		<section id="content" class="main-section">
+			<!-- content goes here -->
+            {{> visualization mainContent}}
+		</section>
+		<a class="exit-off-canvas"></a>
+		</div>
+	</div>
+</template>
