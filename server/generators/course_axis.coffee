@@ -105,4 +105,5 @@ root.CourseAxisFactory =
     CourseAxis.insert(videoDoc)
 
   _parseDate: (date) ->
-    date
+    moment(date, 'MM-DD-YYY').utc().format('YYYY-MM-DD hh:mm:ss')
+    

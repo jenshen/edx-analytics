@@ -2,8 +2,6 @@ $heading-height: $h1-height;
 
 #visualization{
     position: relative;
-    opacity: 0;
-    transition: opacity 250ms;
     height: 100%;
 
     .heading{
