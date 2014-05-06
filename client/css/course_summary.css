@@ -1,23 +1,26 @@
-.graph {
+.data {
+	height: 100%;
+}
+
+.graphs {
+	height: 95%;
+	display: block;
+	overflow-y: scroll;
+}
+
+.graphs .graph {
 	margin: 5px;
 	font-size: 13px;
 	width: 275px;
 	height: 250px;
-	display: block;
-	float: left;
+	display: inline-block;
 }
 
-.graphs {
-	overflow-y: scroll;
-	height: 90%;
-}
-
-.wrapper {
+.graphs .graph-wrapper {
 	font-size: 20px;
 	width: 80%;
 	margin: 10px;
 	display: block;
-	clear: both;
 }
 
 svg {
@@ -25,12 +28,6 @@ svg {
 	height: 80%;
 	min-width: 100px;
 	min-height: 100px;
-/*
-  margin: 10px;
-  Minimum height and width is a good idea to prevent negative SVG dimensions...
-  For example width should be =< margin.left + margin.right + 1,
-  of course 1 pixel for the entire chart would not be very useful, BUT should not have errors
-*/
 }
 
 svg text {
