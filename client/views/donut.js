@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-  function tooltipContent(key, y, e, graph) {
-    return '<h3>' + key + '</h3>' +'<p>' + y + '</p>' ;
-  }
-
   var data = [{"label": "Male", "value": 1000234}, {"label": "Female", "value": 999200}, {"label": "Unreported", "value": 20000}];
 
   nv.addGraph(function() {

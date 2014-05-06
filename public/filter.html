@@ -1,52 +1,63 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="bootstrap-multiselect/css/bootstrap.min.css" type="text/css"/>
-<link rel="stylesheet" href="bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css"/>
-<link rel="stylesheet" href="css/filter.css" type="text/css"/>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF8">
+	<link rel="stylesheet" href="css/main.css" type="text/css"/>
+	<link href="nvd3/src/nv.d3.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/filter.css" type="text/css"/>
 
-<script type="text/javascript" src="bootstrap-multiselect/js/jquery.min.js"></script>
-<script type="text/javascript" src="bootstrap-multiselect/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="nvd3/lib/d3.v3.js"></script>
+	<script src="nvd3/nv.d3.js"></script>
+	<!-- including all the components so I don't have to minify every time I test in development -->
+	<script src="nvd3/src/interactiveLayer.js"></script>
+	<script src="nvd3/src/tooltip.js"></script>
+	<script src="nvd3/src/utils.js"></script>
+	<script src="nvd3/src/models/pie.js"></script>
+	<script src="nvd3/src/models/legend.js"></script>
+	<script src="nvd3/src/models/axis.js"></script>
+	<script src="nvd3/src/models/scatter.js"></script>
+	<script src="nvd3/src/models/line.js"></script>
+	<script src="nvd3/src/models/lineChart.js"></script>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script type="text/javascript" src="js/filter.js"></script>
+	<script type="text/javascript" src="js/course_summary.js"></script>
+</head>
 
-<div class="main">
-	<select class="multiselect video-filter" multiple="multiple">
-	  <option>Chapter 1: Basics</option>
-	  <option>Lec 1.1: Proof of Inductions</option>
-	  <option>Lec 1.2: Famous Philosophers</option>
-	  <option>Chapter 2: People</option>
-	  <option>Chapter 3: Logic</option>
-	</select>
-
-	<select class="multiselect geo-filter" multiple="multiple">
-	  <option>United States</option>
-	  <option>United Kingdom</option>
-	  <option>Spain</option>
-	  <option>China</option>
-	  <option>Brazil</option>
-	</select>
-
-	<select class="multiselect edu-filter" multiple="multiple">
-	  <option>High School</option>
-	  <option>Bachelors</option>
-	  <option>Masters</option>
-	  <option>PhD</option>
-	  <option>Other</option>
-	</select>
-
-	<select class="multiselect time-filter">
-	  <option>Last Week</option>
-	  <option>Last Month</option>
-	  <option>All Time</option>
-	</select>
-
-	<form>
-    	<label><input type="radio" name="mode" value="grouped"> Grouped</label>
-		<label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-	</form>
-	<div class="graph">
-	
+<body>
+	<div class="wrapper">
+		<div>Video Engagement</div>
+		<div class="graph" id="chart1">
+			<svg></svg>
+			Total Views
+		</div>
+		<div class="graph" id="chart2">
+			<svg></svg>
+			Total Minutes
+		</div>
 	</div>
-</div>
+
+	<div class="wrapper">
+		<div>Student Performance</div>
+		<div class="graph" id="chart3">
+			<svg></svg>
+			Total Attempts v. Correct
+		</div>
+		<div class="graph" id="chart5">
+			<svg></svg>
+			Pset 2
+		</div>
+		<div class="graph" id="chart6">
+			<svg></svg>
+		</div>
+		<div class="graph" id="chart7">
+			<svg></svg>
+		</div>
+	</div>
+	<div class="wrapper">
+		<div class="graph" id="chart0">
+			<svg></svg>
+		</div>
+	</div>
+</body>
+
 </html>
