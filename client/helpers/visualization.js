@@ -1,4 +1,4 @@
-UI.registerHelper('mainContent',function() {
+UI.registerHelper('content',function() {
   if (typeof(Session.get('selected')) == 'undefined'){
     summary = Visualizations.findOne({name: 'Course Summary'});
     if(typeof(summary) != 'undefined') {
