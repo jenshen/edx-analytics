@@ -1,15 +1,14 @@
-#logo{
-    float: left;
-    width: 200px;
+.off-canvas-list{
+	label{
+		font-size: 1.1em;
+	}
+
 }
 
-#img-logo {
-     width: 100%;
+.left-off-canvas-toggle{
+	border-right: 1px solid #ddd;
 }
 
-#welcome{
-        padding-top: 0px;
-        float: right;
-        line-height: 57px;
-        font-size: 1.4em;
-    }
+.tab-bar{
+	border-bottom: 1px solid #ddd;
+}

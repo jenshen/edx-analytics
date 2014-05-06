@@ -4,11 +4,15 @@
             <h1>{{name}}</h1>
             <ul class="controls">
                 <li id="favorite">
-                    <a href="#">Favorite</a>
+                    {{#if favorite}}
+                        <a href="#">Unfavorite</a>
+                    {{else}}
+                        <a href="#">Favorite</a>
+                    {{/if}}
                 </li>
-<!--                 <li id="share">
-                    <a href="#">Share</a>
-                </li> -->
+                 <li id="share">
+                    <a href="mailto:?subject=EdX Analytics Recommendation: {{name}}&amp;body=Sign into EdXAnalytics with your account and check out the '{{name}}' visualization!" title="Share by Email">Share</a>
+                </li>
                 <li id="download">
                     <a href="#">Download</a>
                 </li>

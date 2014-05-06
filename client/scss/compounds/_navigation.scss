@@ -4,6 +4,22 @@ nav.tab-bar{
     }
 }
 
+#logo{
+    float: left;
+    width: 300px;
+}
+
+#img-logo {
+     width: 100%;
+}
+
+#welcome{
+    padding-top: 1em;
+    float: right;
+    line-height: 57px;
+    font-size: 1.4em;
+}
+
 #visualizations{
     padding: 0;
     width: 12*$font-size;
