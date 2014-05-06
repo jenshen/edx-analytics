@@ -1,38 +1,38 @@
 <template name="course_summary">
-  <strong>Course Summary code goes here</strong>
   <div class="main">
-    <select class="multiselect video-filter" multiple="multiple">
-      <option>Chapter 1: Basics</option>
-      <option>Lec 1.1: Proof of Inductions</option>
-      <option>Lec 1.2: Famous Philosophers</option>
-      <option>Chapter 2: People</option>
-      <option>Chapter 3: Logic</option>
-    </select>
-
-    <select class="multiselect geo-filter" multiple="multiple">
-      <option>United States</option>
-      <option>United Kingdom</option>
-      <option>Spain</option>
-      <option>China</option>
-      <option>Brazil</option>
-    </select>
-
-    <select class="multiselect edu-filter" multiple="multiple">
-      <option>High School</option>
-      <option>Bachelors</option>
-      <option>Masters</option>
-      <option>PhD</option>
-      <option>Other</option>
-    </select>
-
-    <select class="multiselect time-filter">
-      <option>Last Week</option>
-      <option>Last Month</option>
-      <option>All Time</option>
-    </select>
-
-    <div class="graph">
+    <div class="wrapper">
+      <div>Video Engagement</div>
+      <div class="graph" id="chart1">
         <svg></svg>
+        Total Views
+      </div>
+      <div class="graph" id="chart2">
+        <svg></svg>
+        Total Minutes
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div>Student Performance</div>
+      <div class="graph" id="chart3">
+        <svg></svg>
+        Total Attempts v. Correct
+      </div>
+      <div class="graph" id="chart4">
+        <svg></svg>
+        Certifications
+      </div>
+      <div class="graph" id="chart6">
+        <svg></svg>
+      </div>
+      <div class="graph" id="chart7">
+        <svg></svg>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="graph" id="chart0">
+        <svg></svg>
+      </div>
     </div>
   </div>
 </template>
