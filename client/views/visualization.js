@@ -25,7 +25,7 @@ Template.visualization.events = {
           loe: {$in: ["p"]},
           date: {
             $gt: "2020-02-03 05:00:00",
-            $lt: "2020-02-05 05:00:00"
+            $lt: "2020-03-05 05:00:00"
           },
           cc: {$in: ["US"]}
         }
@@ -37,13 +37,19 @@ Template.visualization.events = {
       }],
       collection: 'daily_count'
     }
-    console.log(this)
+    that = this
     Meteor.call('aggregate',
       params,
       function (error, result) {
         csvContent = "data:text/csv;charset=utf-8,"
-        console.log(error);
-        console.log(result);
+        resultLength = result.length;
+        for (var i = 0; i < resultLength; i++){
+          dataString = result[i]['_id']['date']+','+result[i]['count'];
+          csvContent += dataString + "\n";
+        }
+        encodedData = encodeURI(csvContent);
+        console.log(encodedData);
+        window.open(encodedData, '_self');
     }) 
   }
 };
