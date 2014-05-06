@@ -16,9 +16,15 @@
             <section id="logo" class="middle tab-bar-section">
                 <img id="img-logo" alt = "edX Analytics" src="img/logo.png">
             </section>
+            <section id="welcome" class="show-for-medium-up right tab-bar-section">
+                <span class = "right" id="welcome-message">
+                    Welcome to PhilosophyX
+                </span>            
+            </section>
         </nav>
         <aside class="left-off-canvas-menu">
-            <ul class="off-canvas-list">
+            <ul class="off-canvas-list">                
+                {{> search}}
                 <li><label>Visualizations</label></li>
                 {{> visualizations}}
                 <li><label>Favorites</label></li>
@@ -28,6 +34,7 @@
         <section id="main-wrapper" class='main-section'>
             <nav id='visualizations' class='show-for-large-up'>
                 <ul>
+                    {{> search}}
                     {{> visualizations}}
                     {{> favorites}}
                 </ul>
