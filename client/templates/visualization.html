@@ -16,9 +16,13 @@
         </div>
 
         <div class='data'>
-<!--             <iframe src="{{url}}">
+            {{#unless iframe}}
+                {{> figures}}
+            {{else}}
+                <iframe src="{{url}}">
                 
-            </iframe> -->
+                </iframe>
+            {{/unless}}
         </div>
     </div>
 </template>

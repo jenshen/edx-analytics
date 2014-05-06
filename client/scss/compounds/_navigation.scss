@@ -77,8 +77,6 @@ nav.tab-bar{
         }
     }
     li.favorites-heading{
-        // border-top: $content-border solid $gray;
-
         &.selected{
             background-color: $edx-blue;
             border-right: $content-border solid darken($edx-blue, 20);

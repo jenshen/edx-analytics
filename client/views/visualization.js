@@ -1,8 +1,6 @@
 // Visualization Template
 Template.visualization.rendered = function () {
-  UI.insert(
-      UI.render(Template.test), this.find('.data')
-  );
+
 };
 Template.visualization.events = {
   'click #favorite': function(event){
@@ -15,4 +13,10 @@ Template.visualization.events = {
   'click #download': function(event){
     console.log('Download');
   }
+};
+Template.visualization.figures = function(){
+  if (typeof(this.url) != 'undefined'){
+    return Template[this.url];
+  }
+  return Template['blank'];
 };
