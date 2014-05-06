@@ -1,3 +1,52 @@
+Template.course_summary.videoData = function(){
+  records = []
+  CourseAxis.find({category: 'video'}).forEach(function(video){
+    records.push({
+      display: video.name,
+      value: video.module_id
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'video-filter',
+    noneSelected: 'All Videos'
+  };
+}
+
+Template.course_summary.countryData = function(){
+  records = []
+  Country.find({}).forEach(function(country){
+    records.push({
+      display: country.name,
+      value: country.short
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'country-filter',
+    noneSelected: 'All Countries'
+  };
+},
+
+Template.course_summary.educationData = function(){
+  records = []
+  EducationLevels.find({}).forEach(function(loe){
+    records.push({
+      display: loe.name,
+      value: loe.short
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'edu-filter',
+    noneSelected: 'All Educations'
+  };
+},
+
+
 Template.course_summary.rendered = function(){
     // Rendering code goes here
     console.log("Rendered course_summary")
@@ -11,7 +60,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -59,7 +107,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -105,7 +152,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -150,7 +196,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,

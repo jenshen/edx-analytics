@@ -1,0 +1,7 @@
+<template name="filter">
+    <select class="multiselect {{classes}}" data-none-selected="{{noneSelected}}" multiple="multiple">
+        {{#each records}}
+            <option value="{{value}}">{{display}}</option>
+        {{/each}}
+    </select>
+</template>
