@@ -1,38 +1,26 @@
 <template name="demographics">
-  <strong>Demographics code goes here</strong>
   <div class="main">
-    <select class="multiselect video-filter" multiple="multiple">
-      <option>Chapter 1: Basics</option>
-      <option>Lec 1.1: Proof of Inductions</option>
-      <option>Lec 1.2: Famous Philosophers</option>
-      <option>Chapter 2: People</option>
-      <option>Chapter 3: Logic</option>
-    </select>
-
-    <select class="multiselect geo-filter" multiple="multiple">
-      <option>United States</option>
-      <option>United Kingdom</option>
-      <option>Spain</option>
-      <option>China</option>
-      <option>Brazil</option>
-    </select>
-
-    <select class="multiselect edu-filter" multiple="multiple">
-      <option>High School</option>
-      <option>Bachelors</option>
-      <option>Masters</option>
-      <option>PhD</option>
-      <option>Other</option>
-    </select>
-
-    <select class="multiselect time-filter">
-      <option>Last Week</option>
-      <option>Last Month</option>
-      <option>All Time</option>
-    </select>
-
-    <div class="graph">
-        <svg></svg>
+    <div class="graphs">
+      <div class="graph-wrapper">
+        <div>Students Enrolled</div>
+        <div class="graph full" id="enrollment_chart">
+          <svg></svg>
+        </div>
+      </div>
+      <div class="graph-wrapper">
+        <div>Student Breakdown</div>
+        <div class="graph" id="chart0">
+          <svg></svg>
+          Gender
+        </div>
+        <div class="graph" id="age_chart">
+          <svg></svg>
+          Age
+        </div>
+        <div class="graph full" id="map_chart">
+        </div>
+      </div>
     </div>
+
   </div>
 </template>

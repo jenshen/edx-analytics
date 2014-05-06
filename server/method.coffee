@@ -2,7 +2,6 @@ Future = Npm.require('fibers/future');
 
 Meteor.methods
   'aggregate': (params) ->
-    console.log params
     fut = new Future();
     MongoInternals\
       .defaultRemoteCollectionDriver()\

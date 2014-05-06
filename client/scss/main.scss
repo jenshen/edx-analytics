@@ -17,10 +17,12 @@
 @import "elements/headings";
 @import "elements/containers";
 @import "elements/links";
+@import "elements/filters";
 
-// Combindations of HTML Elements
+// Combinations of HTML Elements
 @import "compounds/visualization";
 @import "compounds/navigation";
 @import "compounds/offcanvas";
 
-
+// Graphs
+@import "compounds/graphs";

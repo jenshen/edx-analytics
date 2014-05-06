@@ -18,6 +18,39 @@ Template.visualization.events = {
   },
   'click #download': function(event){
     console.log('Download');
+    params = {
+      pipe: [{
+        $match: {
+          module_id: {$in: ["MITx/Spring_2014/test_course1/C0_LS1_V3"]},
+          loe: {$in: ["p"]},
+          date: {
+            $gt: "2020-02-03 05:00:00",
+            $lt: "2020-03-05 05:00:00"
+          },
+          cc: {$in: ["US"]}
+        }
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      }],
+      collection: 'daily_count'
+    }
+    that = this
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        csvContent = "data:text/csv;charset=utf-8,"
+        resultLength = result.length;
+        for (var i = 0; i < resultLength; i++){
+          dataString = result[i]['_id']['date']+','+result[i]['count'];
+          csvContent += dataString + "\n";
+        }
+        encodedData = encodeURI(csvContent);
+        console.log(encodedData);
+        window.open(encodedData, '_self');
+    }) 
   }
 };
 Template.visualization.figures = function(){

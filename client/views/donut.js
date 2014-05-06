@@ -17,7 +17,7 @@ $(document).ready(function () {
         //});
         ;
 
-      d3.select("#chart1 svg")
+      d3.select("#example_chart svg")
           .datum(data)
           .transition().duration(350)
           .call(chart);
