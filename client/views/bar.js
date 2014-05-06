@@ -15,7 +15,7 @@ $(document).ready(function() {
             .transitionDuration(250)
             ;
 
-        d3.select('#chart1 svg')
+        d3.select('#example_chart svg')
             .datum(data)
             .call(chart);
 

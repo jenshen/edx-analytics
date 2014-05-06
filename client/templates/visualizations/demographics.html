@@ -1,5 +1,4 @@
 <template name="demographics">
-  <strong>Demographics code goes here</strong>
   <div class="main">
     <select class="multiselect video-filter" multiple="multiple">
       <option>Chapter 1: Basics</option>
@@ -31,8 +30,25 @@
       <option>All Time</option>
     </select>
 
-    <div class="graph">
-        <svg></svg>
+    <div class="graphs">
+      <div class="graph-wrapper">
+        <div>Students Enrolled</div>
+        <div class="graph full" id="enrollment_chart">
+          <svg></svg>
+        </div>
+      </div>
+      <div class="graph-wrapper">
+        <div>Student Breakdown</div>
+        <div class="graph" id="chart0">
+          <svg></svg>
+          Gender
+        </div>
+        <div class="graph" id="age_chart">
+          <svg></svg>
+          Age
+        </div>
+      </div>
     </div>
+
   </div>
 </template>

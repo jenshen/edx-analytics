@@ -28,7 +28,7 @@ $(document).ready(function () {
       .tickFormat(d3.format(',.2f'))
       ;
 
-    d3.select('#chart1 svg')
+    d3.select('#example_chart svg')
       .datum(data)
       .call(chart);
 
