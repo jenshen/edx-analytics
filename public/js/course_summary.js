@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  var map = new Datamap({element: document.getElementById('map')});
+
   // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
   var set_1 = [{x: 1025409600000, y: 5}, {x: 1122782400000, y: 1}, {x: 1304136000000, y: 2}];
   
