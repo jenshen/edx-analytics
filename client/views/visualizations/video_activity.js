@@ -31,7 +31,7 @@ Template.video_activity.rendered = function(){
       ;
 
     chart.yAxis
-      .axisLabel("Views (millions)")
+      .axisLabel("")
       .tickFormat(d3.format(',.f'))
       ;
 

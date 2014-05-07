@@ -7,8 +7,8 @@ Template.demographics.rendered = function(){
   nv.addGraph(function() {
     var chart = nv.models.lineChart()
     .options({
-      margin: {left: 30, bottom: 30},
-      showXAxis: false,
+      margin: {left: 50, bottom: 50},
+      showXAxis: true,
       showYAxis: true,
       transitionDuration: 250,
       showLegend: false,
@@ -20,7 +20,7 @@ Template.demographics.rendered = function(){
 
     // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
     chart.xAxis
-      .axisLabel("Total Views")
+      .axisLabel("Date")
       //.tickFormat(d3.format(',.1f'))
       .tickFormat(function(d) {
             return d3.time.format('%x')(new Date(d))
@@ -28,7 +28,7 @@ Template.demographics.rendered = function(){
       ;
 
     chart.yAxis
-      .axisLabel("Views (millions)")
+      .axisLabel("")
       .tickFormat(d3.format(',.f'))
       ;
 
