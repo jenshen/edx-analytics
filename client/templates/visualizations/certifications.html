@@ -1,7 +1,10 @@
 <template name="certifications">
-  {{> filter videoData}}
-  {{> filter countryData}}
-  {{> filter educationData}}
+  <div class="filters">
+    {{> filter videoData}}
+    {{> filter countryData}}
+    {{> filter educationData}}
+    {{> filter timeData}}
+  </div>
 
   <div class="graph">
       <svg></svg>

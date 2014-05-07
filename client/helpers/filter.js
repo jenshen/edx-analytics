@@ -1,4 +1,3 @@
-
 UI.registerHelper('videoData', function(){
   records = []
   CourseAxis.find({category: 'video'}).forEach(function(video){

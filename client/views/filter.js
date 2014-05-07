@@ -6,10 +6,15 @@ Template.filter.rendered = function() {
         enableCaseInsensitiveFiltering: true,
         filterBehavior: 'both',
         nonSelectedText: data['noneSelected'],
-        onChange: getSelectedOptions
+        onChange: renderGraph
         // buttonText: dropDownLabel,
     });
 };
+
+var renderGraph = function() {
+  console.log('triggering');
+  $('.multiselect').trigger("graphRender", getSelectedOptions());
+}
 
 var getSelectedOptions = function(element, checked) {
   var filter = $('.multiselect option:selected');
@@ -19,7 +24,7 @@ var getSelectedOptions = function(element, checked) {
       selected.push($(this).val());
     }
   });
-  console.log(selected);
+  return selected;
 }
 
 var dropDownLabel = function(options, select) {

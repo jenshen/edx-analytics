@@ -1,6 +1,11 @@
 Template.video_activity.rendered = function(){
-    // Rendering code goes here
-    console.log("Rendered video_activity");
+  $('.multiselect').on('graphRender', renderVideoActivityGraphs);
+  renderVideoActivityGraphs();
+}
+
+var renderVideoActivityGraphs = function() {
+  // Rendering code goes here
+  console.log("Rendered video_activity");
 
   // Views graph
   var set_1 = [{x: 1025409600000, y: 50}, {x: 1122782400000, y: 60}, {x: 1304136000000, y: 20}, {x: 1504136000000, y: 100}];

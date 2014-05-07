@@ -1,4 +1,10 @@
-Template.demographics.rendered = function(){
+Template.demographics.rendered = function() {
+  $('.multiselect').on('graphRender', renderDemographicsGraphs);
+  renderDemographicsGraphs();
+}
+
+var renderDemographicsGraphs = function() {
+  console.log('rerendering demographics graphs');
   // Enrollment graph
   var set_1 = [{x: 1025409600000, y: 5}, {x: 1122782400000, y: 9}, {x: 1304136000000, y: 12}, {x: 1504136000000, y: 13}];
   
