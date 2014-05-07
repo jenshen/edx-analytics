@@ -6,18 +6,21 @@ Template.filter.rendered = function() {
         enableCaseInsensitiveFiltering: true,
         filterBehavior: 'both',
         nonSelectedText: data['noneSelected'],
+        onChange: getSelectedOptions
         // buttonText: dropDownLabel,
     });
 };
 
-var getSelected = function(element, checked) {
-  var filter = $(this).find('option:selected');
+var getSelectedOptions = function(element, checked) {
+  var filter = $('.multiselect option:selected');
   var selected = [];
   $(filter).each(function(index, item){
-    selected.push([$(this).val()]);
+    if ($(this).val() != "multiselect-all") {
+      selected.push($(this).val());
+    }
   });
-  console.log(filter);
-};
+  console.log(selected);
+}
 
 var dropDownLabel = function(options, select) {
   if (options.length == 0) {

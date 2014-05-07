@@ -12,6 +12,10 @@ Meteor.startup ->
   if Visualizations.find().count() == 0
     console.log 'Adding Visualizations'
     Visualizations.insert viz for viz in visualizations
+
+  if TimeRanges.find().count() == 0
+    console.log 'Adding time ranges'
+    TimeRanges.insert tr for tr in timeRanges
   
   if CourseAxis.find().count() == 0
     console.log('Adding courses')

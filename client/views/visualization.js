@@ -64,6 +64,7 @@ Template.visualization.events = {
     }) 
   }
 };
+
 Template.visualization.figures = function(){
   if (typeof(this.url) != 'undefined'){
     return Template[this.url];

@@ -9,4 +9,4 @@ UI.registerHelper('content',function() {
   } else{
     return Visualizations.findOne({_id: Session.get('selected')})
   }
-})
+});

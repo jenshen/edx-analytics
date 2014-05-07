@@ -1,3 +1,4 @@
+
 UI.registerHelper('videoData', function(){
   records = []
   CourseAxis.find({category: 'video'}).forEach(function(video){
@@ -10,9 +11,11 @@ UI.registerHelper('videoData', function(){
   return {
     records: records,
     classes: 'video-filter',
-    noneSelected: 'All Videos'
+    noneSelected: 'All Videos',
+    multiple: true
   };
 });
+
 UI.registerHelper('countryData', function(){
   records = []
   Country.find({}).forEach(function(country){
@@ -25,9 +28,11 @@ UI.registerHelper('countryData', function(){
   return {
     records: records,
     classes: 'country-filter',
-    noneSelected: 'All Countries'
+    noneSelected: 'All Countries',
+    multiple: true
   };
 });
+
 UI.registerHelper('educationData', function(){
   records = []
   EducationLevels.find({}).forEach(function(loe){
@@ -40,6 +45,24 @@ UI.registerHelper('educationData', function(){
   return {
     records: records,
     classes: 'edu-filter',
-    noneSelected: 'All Educations'
+    noneSelected: 'All Educations',
+    multiple: true
+  };
+});
+
+UI.registerHelper('timeData', function() {
+  records = []
+  TimeRanges.find({}).forEach(function(tr){
+    records.push({
+      display: tr.name,
+      value: tr.short
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'time-filter',
+    noneSelected: '',
+    multiple: false
   };
 });
