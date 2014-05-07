@@ -1,5 +1,7 @@
+var selectedOptions = {};
+
 Template.course_summary.rendered = function(){
-    $('.multiselect').on('graphRender', renderCourseSummaryGraphs);
+    this.$('select.multiselect').on('graphRender', renderCourseSummaryGraphs);
     renderCourseSummaryGraphs();
 }
 
@@ -25,11 +27,15 @@ Template.course_summary.events({
       console.log("You've clicked certifications!");
       var viz = Visualizations.findOne({name:"Certifications"});
       Session.set("selected", viz._id);
-    }
+    },
 });
 
-var renderCourseSummaryGraphs = function () {
-    console.log('rerendering course summary');
+var renderCourseSummaryGraphs = function (event, selectedOptions) {
+    console.log('rerendering course summary', event);
+    var testdata = DailyCount.find();
+    var num_views = [];
+    
+    
     // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
     var set_1 = [{
         x: 1025409600000,
