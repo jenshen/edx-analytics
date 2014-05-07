@@ -12,8 +12,16 @@ Template.filter.rendered = function() {
 };
 
 var renderGraph = function() {
-  var el = this['$select']['context']
-  $(el).trigger("graphRender", getSelectedOptions());
+  var el = $(this['$select']['context'])
+  var category = el.data()['category']
+  var selected = [];
+  el.find('option:selected').each(function(index, item){
+    if ($(this).val() != "multiselect-all") {
+      selected.push($(this).val());
+    }
+  });
+  console.log({category: selected});
+  el.trigger("graphRender", {category: selected});
 }
 
 var getSelectedOptions = function(element, checked) {

@@ -11,7 +11,8 @@ UI.registerHelper('videoData', function(){
     records: records,
     classes: 'video-filter',
     noneSelected: 'All Videos',
-    multiple: true
+    multiple: true,
+    category: 'daily_count'
   };
 });
 
@@ -28,7 +29,8 @@ UI.registerHelper('countryData', function(){
     records: records,
     classes: 'country-filter',
     noneSelected: 'All Countries',
-    multiple: true
+    multiple: true,
+    category: 'countries'
   };
 });
 
@@ -45,7 +47,8 @@ UI.registerHelper('educationData', function(){
     records: records,
     classes: 'edu-filter',
     noneSelected: 'All Educations',
-    multiple: true
+    multiple: true,
+    category: 'loe'
   };
 });
 
@@ -62,6 +65,7 @@ UI.registerHelper('timeData', function() {
     records: records,
     classes: 'time-filter',
     noneSelected: '',
-    multiple: false
+    multiple: false,
+    category: 'time'
   };
 });
