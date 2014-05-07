@@ -11,7 +11,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -59,7 +58,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -105,7 +103,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
@@ -150,7 +147,6 @@ Template.course_summary.rendered = function(){
     var chart = nv.models.lineChart()
     .options({
       margin: {left: 30, bottom: 30},
-      x: function(d,i) { return i},
       showXAxis: false,
       showYAxis: true,
       transitionDuration: 250,
