@@ -101,11 +101,16 @@ nav.tab-bar{
             background-color: $secondary-color;
             border-right: $content-border+10 solid darken($secondary-color, 20);
             ul{
-                display: block; 
+                // display: block;
+                height: auto;
+                opacity: 1;
             }
         }
         ul{
-            display: none;
+            @include transition(opacity .25s ease-in-out);
+            opacity: 0;
+            height: 0;
+            // display: none;
             margin: 0;
             padding: 0;
             position: absolute;
