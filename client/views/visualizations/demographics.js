@@ -95,5 +95,5 @@ Template.demographics.rendered = function(){
     });
 
     //World Map
-    var map = new Datamap({element: document.getElementById('map_chart')});
+    //var map = new Datamap({element: document.getElementById('map_chart')});
 }
