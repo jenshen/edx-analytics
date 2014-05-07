@@ -2,7 +2,7 @@ $heading-height: $h1-height;
 
 #visualization{
     position: relative;
-    height: 100%;
+    height: 95%;
 
     .heading{
         overflow: hidden;
@@ -30,7 +30,7 @@ $heading-height: $h1-height;
         top: $heading-height + $font-size;
         bottom: 0;
         width: 100%;
-        overflow: scroll;
+        overflow-y: scroll;
     }
     iframe{
         width: 100%;
