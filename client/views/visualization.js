@@ -6,23 +6,15 @@ Template.visualization.rendered = function () {
 Template.visualization.events = {
   'click #favorite': function(event){
     //Visual feedback for favoriting
-    $("li.favorites-heading").css("background-color", 'rgb(30,161,229)');
-    setTimeout(function() {$("li.favorites-heading").css("background-color", 'white');}, 200);         
+    $("li.favorites").css("background-color", 'rgb(30,161,229)');
+    setTimeout(function() {$("li.favorites").css("background-color", 'none');}, 200);         
     
-    //Create selector for this nav
-    var selector = $('#' + this._id);
-    //console.log(selector);
-    //console.log('Favorited' + this.name);
     var isFavorited = Visualizations.findOne({_id:this._id}).favorite;
     if (isFavorited) {
       Visualizations.update(this._id, {$set: {favorite: false}});
     } else {
       Visualizations.update(this._id, {$set: {favorite: true}});
     }
-
-    //Use session to force model to update.
-    Session.set('selected',Session.get('selected'));
-    selector.fadeToggle();
   },
   'click #share': function(event){
     console.log('Share');
