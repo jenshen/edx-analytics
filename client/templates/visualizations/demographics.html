@@ -1,26 +1,27 @@
 <template name="demographics">
-  <div class="main">
-    <div class="graphs">
-      <div class="graph-wrapper">
-        <div>Students Enrolled</div>
-        <div class="graph full" id="enrollment_chart">
-          <svg></svg>
-        </div>
-      </div>
-      <div class="graph-wrapper">
-        <div>Student Breakdown</div>
-        <div class="graph" id="chart0">
-          <svg></svg>
-          Gender
-        </div>
-        <div class="graph" id="age_chart">
-          <svg></svg>
-          Age
-        </div>
-        <div class="graph full" id="map_chart">
-        </div>
+  {{> filter videoData}}
+  {{> filter countryData}}
+  {{> filter educationData}}
+
+  <div class="graphs">
+    <div class="graph-wrapper">
+      <div>Students Enrolled</div>
+      <div class="graph full" id="enrollment_chart">
+        <svg></svg>
       </div>
     </div>
-
+    <div class="graph-wrapper">
+      <div>Student Breakdown</div>
+      <div class="graph" id="chart0">
+        <svg></svg>
+        Gender
+      </div>
+      <div class="graph" id="age_chart">
+        <svg></svg>
+        Age
+      </div>
+      <div class="graph full" id="map_chart">
+      </div>
+    </div>
   </div>
 </template>
