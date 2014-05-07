@@ -1,9 +1,11 @@
 <template name="video_activity">
   <div class="filters">
-    {{> filter videoData}}
-    {{> filter countryData}}
-    {{> filter educationData}}
-    {{> filter timeData}}
+    <div class="row">
+      <div class="small-6 large-3 columns">{{> filter videoData}}</div>
+      <div class="small-6 large-3 columns">{{> filter countryData}}</div>
+      <div class="small-6 large-3 columns">{{> filter educationData}}</div>
+      <div class="small-6 large-3 columns">{{> filter timeData}}</div>
+    </div>
   </div>
    
   <div class="graphs">
