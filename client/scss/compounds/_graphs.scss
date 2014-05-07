@@ -35,6 +35,10 @@ svg {
 		text-align: center;
 	}
 
+	.clickable:hover {
+		cursor: pointer;
+	}
+
 	.full {
 		width: 90%;
 	}

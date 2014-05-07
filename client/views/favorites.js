@@ -3,6 +3,7 @@ Template.favorites.events = {
   'click li': function(event) {
     if (typeof(this._id) != 'undefined'){
       Session.set("selected", this._id);
+      console.log(this._id);
     }
   },
   'click .favorites-heading': function(event){

@@ -262,10 +262,14 @@ Template.course_summary.events({
     // Video Enagement: Views
     'click #chart1': function (event) {
       console.log("You've clicked video views!");
+      var viz = Visualizations.findOne({name:"Video Activity"});
+      Session.set("selected", viz._id);
     },
     // Video Engagement: Minutes
     'click #chart2': function (event) {
       console.log("You've clicked video minutes!");
+      var viz = Visualizations.findOne({name:"Video Activity"});
+      Session.set("selected", viz._id);
     },
     // Pset Performance
     'click #chart3': function (event) {
@@ -274,5 +278,7 @@ Template.course_summary.events({
     // Certifications
     'click #chart4': function (event) {
       console.log("You've clicked certifications!");
+      var viz = Visualizations.findOne({name:"Certifications"});
+      Session.set("selected", viz._id);
     }
 });
