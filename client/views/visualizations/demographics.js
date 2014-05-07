@@ -7,7 +7,7 @@ Template.demographics.rendered = function(){
   nv.addGraph(function() {
     var chart = nv.models.lineChart()
     .options({
-      margin: {left: 50, bottom: 50},
+      margin: {left: 50, bottom: 50, right: 40},
       showXAxis: true,
       showYAxis: true,
       transitionDuration: 250,
