@@ -7,45 +7,29 @@ Template.filter.rendered = function() {
         enableCaseInsensitiveFiltering: true,
         filterBehavior: 'both',
         nonSelectedText: data['noneSelected'],
-        onChange: renderGraph
-        // buttonText: dropDownLabel,
+        onChange: Template.filter.updateFilters
     });
 };
 
-var renderGraph = function() {
-  var el = $(this['$select']['context'])
-  var category = el.data()['category']
+Template.filter.updateFilters = function() {
+  // Get Element and Category
+  var el = $(this['$select']['context']);
+  var category = el.data()['category'];
+
+  // Get Selected Items
   var selected = [];
   el.find('option:selected').each(function(index, item){
     if ($(this).val() != "multiselect-all") {
       selected.push($(this).val());
     }
   });
-  el.trigger("graphRender", {
-    category: category, 
-    selected: selected
-  });
-}
 
-var getSelectedOptions = function(element, checked) {
-  var filters = $('select.multiselect');
-  var selected = [];
-  $(filter).each(function(index, item){
-    console.log(item);
-  });
-  return selected;
+  // Update Session Filters
+  var filters = Session.get('filters');
+    if (typeof(filters) == 'undefined'){
+        var filters = {};
+  }
+  filters[category] = selected;
+  Session.set('filters', filters);
+  el.trigger("updatedFilters");
 }
-
-var dropDownLabel = function(options, select) {
-  if (options.length == 0) {
-      return this.nonSelectedText + ' <b class="caret"></b>';
-  }
-  else {
-      var selected = '';
-      options.each(function() {
-        var label = ($(this).attr('label') !== undefined) ? $(this).attr('label') : $(this).html();
-        selected += label + ', ';
-      });
-      return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
-  }
-};

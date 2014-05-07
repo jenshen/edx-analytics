@@ -1,80 +1,27 @@
-var selectedOptions = {};
 
-Template.course_summary.rendered = function(){
-    Session.set('filters', {});
-    this.$('select.multiselect').on('graphRender', updateOptions);
-    params = {
-      pipe: [{
-        $match: {
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-04-30 05:00:00"
-          }
-        }
-      },{
-        $group: {
-          _id: {date: "$date"},
-          count: {$sum: "$count"}
-        },
-      },{
-        $sort: {'_id.date': 1}
-      }],
-      collection: 'daily_count'
-    }
-    Meteor.call('aggregate',
-      params,
-      function (error, result) {
-        console.log(result);
 
-        resultLength = result.length;
-        video_stream = []
-        for (var i = 0; i < resultLength; i++){
-            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
-                x: date.valueOf(), 
-                y: result[i]['count']
-            });
-        }
-        renderCourseSummaryGraphs(video_stream);
-    }); 
+
+Template.course_summary.created = function(){
+    // Initialize filter options
+    Session.set('filters', {
+        cc: [],
+        loe: [],
+        module_id: []
+    });
+    // Initialize data streams
+    Session.set('streams', {video: []});
 }
 
-Template.course_summary.events({
-    // Video Enagement: Views
-    'click #chart1': function (event) {
-      console.log("You've clicked video views!");
-      var viz = Visualizations.findOne({name:"Video Activity"});
-      Session.set("selected", viz._id);
-    },
-    // Video Engagement: Minutes
-    'click #chart2': function (event) {
-      console.log("You've clicked video minutes!");
-      var viz = Visualizations.findOne({name:"Video Activity"});
-      Session.set("selected", viz._id);
-    },
-    // Pset Performance
-    'click #chart3': function (event) {
-      console.log("You've clicked pset performance!");
-    },
-    // Certifications
-    'click #chart4': function (event) {
-      console.log("You've clicked certifications!");
-      var viz = Visualizations.findOne({name:"Certifications"});
-      Session.set("selected", viz._id);
-    },
-});
+Template.course_summary.rendered = function(){
+    // Update data based on initial filter options
+    Template.course_summary.updateData();
 
-var updateOptions = function (event, selectedOptions) {
-    var filters = Session.get('filters');
-    if (typeof(filters) == 'undefined'){
-        var filters = {};
-    }
+    // Establish graph dependency on data
+    Deps.autorun(Template.course_summary.renderGraphs);
+}
 
-    filters[selectedOptions['category']] = selectedOptions['selected'];
-    Session.set('filters', filters);
+Template.course_summary.updateData = function(){
     filters = Session.get('filters');
-
-
     match = {
           date: {
             $gt: "2020-02-03 05:00:00",
@@ -82,24 +29,15 @@ var updateOptions = function (event, selectedOptions) {
           }
     }
 
-    if (typeof(filters['countries']) != 'undefined'){
-        if (filters['countries'].length > 0){
-            match['cc'] = {$in: filters['countries']};
-        }
+    if (filters['cc'].length > 0){
+        match['cc'] = {$in: filters['cc']};
     }
-    if (typeof(filters['loe']) != 'undefined'){
-        if (filters['loe'].length > 0){
-            match['loe'] = {$in: filters['loe']};
-        }
+    if (filters['loe'].length > 0){
+        match['loe'] = {$in: filters['loe']};
     }
-    if (typeof(filters['module_id']) != 'undefined'){
-        if (filters['module_id'].length > 0){
-            match['module_id'] = {$in: filters['module_id']};
-        }
+    if (filters['module_id'].length > 0){
+        match['module_id'] = {$in: filters['module_id']};
     }
-
-    console.log(match);
-
     params = {
       pipe: [{
         $match: match
@@ -116,8 +54,6 @@ var updateOptions = function (event, selectedOptions) {
     Meteor.call('aggregate',
       params,
       function (error, result) {
-        console.log(result);
-
         resultLength = result.length;
         video_stream = []
         for (var i = 0; i < resultLength; i++){
@@ -127,18 +63,39 @@ var updateOptions = function (event, selectedOptions) {
                 y: result[i]['count']
             });
         }
-        renderCourseSummaryGraphs(video_stream);
+        streams = Session.get('streams');
+        streams['video'] = video_stream
+        Session.set('streams', streams);
     }); 
-}
+};
 
-var renderCourseSummaryGraphs = function (video_stream) {
-    console.log(selectedOptions)
+Template.course_summary.events = {
+    // Video Enagement: Views
+    'click #chart1': function (event) {
+      var viz = Visualizations.findOne({name:"Video Activity"});
+      Session.set("selected", viz._id);
+    },
+    'updatedFilters': Template.course_summary.updateData,
+    // Video Engagement: Minutes
+    'click #chart2': function (event) {
+      var viz = Visualizations.findOne({name:"Video Activity"});
+      Session.set("selected", viz._id);
+    },
+    // Pset Performance
+    'click #chart3': function (event) {
+    },
+    // Certifications
+    'click #chart4': function (event) {
+      var viz = Visualizations.findOne({name:"Certifications"});
+      Session.set("selected", viz._id);
+    },
+};
 
-    var num_views = [];
-
+Template.course_summary.renderGraphs = function () {
+    streams = Session.get('streams');
     var data = [{
         "key": "DOWN",
-        "values": video_stream,
+        "values": streams['video'],
         "color": "#2F73BC"
     }];
 
@@ -192,7 +149,7 @@ var renderCourseSummaryGraphs = function (video_stream) {
 
     var line_data = [{
         "key": "Minutes",
-        "values": video_stream,
+        "values": streams['video'],
         "color": "#2F73BC"
     }];
 
@@ -243,11 +200,11 @@ var renderCourseSummaryGraphs = function (video_stream) {
 
     var set3_data = [{
         "key": "Attempts",
-        "values":video_stream,
+        "values":streams['video'],
         "color": "#d21673"
     }, {
         "key": "Correct",
-        "values": video_stream,
+        "values": streams['video'],
         "color": "#2F73BC"
     }];
 
@@ -300,7 +257,7 @@ var renderCourseSummaryGraphs = function (video_stream) {
 
     var set5_data = [{
         "key": "Certifications",
-        "values": video_stream,
+        "values": streams['video'],
         "color": "#d21673"
     }];
 

@@ -1,53 +1,25 @@
-Template.video_activity.rendered = function(){
-    Session.set('filters', {});
-    this.$('select.multiselect').on('graphRender', updateVideoOptions);
-    params = {
-      pipe: [{
-        $match: {
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-04-30 05:00:00"
-          }
-        }
-      },{
-        $group: {
-          _id: {date: "$date"},
-          count: {$sum: "$count"}
-        },
-      },{
-        $sort: {'_id.date': 1}
-      }],
-      collection: 'daily_count'
-    }
-    Meteor.call('aggregate',
-      params,
-      function (error, result) {
-        console.log(result);
-
-        resultLength = result.length;
-        video_stream = []
-        for (var i = 0; i < resultLength; i++){
-            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
-                x: date.valueOf(), 
-                y: result[i]['count']
-            });
-        }
-        renderVideoActivityGraphs(video_stream);
-    }); 
+Template.video_activity.created = function(){
+  // Initialize filter options
+  Session.set('filters', {
+    cc: [],
+    loe: [],
+    module_id: []
+  });
+  // Initialize data streams
+  Session.set('streams', {video: []});
 }
 
-var updateVideoOptions = function (event, selectedOptions) {
-    var filters = Session.get('filters');
-    if (typeof(filters) == 'undefined'){
-        var filters = {};
-    }
+Template.video_activity.rendered = function(){
+  // Update data based on initial filter options
+  Template.video_activity.updateData();
 
-    filters[selectedOptions['category']] = selectedOptions['selected'];
-    Session.set('filters', filters);
+  // Establish graph dependency on data
+  Deps.autorun(Template.video_activity.renderGraphs);
+
+}
+
+Template.video_activity.updateData = function(){
     filters = Session.get('filters');
-
-
     match = {
           date: {
             $gt: "2020-02-03 05:00:00",
@@ -55,24 +27,15 @@ var updateVideoOptions = function (event, selectedOptions) {
           }
     }
 
-    if (typeof(filters['countries']) != 'undefined'){
-        if (filters['countries'].length > 0){
-            match['cc'] = {$in: filters['countries']};
-        }
+    if (filters['cc'].length > 0){
+        match['cc'] = {$in: filters['cc']};
     }
-    if (typeof(filters['loe']) != 'undefined'){
-        if (filters['loe'].length > 0){
-            match['loe'] = {$in: filters['loe']};
-        }
+    if (filters['loe'].length > 0){
+        match['loe'] = {$in: filters['loe']};
     }
-    if (typeof(filters['module_id']) != 'undefined'){
-        if (filters['module_id'].length > 0){
-            match['module_id'] = {$in: filters['module_id']};
-        }
+    if (filters['module_id'].length > 0){
+        match['module_id'] = {$in: filters['module_id']};
     }
-
-    console.log(match);
-
     params = {
       pipe: [{
         $match: match
@@ -89,8 +52,6 @@ var updateVideoOptions = function (event, selectedOptions) {
     Meteor.call('aggregate',
       params,
       function (error, result) {
-        console.log(result);
-
         resultLength = result.length;
         video_stream = []
         for (var i = 0; i < resultLength; i++){
@@ -100,16 +61,25 @@ var updateVideoOptions = function (event, selectedOptions) {
                 y: result[i]['count']
             });
         }
-        renderVideoActivityGraphs(video_stream);
+        streams = Session.get('streams');
+        streams['video'] = video_stream
+        Session.set('streams', streams);
     }); 
 }
 
-var renderVideoActivityGraphs = function(video_stream) {
-  // Rendering code goes here
-  console.log("Rendered video_activity");
+Template.video_activity.events = {
+  'updatedFilters': Template.video_activity.updateData
+}
+
+Template.video_activity.renderGraphs = function(video_stream) {
+  streams = Session.get('streams');
 
   // Views graph
-  var data = [{"key":"DOWN", "values": video_stream, "color": "#2F73BC"}];
+  var data = [{
+    "key":"DOWN",
+    "values": streams['video'],
+    "color": "#2F73BC"
+  }];
 
   nv.addGraph(function() {
     var chart = nv.models.lineChart()

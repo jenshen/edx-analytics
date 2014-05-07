@@ -30,7 +30,7 @@ UI.registerHelper('countryData', function(){
     classes: 'country-filter',
     noneSelected: 'All Countries',
     multiple: true,
-    category: 'countries'
+    category: 'cc'
   };
 });
 
