@@ -1,5 +1,6 @@
 Template.filter.rendered = function() {
     data = this.$('.multiselect').data();
+
     this.$('.multiselect').multiselect({
         includeSelectAllOption: true,
         includeSelectAllDivider: true,
@@ -25,7 +26,7 @@ var renderGraph = function() {
 }
 
 var getSelectedOptions = function(element, checked) {
-  var filter = $('.multiselect option:selected');
+  var filters = $('select.multiselect option:selected');
   var selected = [];
   $(filter).each(function(index, item){
     if ($(this).val() != "multiselect-all") {
