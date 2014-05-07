@@ -10,7 +10,7 @@ Template.favorites.events = {
     $('.favorite').fadeToggle();
   },
   'click .favorite': function(event) {
-    $('.favorites-heading').toggleClass('selected');
+    $('.favorites-heading').toggleClass('selected');    
     $('.favorite').fadeToggle();
   }
 };

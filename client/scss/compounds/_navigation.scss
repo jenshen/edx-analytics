@@ -94,14 +94,14 @@ nav.tab-bar{
     }
     li.favorites-heading{
         &.selected{
-            background-color: $edx-blue;
+            background-color: $secondary-color;
             border-right: $content-border solid darken($edx-blue, 20);
             .wrapper{
                 border-bottom: 1px solid $edx-blue;
             }
         }
         &:hover{
-            background-color: $edx-blue;
+            background-color: $secondary-color;
             border-right: $content-border+10 solid darken($edx-blue, 20);
             .wrapper{
                 border-bottom: 1px solid $edx-blue;
