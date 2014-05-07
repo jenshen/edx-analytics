@@ -17,6 +17,7 @@ svg {
 .graphs {
 	margin-top: 20px;
 	height: 90%;
+	overflow-y: scroll;
 
 	.graph-wrapper {
 		font-size: 20px;
@@ -38,8 +39,15 @@ svg {
 		width: 90%;
 	}
 
+<<<<<<< HEAD
 }
 
 button.multiselect.dropdown-toggle {
 	margin-right: 35px;
+=======
+	.full-height {
+		height: 80%;
+	}
+
+>>>>>>> 6d4014ac84baeeae303825a8b631587f512cfb37
 }

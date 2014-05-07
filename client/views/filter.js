@@ -1,5 +1,6 @@
 Template.filter.rendered = function() {
     data = this.$('.multiselect').data();
+    console.log(data);
     this.$('.multiselect').multiselect({
         includeSelectAllOption: true,
         includeSelectAllDivider: true,

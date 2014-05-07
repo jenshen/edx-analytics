@@ -253,7 +253,26 @@ Template.course_summary.rendered = function(){
           .transition().duration(350)
           .call(chart);
 
-    return chart;
+      return chart;
+    });
   });
-});
 }
+
+Template.course_summary.events({
+    // Video Enagement: Views
+    'click #chart1': function (event) {
+      console.log("You've clicked video views!");
+    },
+    // Video Engagement: Minutes
+    'click #chart2': function (event) {
+      console.log("You've clicked video minutes!");
+    },
+    // Pset Performance
+    'click #chart3': function (event) {
+      console.log("You've clicked pset performance!");
+    },
+    // Certifications
+    'click #chart4': function (event) {
+      console.log("You've clicked certifications!");
+    }
+});
