@@ -12,8 +12,8 @@ Template.filter.rendered = function() {
 };
 
 var renderGraph = function() {
-  console.log('triggering');
-  $('.multiselect').trigger("graphRender", getSelectedOptions());
+  var el = this['$select']['context']
+  $(el).trigger("graphRender", getSelectedOptions());
 }
 
 var getSelectedOptions = function(element, checked) {
