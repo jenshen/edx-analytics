@@ -253,7 +253,11 @@ Template.course_summary.rendered = function(){
           .transition().duration(350)
           .call(chart);
 
-    return chart;
+      return chart;
+    });
   });
-});
+}
+
+Template.course_summary.events = function() {
+  
 }

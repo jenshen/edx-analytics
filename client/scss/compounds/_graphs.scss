@@ -17,6 +17,7 @@ svg {
 .graphs {
 	margin-top: 20px;
 	height: 90%;
+	overflow-y: scroll;
 
 	.graph-wrapper {
 		font-size: 20px;
@@ -36,6 +37,10 @@ svg {
 
 	.full {
 		width: 90%;
+	}
+
+	.full-height {
+		height: 80%;
 	}
 
 }
