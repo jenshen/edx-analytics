@@ -6,6 +6,7 @@ svg {
 
 	text {
 		font-family: "Open Sans";
+		font-size: 13px;
 	}
 }
 
@@ -15,7 +16,7 @@ svg {
 }
 
 .graphs {
-	margin-top: 20px;
+	margin-top: 10px;
 	height: 90%;
 	overflow-y: scroll;
 
@@ -23,16 +24,18 @@ svg {
 		font-size: 20px;
 		width: 100%;
 		display: block;
-		margin-top: 30px;
+		margin-top: 15px;
 		margin-bottom: 20px;
 	}
 
 	.graph {
+		margin-top: 10px;
+		margin-left: 10px;
 		font-size: 13px;
-		width: 40%;
-		height: 250px;
+		width: 45%;
+		height: 300px;
 		display: inline-block;
-		text-align: center;
+		text-align: left;
 	}
 
 	.clickable:hover {

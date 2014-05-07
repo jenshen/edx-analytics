@@ -52,10 +52,11 @@ var renderCourseSummaryGraphs = function () {
         var chart = nv.models.lineChart()
             .options({
                 margin: {
-                    left: 30,
-                    bottom: 30
+                    left: 50,
+                    bottom: 50,
+                    right: 50
                 },
-                showXAxis: false,
+                showXAxis: true,
                 showYAxis: true,
                 transitionDuration: 250,
                 showLegend: false,
@@ -66,15 +67,16 @@ var renderCourseSummaryGraphs = function () {
 
         // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
         chart.xAxis
-            .axisLabel("Total Views")
-        //.tickFormat(d3.format(',.1f'))
+            .axisLabel("Date")
+            .axisLabelDistance(30)
         .tickFormat(function (d) {
             return d3.time.format('%x')(new Date(d))
         });;
 
         chart.yAxis
-            .axisLabel("Views (millions)")
-            .tickFormat(d3.format(',.f'));
+            .axisLabel("Views")
+            .tickFormat(d3.format(',.f'))
+            .axisLabelDistance(40);
 
         d3.select('#chart1 svg')
             .datum(data)
@@ -94,18 +96,18 @@ var renderCourseSummaryGraphs = function () {
 
     // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
     var set_2 = [{
-        x: 0,
+        x: 1025409600000,
         y: 2
     }, {
-        x: 1,
+        x: 1026409600000,
         y: 3
     }, {
-        x: 2,
+        x: 1045409600000,
         y: 1
     }];
 
     var line_data = [{
-        "key": "Total Minutes",
+        "key": "Minutes",
         "values": set_2,
         "color": "#2F73BC"
     }];
@@ -114,26 +116,30 @@ var renderCourseSummaryGraphs = function () {
         var chart = nv.models.lineChart()
             .options({
                 margin: {
-                    left: 30,
-                    bottom: 30
+                    left: 50,
+                    bottom: 50,
+                    right: 50
                 },
-                showXAxis: false,
+                showXAxis: true,
                 showYAxis: true,
                 transitionDuration: 250,
                 showLegend: false
             })
             .tooltipContent(function (key, x, y, e, graph) {
-                return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + '</p>';
+                return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " minutes" + '</p>';
             });;
 
         // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
         chart.xAxis
-            .axisLabel("Total Minutes")
-        //.tickFormat(function (d) {return '';})
-        .tickFormat(d3.format(',.1f'));
+            .axisLabel("Date")
+            .axisLabelDistance(30)
+            .tickFormat(function (d) {
+              return d3.time.format('%x')(new Date(d))
+            });;
 
         chart.yAxis
             .axisLabel("Minutes")
+            .axisLabelDistance(40)
             .tickFormat(d3.format(',.f'));
 
         d3.select('#chart2 svg')
@@ -185,11 +191,11 @@ var renderCourseSummaryGraphs = function () {
     }];
 
     var set3_data = [{
-        "key": "Total Attempts",
+        "key": "Attempts",
         "values": set_3,
         "color": "#d21673"
     }, {
-        "key": "Total Correct",
+        "key": "Correct",
         "values": set_4,
         "color": "#2F73BC"
     }];
@@ -198,26 +204,30 @@ var renderCourseSummaryGraphs = function () {
         var chart = nv.models.lineChart()
             .options({
                 margin: {
-                    left: 30,
-                    bottom: 30
+                    left: 50,
+                    bottom: 50,
+                    right: 50
                 },
-                showXAxis: false,
+                showXAxis: true,
                 showYAxis: true,
                 transitionDuration: 250,
-                showLegend: false
+                showLegend: true
             })
             .tooltipContent(function (key, x, y, e, graph) {
-                return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + '</p>';
+                return "<h3 class='tool-tip'>" + key + '</h3>' + "<p class='tool-tip'>" + y + " problems" + '</p>';
             });;
 
         // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
         chart.xAxis
-            .axisLabel("Total Minutes")
-        //.tickFormat(function (d) {return '';})
-        .tickFormat(d3.format(',.1f'));
+            .axisLabel("Date")
+            .axisLabelDistance(30)
+            .tickFormat(function (d) {
+                return d3.time.format('%x')(new Date(d))
+            });;
 
         chart.yAxis
-            .axisLabel("Minutes")
+            .axisLabel("Number of Problems")
+            .axisLabelDistance(40)
             .tickFormat(d3.format(',.f'));
 
         d3.select('#chart3 svg')
@@ -257,7 +267,7 @@ var renderCourseSummaryGraphs = function () {
     }];
 
     var set5_data = [{
-        "key": "Total Attempts",
+        "key": "Certifications",
         "values": set_5,
         "color": "#d21673"
     }];
@@ -266,26 +276,30 @@ var renderCourseSummaryGraphs = function () {
         var chart = nv.models.lineChart()
             .options({
                 margin: {
-                    left: 30,
-                    bottom: 30
+                    left: 50,
+                    bottom: 50,
+                    right: 50
                 },
-                showXAxis: false,
+                showXAxis: true,
                 showYAxis: true,
                 transitionDuration: 250,
                 showLegend: false
             })
             .tooltipContent(function (key, x, y, e, graph) {
-                return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + '</p>';
+                return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " certifications" + '</p>';
             });;
 
         // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
         chart.xAxis
-            .axisLabel("Total Minutes")
-        //.tickFormat(function (d) {return '';})
-        .tickFormat(d3.format(',.1f'));
+            .axisLabel("Date")
+            .axisLabelDistance(30)
+            .tickFormat(function (d) {
+                return d3.time.format('%x')(new Date(d))
+            });;
 
         chart.yAxis
-            .axisLabel("Minutes")
+            .axisLabel("Certifications")
+            .axisLabelDistance(40)
             .tickFormat(d3.format(',.f'));
 
         d3.select('#chart4 svg')
@@ -299,43 +313,6 @@ var renderCourseSummaryGraphs = function () {
         chart.dispatch.on('stateChange', function (e) {
             nv.log('New State:', JSON.stringify(e));
         });
-
-        return chart;
-    });
-
-    var pie_data = [{
-        "label": "Male",
-        "value": 1000234
-    }, {
-        "label": "Female",
-        "value": 999200
-    }, {
-        "label": "Unreported",
-        "value": 20000
-    }];
-
-    nv.addGraph(function () {
-        var chart = nv.models.pieChart()
-            .x(function (d) {
-                return d.label
-            })
-            .y(function (d) {
-                return d.value
-            })
-            .showLabels(true) //Display pie labels
-            .labelThreshold(.05) //Configure the minimum slice size for labels to show up
-            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-            .donut(true) //Turn on Donut mode. Makes pie chart look tasty!
-            .donutRatio(0.35) //Configure how big you want the donut hole size to be.
-            // Can customize tooltip content. Not sure how to customize style yet.
-            .tooltipContent(function (key, y, e, graph) {
-                return "<h3 class='tool-tip'>" + key + '</h3>' + "<p class='tool-tip'>" + y + '</p>';
-            });;
-
-        d3.select("#chart0 svg")
-            .datum(pie_data)
-            .transition().duration(350)
-            .call(chart);
 
         return chart;
     });

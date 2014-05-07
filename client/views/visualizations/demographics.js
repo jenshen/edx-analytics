@@ -27,14 +27,14 @@ var renderDemographicsGraphs = function() {
     // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
     chart.xAxis
       .axisLabel("Date")
-      //.tickFormat(d3.format(',.1f'))
       .tickFormat(function(d) {
             return d3.time.format('%x')(new Date(d))
           });
       ;
 
     chart.yAxis
-      .axisLabel("")
+      .axisLabel("Number of Students")
+      .axisLabelDistance(40)
       .tickFormat(d3.format(',.f'))
       ;
 
@@ -77,18 +77,31 @@ var renderDemographicsGraphs = function() {
     return chart;
   });
 
-  var bar_data = [{"key":"Progress","values":[{"label":"A","value":13},{"label":"B","value":15}]}];
+  var bar_data = [{"key":"Age","values":[{"label":"A","value":13},{"label":"B","value":15}]}];
   nv.addGraph(function() {  
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
             .y(function(d) { return d.value })
-            .staggerLabels(true)
-            //.staggerLabels(historicalBarChart[0].values.length > 8)
-            .tooltips(false)
-            .showValues(true)
-            .transitionDuration(250)
-            .showXAxis(false)
+            .options({
+              margin: {left: 60, bottom: 50, right: 40},
+              showXAxis: true,
+              showYAxis: true,
+              showValues: true,
+              transitionDuration: 250,
+              showLegend: false,
+              tootips: false,
+            })
             ;
+
+        chart.xAxis
+          .axisLabel("Age")
+          .axisLabelDistance(20)
+          ;
+
+        chart.yAxis
+          .axisLabel("Students Enrolled")
+          .axisLabelDistance(30)
+          ;
 
         d3.select('#age_chart svg')
             .datum(bar_data)
