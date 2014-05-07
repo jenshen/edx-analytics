@@ -135,19 +135,6 @@ var renderCourseSummaryGraphs = function (video_stream) {
     console.log(selectedOptions)
 
     var num_views = [];
-    
-    
-    // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
-    var set_1 = [{
-        x: 1025409600000,
-        y: 5
-    }, {
-        x: 1122782400000,
-        y: 1
-    }, {
-        x: 1304136000000,
-        y: 2
-    }];
 
     var data = [{
         "key": "DOWN",
@@ -202,20 +189,10 @@ var renderCourseSummaryGraphs = function (video_stream) {
 
 
     // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
-    var set_2 = [{
-        x: 1025409600000,
-        y: 2
-    }, {
-        x: 1026409600000,
-        y: 3
-    }, {
-        x: 1045409600000,
-        y: 1
-    }];
 
     var line_data = [{
         "key": "Minutes",
-        "values": set_2,
+        "values": video_stream,
         "color": "#2F73BC"
     }];
 
@@ -264,46 +241,13 @@ var renderCourseSummaryGraphs = function (video_stream) {
         return chart;
     });
 
-    var set_3 = [{
-        x: 0,
-        y: 10
-    }, {
-        x: 1,
-        y: 8
-    }, {
-        x: 2,
-        y: 7
-    }, {
-        x: 3,
-        y: 5
-    }, {
-        x: 4,
-        y: 9
-    }];
-    var set_4 = [{
-        x: 0,
-        y: 7
-    }, {
-        x: 1,
-        y: 7
-    }, {
-        x: 2,
-        y: 4
-    }, {
-        x: 3,
-        y: 3
-    }, {
-        x: 4,
-        y: 7
-    }];
-
     var set3_data = [{
         "key": "Attempts",
-        "values": set_3,
+        "values":video_stream,
         "color": "#d21673"
     }, {
         "key": "Correct",
-        "values": set_4,
+        "values": video_stream,
         "color": "#2F73BC"
     }];
 
@@ -353,29 +297,10 @@ var renderCourseSummaryGraphs = function (video_stream) {
     });
 
 
-    var set_5 = [{
-        x: 0,
-        y: 0
-    }, {
-        x: 1,
-        y: 0
-    }, {
-        x: 2,
-        y: 1
-    }, {
-        x: 3,
-        y: 2
-    }, {
-        x: 4,
-        y: 4
-    }, {
-        x: 5,
-        y: 10
-    }];
 
     var set5_data = [{
         "key": "Certifications",
-        "values": set_5,
+        "values": video_stream,
         "color": "#d21673"
     }];
 
