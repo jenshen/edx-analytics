@@ -23,7 +23,7 @@ Template.filters.rendered = function() {
       enableCaseInsensitiveFiltering: true,
       filterBehavior: 'both',
       nonSelectedText: 'All Educations',
-      buttonText: dropDownLabel,
+      buttonText: dropDownLabel
     });
 
     this.$('.multiselect.time-filter').multiselect({
@@ -31,11 +31,25 @@ Template.filters.rendered = function() {
       filterBehavior: 'both',
     });
 
-    setFilterOptions(EducationLevels.find());
+    this.$('.multiselect.geo-filter').multiselect('dataprovider', getFilterOptions(Country.find()));
+    this.$('.multiselect.edu-filter').multiselect('dataprovider', getFilterOptions(EducationLevels.find()));
 };
 
-var setFilterOptions = function(collection) {
-  console.log(collection);
+var getSelected = function(element, checked) {
+  var filter = $(this).find('option:selected');
+  var selected = [];
+  $(filter).each(function(index, item){
+    selected.push([$(this).val()]);
+  });
+  console.log(filter);
+};
+
+var getFilterOptions = function(collection) {
+  var options = [];
+  collection.forEach(function(item){
+    options.push({label: item.name, value: item.name});
+  });
+  return options;
 };
 
 var dropDownLabel = function(options, select) {
