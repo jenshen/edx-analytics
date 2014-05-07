@@ -1,7 +1,10 @@
 <template name="demographics">
-  {{> filter videoData}}
-  {{> filter countryData}}
-  {{> filter educationData}}
+  <div class="filters">
+    {{> filter videoData}}
+    {{> filter countryData}}
+    {{> filter educationData}}
+  </div>
+  
   <div class="graphs">
     <div class="graph-wrapper">
       <div>Students Enrolled</div>
