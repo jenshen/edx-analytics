@@ -1,0 +1,45 @@
+UI.registerHelper('videoData', function(){
+  records = []
+  CourseAxis.find({category: 'video'}).forEach(function(video){
+    records.push({
+      display: video.name,
+      value: video.module_id
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'video-filter',
+    noneSelected: 'All Videos'
+  };
+});
+UI.registerHelper('countryData', function(){
+  records = []
+  Country.find({}).forEach(function(country){
+    records.push({
+      display: country.name,
+      value: country.short
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'country-filter',
+    noneSelected: 'All Countries'
+  };
+});
+UI.registerHelper('educationData', function(){
+  records = []
+  EducationLevels.find({}).forEach(function(loe){
+    records.push({
+      display: loe.name,
+      value: loe.short
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'edu-filter',
+    noneSelected: 'All Educations'
+  };
+});
