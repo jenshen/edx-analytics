@@ -28,12 +28,10 @@ var renderGraph = function() {
 }
 
 var getSelectedOptions = function(element, checked) {
-  var filters = $('select.multiselect option:selected');
+  var filters = $('select.multiselect');
   var selected = [];
   $(filter).each(function(index, item){
-    if ($(this).val() != "multiselect-all") {
-      selected.push($(this).val());
-    }
+    console.log(item);
   });
   return selected;
 }

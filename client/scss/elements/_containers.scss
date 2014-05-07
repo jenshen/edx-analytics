@@ -35,6 +35,9 @@ html, body{
     margin-top: 1em;
     bottom: 0; 
 }
+#welcome-message {
+    margin-bottom: 1em;
+}
 #content{
     @include box-sizing(border-box);
     background-color: white;
@@ -51,4 +54,8 @@ html, body{
 .filters{
     padding-bottom: 1em;
     border-bottom: 1px solid rgb(221, 221, 221);
+    .row {
+        width: 80%;
+        margin: 0;
+    }
 }
