@@ -35,6 +35,9 @@ html, body{
     margin-top: 1em;
     bottom: 0; 
 }
+#welcome-message {
+    margin-bottom: 1em;
+}
 #content{
     @include box-sizing(border-box);
     background-color: white;
