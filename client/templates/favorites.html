@@ -1,15 +1,16 @@
 <template name="favorites">
-    <li class='favorites-heading'>
-        <div class="wrapper show-for-large-up">
-            <a>Favorites ▾</a>
+    <li class='favorites'>
+        <div class="wrapper">
+            <label class='favorites-heading'>Favorites ▾</label>
+            <ul>
+                {{#each favs}}
+                <li class="favorite">
+                    <div class="wrapper">
+                        <a href='#'>{{name}}</a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
         </div>
     </li>
-    {{#each favs}}
-        <li class="favorite" id="{{_id}}">
-            <div class="wrapper">
-                <a href='#'>{{name}}</a>
-            </div>
-        </li>
-        
-    {{/each}}
 </template>

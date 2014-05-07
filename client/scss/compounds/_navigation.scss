@@ -44,11 +44,12 @@ nav.tab-bar{
         text-align: right;
         color: $black;
         border-right: $content-border solid $gray;
-        a{
+        a, label{
             &:hover{
                 background-color: transparent;
             }
             @include transition(color .25s ease-in-out);
+            font-size: inherit;
             padding-right: 1em;
             color: $black;
             display: block;
@@ -68,7 +69,7 @@ nav.tab-bar{
             background-color: $primary-color;
             border-right: $content-border+10 solid darken($primary-color, 20);
             color: white;
-            a{
+            a, label{
                 color: white;
             }
             .wrapper{
@@ -84,7 +85,7 @@ nav.tab-bar{
             background-color: $primary-color;
             border-right: $content-border solid darken($primary-color, 20);
             color: white;
-            a{
+            a, label{
                 color: white;
             }
             .wrapper{
@@ -92,53 +93,62 @@ nav.tab-bar{
             }
         }
     }
-    li.favorites-heading{
-        &.selected{
-            background-color: $secondary-color;
-            border-right: $content-border solid darken($edx-blue, 20);
-            .wrapper{
-                border-bottom: 1px solid $edx-blue;
-            }
-        }
+
+
+    li.favorites{
+        position: relative;
         &:hover{
             background-color: $secondary-color;
-            border-right: $content-border+10 solid darken($edx-blue, 20);
-            .wrapper{
-                border-bottom: 1px solid $edx-blue;
+            border-right: $content-border+10 solid darken($secondary-color, 20);
+            ul{
+                display: block; 
             }
         }
-
+        ul{
+            display: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+        }
+        li{
+            a, label{
+                    color: $black;   
+            }
+            color: $black;
+            margin-left: 10px;
+            width: 12*$font-size - 10px;
+            background-color: lightgray;
+            .wrapper{
+                border-bottom: 1px solid white;
+            }
+            &.selected{
+                a, label{
+                    color: white;   
+                }
+                background-color: $secondary-color;
+                border-right: $content-border solid darken($secondary-color, 20);
+                .wrapper{
+                    border-bottom: 1px solid $edx-blue;
+                }
+            }
+            &:hover{
+                a, label{
+                    color: white;   
+                }
+                background-color: $secondary-color;
+                border-right: $content-border+10 solid darken($secondary-color, 20);
+                .wrapper{
+                    border-bottom: 1px solid $edx-blue;
+                }
+            } 
+        }
     }
-    li.favorite{
-        margin-left: 10px;
-        width: 12*$font-size - 10px;
-        display: none;
-        border-right: $content-border solid $gray;
-        .wrapper{
-            border-bottom: 1px solid white;
-        }
-        &.selected{
-            background-color: $edx-blue;
-            border-right: $content-border solid darken($edx-blue, 20);
-            .wrapper{
-                border-bottom: 1px solid $edx-blue;
-            }
-        }
-        &:hover{
-            background-color: $edx-blue;
-            border-right: $content-border+10 solid darken($edx-blue, 20);
-            .wrapper{
-                border-bottom: 1px solid $edx-blue;
-            }
-        }
+}
 
-        // background-image: url('img/favorite.png');
-        // background-repeat: no-repeat;
-        // background-position: 10% 50%;
-        // background-size: 1.5em 1.5em;
-        // &:hover, &.selected{
-        //     background-size: 0em 0em;
-        // }
-        background-color: lightgray;
+ul.off-canvas-list{
+    ul{
+        margin-left: 0;
     }
 }
