@@ -12,7 +12,7 @@ UI.registerHelper('videoData', function(){
     classes: 'video-filter',
     noneSelected: 'All Videos',
     multiple: true,
-    category: 'daily_count'
+    category: 'module_id'
   };
 });
 

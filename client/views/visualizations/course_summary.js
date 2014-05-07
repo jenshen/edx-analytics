@@ -1,8 +1,42 @@
 var selectedOptions = {};
 
 Template.course_summary.rendered = function(){
-    this.$('select.multiselect').on('graphRender', renderCourseSummaryGraphs);
-    renderCourseSummaryGraphs();
+    Session.set('filters', {});
+    this.$('select.multiselect').on('graphRender', updateOptions);
+    params = {
+      pipe: [{
+        $match: {
+          date: {
+            $gt: "2020-02-03 05:00:00",
+            $lt: "2020-04-30 05:00:00"
+          }
+        }
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        },
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        console.log(result);
+
+        resultLength = result.length;
+        video_stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            video_stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        renderCourseSummaryGraphs(video_stream);
+    }); 
 }
 
 Template.course_summary.events({
@@ -30,9 +64,76 @@ Template.course_summary.events({
     },
 });
 
-var renderCourseSummaryGraphs = function (event, selectedOptions) {
-    console.log('rerendering course summary', event);
-    var testdata = DailyCount.find();
+var updateOptions = function (event, selectedOptions) {
+    var filters = Session.get('filters');
+    if (typeof(filters) == 'undefined'){
+        var filters = {};
+    }
+
+    filters[selectedOptions['category']] = selectedOptions['selected'];
+    Session.set('filters', filters);
+    filters = Session.get('filters');
+
+
+    match = {
+          date: {
+            $gt: "2020-02-03 05:00:00",
+            $lt: "2020-04-30 05:00:00"
+          }
+    }
+
+    if (typeof(filters['countries']) != 'undefined'){
+        if (filters['countries'].length > 0){
+            match['cc'] = {$in: filters['countries']};
+        }
+    }
+    if (typeof(filters['loe']) != 'undefined'){
+        if (filters['loe'].length > 0){
+            match['loe'] = {$in: filters['loe']};
+        }
+    }
+    if (typeof(filters['module_id']) != 'undefined'){
+        if (filters['module_id'].length > 0){
+            match['module_id'] = {$in: filters['module_id']};
+        }
+    }
+
+    console.log(match);
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        console.log(result);
+
+        resultLength = result.length;
+        video_stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            video_stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        renderCourseSummaryGraphs(video_stream);
+    }); 
+}
+
+var renderCourseSummaryGraphs = function (video_stream) {
+    console.log(selectedOptions)
+
     var num_views = [];
     
     
@@ -50,7 +151,7 @@ var renderCourseSummaryGraphs = function (event, selectedOptions) {
 
     var data = [{
         "key": "DOWN",
-        "values": set_1,
+        "values": video_stream,
         "color": "#2F73BC"
     }];
 

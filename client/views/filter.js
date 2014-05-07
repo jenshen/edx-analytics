@@ -21,8 +21,10 @@ var renderGraph = function() {
       selected.push($(this).val());
     }
   });
-  console.log({category: selected});
-  el.trigger("graphRender", {category: selected});
+  el.trigger("graphRender", {
+    category: category, 
+    selected: selected
+  });
 }
 
 var getSelectedOptions = function(element, checked) {
