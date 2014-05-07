@@ -24,14 +24,6 @@ visualizations = [
     'url': 'video_activity'
   },
   {
-    'name': 'Forum Activity',
-    'standard': true,
-    'ready': true,
-    'iframe': false,
-    'favorite': false,
-    'url': 'forum_activity'
-  },
-  {
     'name': 'Certifications',
     'standard': true,
     'ready': false,
