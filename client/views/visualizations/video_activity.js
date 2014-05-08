@@ -6,7 +6,7 @@ Template.video_activity.created = function(){
     module_id: []
   });
   // Initialize data streams
-  Session.set('streams', {video: []});
+  Session.set('streams', {view: []});
 }
 
 Template.video_activity.rendered = function(){
@@ -24,7 +24,8 @@ Template.video_activity.updateData = function(){
           date: {
             $gt: "2020-02-03 05:00:00",
             $lt: "2020-04-30 05:00:00"
-          }
+          },
+          event_type: 'view'
     }
 
     if (filters['cc'].length > 0){
@@ -53,16 +54,16 @@ Template.video_activity.updateData = function(){
       params,
       function (error, result) {
         resultLength = result.length;
-        video_stream = []
+        stream = []
         for (var i = 0; i < resultLength; i++){
             date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
+            stream.push({
                 x: date.valueOf(), 
                 y: result[i]['count']
             });
         }
         streams = Session.get('streams');
-        streams['video'] = video_stream
+        streams['view'] = stream
         Session.set('streams', streams);
     }); 
 }
@@ -71,13 +72,13 @@ Template.video_activity.events = {
   'updatedFilters': Template.video_activity.updateData
 }
 
-Template.video_activity.renderGraphs = function(video_stream) {
+Template.video_activity.renderGraphs = function() {
   streams = Session.get('streams');
 
   // Views graph
   var data = [{
     "key":"DOWN",
-    "values": streams['video'],
+    "values": streams['view'],
     "color": "#2F73BC"
   }];
 
