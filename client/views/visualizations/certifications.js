@@ -5,7 +5,7 @@ Template.certifications.created = function(){
     loe: [],
   });
   // Initialize data streams
-  Session.set('streams', {certifications: []});
+  Session.set('streams', {certification: []});
 }
 
 Template.certifications.rendered = function(){
@@ -58,7 +58,7 @@ Template.certifications.updateData = function(){
           });
       }
       streams = Session.get('streams');
-      streams['certifications'] = stream
+      streams['certification'] = stream
       Session.set('streams', streams);
   }); 
 }
@@ -71,7 +71,7 @@ Template.certifications.renderGraphs = function(){
   var streams = Session.get('streams');
   var data = [{
     "key":"DOWN",
-    "values": streams['certifications'],
+    "values": streams['certification'],
     "color": "#2F73BC"
   }];
 

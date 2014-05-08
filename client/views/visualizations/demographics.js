@@ -1,14 +1,122 @@
-Template.demographics.rendered = function() {
-  $('.multiselect').on('graphRender', renderDemographicsGraphs);
-  renderDemographicsGraphs();
+Template.demographics.created = function(){
+  // Initialize filter options
+  Session.set('filters',{
+    cc: [],
+    loe: []
+  });
+
+  // Initialize data streams
+  Session.set('streams', {
+    enrollment: [],
+    gender: []
+  });
 }
 
-var renderDemographicsGraphs = function() {
-  console.log('rerendering demographics graphs');
-  // Enrollment graph
-  var set_1 = [{x: 1025409600000, y: 5}, {x: 1122782400000, y: 9}, {x: 1304136000000, y: 12}, {x: 1504136000000, y: 13}];
-  
-  var data = [{"key":"DOWN", "values": set_1, "color": "#2F73BC"}];
+Template.demographics.rendered = function(){
+  // Update data based on initial filter options
+  Template.demographics.updateData();
+
+  // Establish graph dependency on data
+  Deps.autorun(Template.demographics.renderGraphs);
+}
+
+Template.demographics.updateData = function(){
+    var filters = Session.get('filters');
+
+    var match = {
+          date: {
+            $gt: "2020-02-03 05:00:00",
+            $lt: "2020-04-30 05:00:00"
+          }
+    }
+
+    if (filters['cc'].length > 0){
+        match['cc'] = {$in: filters['cc']};
+    }
+    if (filters['loe'].length > 0){
+        match['loe'] = {$in: filters['loe']};
+    }
+
+    Template.demographics.updateEnrollment(match);
+    Template.demographics.updateGender(match);
+}
+
+Template.demographics.events = {
+  'updatedFilters': Template.demographics.updateData
+}
+
+Template.demographics.updateEnrollment = function(match){
+  var params = {
+    pipe: [{
+      $match: match
+    },{
+      $group: {
+        _id: {date: "$date"},
+        count: {$sum: "$count"}
+      }
+    },{
+      $sort: {'_id.date': 1}
+    }],
+    collection: 'enrollment'
+  }
+  Meteor.call('aggregate',
+    params,
+    function (error, result) {
+      var resultLength = result.length;
+      var stream = []
+      for (var i = 0; i < resultLength; i++){
+          date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+          stream.push({
+              x: date.valueOf(), 
+              y: result[i]['count']
+          });
+      }
+      streams = Session.get('streams');
+      streams['enrollment'] = stream
+      Session.set('streams', streams);
+  }); 
+}
+
+Template.demographics.updateGender = function(match){
+  var params = {
+    pipe: [{
+      $match: match
+    },{
+      $group: {
+        _id: {gender: "$gender"},
+        count: {$sum: "$count"}
+      }
+    },{
+      $sort: {'_id.date': 1}
+    }],
+    collection: 'enrollment'
+  }
+  Meteor.call('aggregate',
+    params,
+    function (error, result) {
+      var resultLength = result.length;
+      var stream = []
+      for (var i = 0; i < resultLength; i++){
+          stream.push({
+              label: result[i]['_id']['gender'], 
+              value: result[i]['count']
+          });
+      }
+      streams = Session.get('streams');
+      streams['gender'] = stream
+      Session.set('streams', streams);
+  }); 
+}
+
+Template.demographics.renderGraphs = function() {
+  streams = Session.get('streams');
+
+  // Enrollment graph  
+  var data = [{
+    "key":"DOWN",
+    "values": streams['enrollment'],
+    "color": "#2F73BC"
+  }];
 
   nv.addGraph(function() {
     var chart = nv.models.lineChart()
@@ -52,7 +160,7 @@ var renderDemographicsGraphs = function() {
   });
 
   // Gender Donut Graph
-  var pie_data = [{"label": "Male", "value": 1000234}, {"label": "Female", "value": 999200}, {"label": "Unreported", "value": 20000}];
+  var pie_data = streams['gender'];
 
   nv.addGraph(function() {
     var chart = nv.models.pieChart()

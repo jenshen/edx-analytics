@@ -11,7 +11,7 @@ Template.course_summary.created = function(){
         minutes_watched: [],
         problem_corrects: [],
         problem_attempts: [],
-        certifications: []
+        certification: []
     });
 }
 
@@ -236,7 +236,7 @@ Template.course_summary.updateCertification = function(match){
             });
         }
         streams = Session.get('streams');
-        streams['certifications'] = stream
+        streams['certification'] = stream
         Session.set('streams', streams);
     }); 
 }
@@ -408,7 +408,7 @@ Template.course_summary.renderGraphs = function () {
 
     var set5_data = [{
         "key": "Certifications",
-        "values": streams['certifications'],
+        "values": streams['certification'],
         "color": "#d21673"
     }];
 
