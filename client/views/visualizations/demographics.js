@@ -2,7 +2,8 @@ Template.demographics.created = function(){
   // Initialize filter options
   Session.set('filters',{
     cc: [],
-    loe: []
+    loe: [],
+    time: ['lw']
   });
 
   // Initialize data streams
@@ -23,11 +24,34 @@ Template.demographics.rendered = function(){
 Template.demographics.updateData = function(){
     var filters = Session.get('filters');
 
-    var match = {
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-04-30 05:00:00"
-          }
+    var match = {};
+    console.log(filters);
+    var end_date = moment().format('YYYY-MM-DD hh:mm:ss');
+    var start_date = moment(end_date);
+    var date = {};
+
+    if (filters['time'].length > 0){
+        if (filters['time'][0] == 'lm'){
+            start_date.subtract(1, 'months');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            };
+        }
+        if (filters['time'][0] == 'lw'){
+            start_date.subtract(1, 'weeks');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            }
+        }
+        if (filters['time'][0] == 'ts'){
+            start_date.subtract(4, 'months');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            }
+        }
     }
 
     if (filters['cc'].length > 0){

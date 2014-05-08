@@ -12,7 +12,7 @@ root.DailyCountsGenerator =
     # Parse start and end dates
     @start_date = moment @module.start_date, 'YYYY-MM-DD hh:mm:ss'
     @current_date = moment(@start_date)
-    @end_date = moment @course.end_date, 'YYYY-MM-DD hh:mm:ss'
+    @end_date = moment()
 
     while @current_date.isBefore(@end_date)
       this._generateActivity()

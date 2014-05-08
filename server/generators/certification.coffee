@@ -9,8 +9,8 @@ root.CertificationGenerator =
 
     # Parse start and end dates
     @start_date = moment @course.start_date, 'YYYY-MM-DD hh:mm:ss'
-    @end_date = moment @course.end_date, 'YYYY-MM-DD hh:mm:ss'
-    @current_date = moment(@start_date)
+    @end_date = moment()
+    @current_date = moment(@start_date).add(1, 'months')
 
     while @current_date.isBefore(@end_date)
       this._generateActivity()

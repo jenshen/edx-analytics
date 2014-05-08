@@ -9,7 +9,7 @@ root.EnrollmentGenerator =
 
     # Parse start and end dates
     @start_date = moment @course.start_date, 'YYYY-MM-DD hh:mm:ss'
-    @end_date = moment @course.end_date, 'YYYY-MM-DD hh:mm:ss'
+    @end_date = moment()
     @current_date = moment(@start_date)
 
     while @current_date.isBefore(@end_date)
