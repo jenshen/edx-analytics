@@ -1,6 +1,3 @@
-
-
-
 Template.course_summary.created = function(){
     // Initialize filter options
     Session.set('filters', {
@@ -9,7 +6,13 @@ Template.course_summary.created = function(){
         module_id: []
     });
     // Initialize data streams
-    Session.set('streams', {video: []});
+    Session.set('streams', {
+        view: [],
+        minutes_watched: [],
+        problem_corrects: [],
+        problem_attempts: [],
+        certifications: []
+    });
 }
 
 Template.course_summary.rendered = function(){
@@ -22,6 +25,7 @@ Template.course_summary.rendered = function(){
 
 Template.course_summary.updateData = function(){
     filters = Session.get('filters');
+
     match = {
           date: {
             $gt: "2020-02-03 05:00:00",
@@ -38,35 +42,12 @@ Template.course_summary.updateData = function(){
     if (filters['module_id'].length > 0){
         match['module_id'] = {$in: filters['module_id']};
     }
-    params = {
-      pipe: [{
-        $match: match
-      },{
-        $group: {
-          _id: {date: "$date"},
-          count: {$sum: "$count"}
-        }
-      },{
-        $sort: {'_id.date': 1}
-      }],
-      collection: 'daily_count'
-    }
-    Meteor.call('aggregate',
-      params,
-      function (error, result) {
-        resultLength = result.length;
-        video_stream = []
-        for (var i = 0; i < resultLength; i++){
-            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
-                x: date.valueOf(), 
-                y: result[i]['count']
-            });
-        }
-        streams = Session.get('streams');
-        streams['video'] = video_stream
-        Session.set('streams', streams);
-    }); 
+
+    Template.course_summary.updateVideoViews(match);
+    Template.course_summary.updateMinutesWatched(match);
+    Template.course_summary.updateProblemAttempts(match);
+    Template.course_summary.updateProblemCorrects(match);
+    Template.course_summary.updateCertification(match);
 };
 
 Template.course_summary.events = {
@@ -91,11 +72,181 @@ Template.course_summary.events = {
     },
 };
 
+Template.course_summary.updateVideoViews = function(match){
+    match['event_type'] = 'view'
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        resultLength = result.length;
+        stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['view'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+
+Template.course_summary.updateMinutesWatched = function(match){
+    match['event_type'] = 'minutes_watched'
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        resultLength = result.length;
+        stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['minutes_watched'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+Template.course_summary.updateProblemAttempts = function(match){
+    match['event_type'] = 'problem_attempts'
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        resultLength = result.length;
+        stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['problem_attempts'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+Template.course_summary.updateProblemCorrects = function(match){
+    match['event_type'] = 'problem_corrects'
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        resultLength = result.length;
+        stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['problem_corrects'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+
+Template.course_summary.updateCertification = function(match){
+    match['module_id'] = undefined;
+    match['event_type'] = undefined;
+
+    params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'certification'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        resultLength = result.length;
+        stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['certifications'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+
+
 Template.course_summary.renderGraphs = function () {
     streams = Session.get('streams');
     var data = [{
         "key": "DOWN",
-        "values": streams['video'],
+        "values": streams['view'],
         "color": "#2F73BC"
     }];
 
@@ -149,7 +300,7 @@ Template.course_summary.renderGraphs = function () {
 
     var line_data = [{
         "key": "Minutes",
-        "values": streams['video'],
+        "values": streams['minutes_watched'],
         "color": "#2F73BC"
     }];
 
@@ -200,11 +351,11 @@ Template.course_summary.renderGraphs = function () {
 
     var set3_data = [{
         "key": "Attempts",
-        "values":streams['video'],
+        "values":streams['problem_attempts'],
         "color": "#d21673"
     }, {
         "key": "Correct",
-        "values": streams['video'],
+        "values": streams['problem_corrects'],
         "color": "#2F73BC"
     }];
 
@@ -257,7 +408,7 @@ Template.course_summary.renderGraphs = function () {
 
     var set5_data = [{
         "key": "Certifications",
-        "values": streams['video'],
+        "values": streams['certifications'],
         "color": "#d21673"
     }];
 

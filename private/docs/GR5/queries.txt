@@ -1,5 +1,6 @@
 db.daily_count.aggregate([{
   $match: {
+    event_type: 'minutes_watched',
     module_id: {$in: ["MITx/Spring_2014/test_course1/C0_LS1_V3"]},
     loe: {$in: ["p"]},
     date: {

@@ -16,6 +16,26 @@ UI.registerHelper('videoData', function(){
   };
 });
 
+UI.registerHelper('moduleData', function(){
+  records = []
+  CourseAxis.find({category: {$in: ['video','problem']}}).forEach(function(module){
+    records.push({
+      display: module.name,
+      value: module.module_id
+    });
+  });
+  
+  return {
+    records: records,
+    classes: 'module-filter',
+    noneSelected: 'All Modules',
+    multiple: true,
+    category: 'module_id'
+  };
+});
+
+
+
 UI.registerHelper('countryData', function(){
   records = []
   Country.find({}).forEach(function(country){

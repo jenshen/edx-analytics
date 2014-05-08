@@ -23,26 +23,72 @@ Meteor.startup ->
       root.CourseAxisFactory.create course 
 
     CourseAxis.find({category: 'course'}).forEach (course) ->
+      console.log 'Adding enrollment data'
+      root.EnrollmentGenerator.create
+        course: course
+        scalingConstant: 50000,
+        SNR: 1
+
+      console.log 'Adding certification data'
+      root.CertificationGenerator.create
+        course: course
+        scalingConstant: 50000*0.05,
+        SNR: 1
+
+      console.log 'Adding post count data'
+      root.PostCountGenerator.create
+        course: course
+        scalingConstant: 1000,
+        SNR: 1
+
       videos = CourseAxis.find
         category: 'video',
         course_id: course.course_id
 
+      console.log 'Adding video views'
       videos.forEach (video) ->
         root.DailyCountsGenerator.create
-          module: video,
-          course: course,
-          scalingConstant: 10000,
-          SNR: 10,
-          event_type: 'video_view'
+          module: video
+          course: course
+          scalingConstant: 10000
+          SNR: 5
+          event_type: 'view'
+
+      videos = CourseAxis.find
+        category: 'video',
+        course_id: course.course_id
+
+      console.log 'Adding minutes_watched'
+      videos.forEach (video) ->
+        root.DailyCountsGenerator.create
+          module: video
+          course: course
+          scalingConstant: 100000
+          SNR: 1
+          event_type: 'minutes_watched'
 
       problems = CourseAxis.find
         category: 'problem'
         course_id: course.course_id
 
+      console.log 'Adding problem_attempts'
       problems.forEach (problem) ->
         root.DailyCountsGenerator.create
           module: problem
           course: course
-          scalingConstant: 10000,
-          SNR: 10,
-          event_type: 'problem_view'
+          scalingConstant: 100000
+          SNR: 1
+          event_type: 'problem_attempts'
+
+      problems = CourseAxis.find
+        category: 'problem'
+        course_id: course.course_id
+
+      console.log 'Adding problem_corrects'
+      problems.forEach (problem) ->
+        root.DailyCountsGenerator.create
+          module: problem
+          course: course
+          scalingConstant: 10000
+          SNR: 5
+          event_type: 'problem_corrects'
