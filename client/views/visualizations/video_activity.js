@@ -1,79 +1,76 @@
-Template.video_activity.rendered = function(){
-    Session.set('filters', {});
-    this.$('select.multiselect').on('graphRender', updateVideoOptions);
-    params = {
-      pipe: [{
-        $match: {
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-04-30 05:00:00"
-          }
-        }
-      },{
-        $group: {
-          _id: {date: "$date"},
-          count: {$sum: "$count"}
-        },
-      },{
-        $sort: {'_id.date': 1}
-      }],
-      collection: 'daily_count'
-    }
-    Meteor.call('aggregate',
-      params,
-      function (error, result) {
-        console.log(result);
-
-        resultLength = result.length;
-        video_stream = []
-        for (var i = 0; i < resultLength; i++){
-            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
-                x: date.valueOf(), 
-                y: result[i]['count']
-            });
-        }
-        renderVideoActivityGraphs(video_stream);
-    }); 
+Template.video_activity.created = function(){
+  // Initialize filter options
+  Session.set('filters', {
+    cc: [],
+    loe: [],
+    module_id: [],
+    time: ['lw']
+  });
+  // Initialize data streams
+  Session.set('streams', {
+    view: [],
+    minutes_watched: []
+  });
 }
+Template.video_activity.rendered = function(){
+  // Update data based on initial filter options
+  Template.video_activity.updateData();
 
-var updateVideoOptions = function (event, selectedOptions) {
+  // Establish graph dependency on data
+  Deps.autorun(Template.video_activity.renderGraphs);
+
+}
+Template.video_activity.updateData = function(){
     var filters = Session.get('filters');
-    if (typeof(filters) == 'undefined'){
-        var filters = {};
-    }
+    var match = {};
+    console.log(filters);
+    var end_date = moment().format('YYYY-MM-DD hh:mm:ss');
+    var start_date = moment(end_date);
+    var date = {};
 
-    filters[selectedOptions['category']] = selectedOptions['selected'];
-    Session.set('filters', filters);
-    filters = Session.get('filters');
-
-
-    match = {
-          date: {
-            $gt: "2020-02-03 05:00:00",
-            $lt: "2020-04-30 05:00:00"
-          }
-    }
-
-    if (typeof(filters['countries']) != 'undefined'){
-        if (filters['countries'].length > 0){
-            match['cc'] = {$in: filters['countries']};
+    if (filters['time'].length > 0){
+        if (filters['time'][0] == 'lm'){
+            start_date.subtract(1, 'months');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            };
+        }
+        if (filters['time'][0] == 'lw'){
+            start_date.subtract(1, 'weeks');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            }
+        }
+        if (filters['time'][0] == 'ts'){
+            start_date.subtract(4, 'months');
+            match['date'] = {
+                $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+                $lt: end_date
+            }
         }
     }
-    if (typeof(filters['loe']) != 'undefined'){
-        if (filters['loe'].length > 0){
-            match['loe'] = {$in: filters['loe']};
-        }
+
+    if (filters['cc'].length > 0){
+        match['cc'] = {$in: filters['cc']};
     }
-    if (typeof(filters['module_id']) != 'undefined'){
-        if (filters['module_id'].length > 0){
-            match['module_id'] = {$in: filters['module_id']};
-        }
+    if (filters['loe'].length > 0){
+        match['loe'] = {$in: filters['loe']};
+    }
+    if (filters['module_id'].length > 0){
+        match['module_id'] = {$in: filters['module_id']};
     }
 
-    console.log(match);
-
-    params = {
+    Template.video_activity.updateViews(match);
+    Template.video_activity.updateMinutesWatched(match);
+}
+Template.video_activity.events = {
+  'updatedFilters': Template.video_activity.updateData
+}
+Template.video_activity.updateViews = function(match) {
+    match['event_type'] = 'view'
+    var params = {
       pipe: [{
         $match: match
       },{
@@ -89,27 +86,61 @@ var updateVideoOptions = function (event, selectedOptions) {
     Meteor.call('aggregate',
       params,
       function (error, result) {
-        console.log(result);
-
-        resultLength = result.length;
-        video_stream = []
+        var resultLength = result.length;
+        var stream = []
         for (var i = 0; i < resultLength; i++){
             date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
-            video_stream.push({
+            stream.push({
                 x: date.valueOf(), 
                 y: result[i]['count']
             });
         }
-        renderVideoActivityGraphs(video_stream);
+        streams = Session.get('streams');
+        streams['view'] = stream
+        Session.set('streams', streams);
     }); 
 }
-
-var renderVideoActivityGraphs = function(video_stream) {
-  // Rendering code goes here
-  console.log("Rendered video_activity");
+Template.video_activity.updateMinutesWatched = function(match) {
+    match['event_type'] = 'minutes_watched'
+    var params = {
+      pipe: [{
+        $match: match
+      },{
+        $group: {
+          _id: {date: "$date"},
+          count: {$sum: "$count"}
+        }
+      },{
+        $sort: {'_id.date': 1}
+      }],
+      collection: 'daily_count'
+    }
+    Meteor.call('aggregate',
+      params,
+      function (error, result) {
+        var resultLength = result.length;
+        var stream = []
+        for (var i = 0; i < resultLength; i++){
+            date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+            stream.push({
+                x: date.valueOf(), 
+                y: result[i]['count']
+            });
+        }
+        streams = Session.get('streams');
+        streams['minutes_watched'] = stream
+        Session.set('streams', streams);
+    }); 
+}
+Template.video_activity.renderGraphs = function() {
+  streams = Session.get('streams');
 
   // Views graph
-  var data = [{"key":"DOWN", "values": video_stream, "color": "#2F73BC"}];
+  var data = [{
+    "key":"DOWN",
+    "values": streams['view'],
+    "color": "#2F73BC"
+  }];
 
   nv.addGraph(function() {
     var chart = nv.models.lineChart()
@@ -153,10 +184,12 @@ var renderVideoActivityGraphs = function(video_stream) {
   });
 
 
-  // minutes graph
-  var set_2 = [{x: 1025409600000, y: 0}, {x: 1122782400000, y: 900}, {x: 1304136000000, y: 800}, {x: 1504136000000, y: 70}];
-  
-  var data_2 = [{"key":"DOWN", "values": set_2, "color": "#d21673"}];
+  // minutes graph  
+  var data_2 = [{
+    "key":"DOWN",
+    "values": streams['minutes_watched'],
+    "color": "#d21673"
+  }];
 
   nv.addGraph(function() {
     var chart = nv.models.lineChart()

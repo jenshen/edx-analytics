@@ -2,13 +2,12 @@ $heading-height: $h1-height;
 
 #visualization{
     position: relative;
-    height: 95%;
+    height: 100%;
 
     .heading{
         overflow: hidden;
         height: $heading-height;
         @include box-sizing(border-box);
-        //border-bottom: 1px solid lighten($gray,20);
         h1{
             float: left;
         }
@@ -30,6 +29,7 @@ $heading-height: $h1-height;
         top: $heading-height + $font-size;
         bottom: 0;
         width: 100%;
+        overflow: scroll;
     }
     iframe{
         width: 100%;

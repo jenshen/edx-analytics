@@ -1,7 +1,7 @@
 <template name="course_summary">
   <div class="filters">
     <div class="row">
-      <div class="small-6 large-3 columns">{{> filter videoData}}</div>
+      <div class="small-6 large-3 columns">{{> filter moduleData}}</div>
       <div class="small-6 large-3 columns">{{> filter countryData}}</div>
       <div class="small-6 large-3 columns">{{> filter educationData}}</div>
       <div class="small-6 large-3 columns">{{> filter timeData}}</div>
@@ -9,22 +9,22 @@
   </div>
 
   <div class="graphs">
-    <div class="graph-wrapper">
+    <div class="graph-wrapper row">
       <div>Video Engagement</div>
-      <div class="graph clickable" id="chart1">
+      <div class="graph clickable small-12 large-6 columns" id="chart1">
         <svg></svg>
       </div>
-      <div class="graph clickable" id="chart2">
+      <div class="graph clickable small-12 large-6 columns" id="chart2">
         <svg></svg>
       </div>
     </div>
 
-    <div class="graph-wrapper">
+    <div class="graph-wrapper row">
       <div>Student Performance</div>
-      <div class="graph" id="chart3">
+      <div class="graph large-6 columns" id="chart3">
         <svg></svg>
       </div>
-      <div class="graph clickable" id="chart4">
+      <div class="graph clickable large-6 columns" id="chart4">
         <svg></svg>
       </div>
     </div>

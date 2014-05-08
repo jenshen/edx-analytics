@@ -1,11 +1,103 @@
-Template.certifications.rendered = function(){
-    // Rendering code goes here
-    console.log("Rendered certifications")
+Template.certifications.created = function(){
+  // Initialize filter options
+  Session.set('filters', {
+    cc: [],
+    loe: [],
+    time: ['lw']
+  });
+  // Initialize data streams
+  Session.set('streams', {certification: []});
+}
 
-     // Views graph
-  var set_1 = [{x: 1025409600000, y: 50}, {x: 1122782400000, y: 60}, {x: 1304136000000, y: 20}, {x: 1504136000000, y: 100}];
-  
-  var data = [{"key":"DOWN", "values": set_1, "color": "#2F73BC"}];
+Template.certifications.rendered = function(){
+  // Update data based on initial filter options
+  Template.certifications.updateData();
+
+  // Establish graph dependency on data
+  Deps.autorun(Template.certifications.renderGraphs);
+
+}
+
+Template.certifications.updateData = function(){
+  filters = Session.get('filters');
+  var match = {};
+  console.log(filters);
+  var end_date = moment().format('YYYY-MM-DD hh:mm:ss');
+  var start_date = moment(end_date);
+  var date = {};
+
+  if (filters['time'].length > 0){
+    if (filters['time'][0] == 'lm'){
+      start_date.subtract(1, 'months');
+      match['date'] = {
+        $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+        $lt: end_date
+      };
+    }
+    if (filters['time'][0] == 'lw'){
+      start_date.subtract(1, 'weeks');
+      match['date'] = {
+        $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+        $lt: end_date
+      }
+    }
+    if (filters['time'][0] == 'ts'){
+      start_date.subtract(4, 'months');
+      match['date'] = {
+        $gt: start_date.format('YYYY-MM-DD hh:mm:ss'),
+        $lt: end_date
+      }
+    }
+  }
+
+  if (filters['cc'].length > 0){
+      match['cc'] = {$in: filters['cc']};
+  }
+  if (filters['loe'].length > 0){
+      match['loe'] = {$in: filters['loe']};
+  }
+  params = {
+    pipe: [{
+      $match: match
+    },{
+      $group: {
+        _id: {date: "$date"},
+        count: {$sum: "$count"}
+      }
+    },{
+      $sort: {'_id.date': 1}
+    }],
+    collection: 'certification'
+  }
+  Meteor.call('aggregate',
+    params,
+    function (error, result) {
+      resultLength = result.length;
+      stream = []
+      for (var i = 0; i < resultLength; i++){
+          date = moment(result[i]['_id']['date'], 'YYYY-MM-DD hh:mm:ss')
+          stream.push({
+              x: date.valueOf(), 
+              y: result[i]['count']
+          });
+      }
+      streams = Session.get('streams');
+      streams['certification'] = stream
+      Session.set('streams', streams);
+  }); 
+}
+
+Template.certifications.events = {
+  'updatedFilters': Template.certifications.updateData
+}
+
+Template.certifications.renderGraphs = function(){
+  var streams = Session.get('streams');
+  var data = [{
+    "key":"DOWN",
+    "values": streams['certification'],
+    "color": "#2F73BC"
+  }];
 
   nv.addGraph(function() {
     var chart = nv.models.lineChart()

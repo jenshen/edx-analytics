@@ -4,7 +4,7 @@ courses = [
         "course_id": "MITx/Spring_2014/test_course1",
         "registration_open": "01-01-2014",
         "start_date": "02-01-2014",
-        "end_date": "05-01-2014",
+        "end_date": "05-15-2014",
         "chapters": [
             {
                 "name": "Introduction",

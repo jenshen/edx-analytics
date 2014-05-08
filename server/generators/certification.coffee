@@ -1,23 +1,21 @@
 root = exports ? this
 
-root.DailyCountsGenerator = 
+root.CertificationGenerator = 
   create: (obj) ->
     # Grab parameters
-    @module = obj.module
-    @event_type = obj.event_type
     @course = obj.course
     @SNR = obj.SNR ? 1
     @scalingConstant = obj.scalingConstant ? 1000
 
     # Parse start and end dates
-    @start_date = moment @module.start_date, 'YYYY-MM-DD hh:mm:ss'
-    @current_date = moment(@start_date)
+    @start_date = moment @course.start_date, 'YYYY-MM-DD hh:mm:ss'
     @end_date = moment()
+    @current_date = moment(@start_date).add(1, 'months')
 
     while @current_date.isBefore(@end_date)
       this._generateActivity()
       @current_date = @current_date.add('days', 1)
-    
+
   _generateActivity: ->
     @countries = Country.find()
     @countries.forEach (country) =>
@@ -32,7 +30,7 @@ root.DailyCountsGenerator =
   _generateLOE: (country, loe) ->
     # console.log "Number of Days: #{@num_days}"
     # console.log "loe: #{loe.short}"
-    @num_days = @current_date.diff(@start_date, 'days')
+    @num_days = @end_date.diff(@current_date, 'days')
     
     constant = @scalingConstant * country.scale * loe.scale
     pure_count = Math.ceil(constant * Math.pow(Math.E, - 0.03*@num_days))
@@ -44,8 +42,7 @@ root.DailyCountsGenerator =
       loe: loe.short
       cc: country.short
       count: count
-      module_id: @module.module_id
-      event_type: @event_type
+      course_id: @course.course_id
 
     # console.log count
-    DailyCount.insert doc
+    Certification.insert doc
