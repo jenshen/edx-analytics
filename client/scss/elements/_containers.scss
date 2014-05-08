@@ -3,7 +3,7 @@ html, body{
     height: 100%;
     overflow: hidden;
     color: $black;
-    font-family: "Open Sans",Arial,Helvetica,sans-serif;
+    font-family: $primary-font;
     font-weight: 300;
     font-size: $font-size;
     padding: 0;
@@ -48,14 +48,5 @@ html, body{
     
     @media #{$large-up} {
         padding: 1em 0em 0em 2em;
-    }
-}
-
-.filters{
-    padding-bottom: 1em;
-    border-bottom: 1px solid rgb(221, 221, 221);
-    .row {
-        width: 80%;
-        margin: 0;
     }
 }

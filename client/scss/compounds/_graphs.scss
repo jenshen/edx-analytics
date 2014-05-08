@@ -1,38 +1,30 @@
 svg {
-	width: 90%;
-	height: 90%;
 	min-width: 100px;
 	min-height: 100px;
 
 	text {
-		font-family: "Open Sans";
+		font-family: $primary-font;
 		font-size: 13px;
 	}
 }
 
 .tool-tip {
-	font-family: "Open Sans";
+	font-family: $primary-font;
 	font-size: 13px;
 }
 
 .graphs {
-	margin-top: 5px;
-	height: 90%;
-	overflow-y: scroll;
+	margin-top: 10px;
 
 	.graph-wrapper {
 		font-size: 20px;
-		width: 100%;
 		display: block;
 		margin-top: 15px;
-		margin-bottom: 20px;
 	}
 
 	.graph {
 		margin-top: 10px;
-		margin-left: 10px;
 		font-size: 13px;
-		width: 45%;
 		height: 300px;
 		display: inline-block;
 		text-align: left;
@@ -40,14 +32,6 @@ svg {
 
 	.clickable:hover {
 		cursor: pointer;
-	}
-
-	.full {
-		width: 90%;
-	}
-
-	.full-height {
-		height: 80%;
 	}
 }
 
