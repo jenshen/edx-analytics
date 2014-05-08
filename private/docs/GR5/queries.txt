@@ -16,4 +16,36 @@ db.daily_count.aggregate([{
   }
 }])
 
+db.certification.aggregate([{
+  $match: {
+    loe: {$in: ["p"]},
+    date: {
+      $gt: "2020-02-03 05:00:00",
+      $lt: "2020-02-05 05:00:00"
+    },
+    cc: {$in: ["US"]}
+  }
+},{
+  $group: {
+    _id: {date: "$date"},
+    count: {$sum: "$count"}
+  }
+}])
+
+db.enrollment.aggregate([{
+  $match: {
+    loe: {$in: ["p"]},
+    date: {
+      $gt: "2020-02-03 05:00:00",
+      $lt: "2020-02-05 05:00:00"
+    },
+    cc: {$in: ["US"]}
+  }
+},{
+  $group: {
+    _id: {gender: "$gender"},
+    count: {$sum: "$count"}
+  }
+}])
+
     
