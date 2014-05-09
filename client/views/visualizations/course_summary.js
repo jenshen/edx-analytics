@@ -8,14 +8,13 @@ Template.course_summary.created = function(){
   });
   // Initialize data streams
   Session.set('streams', {
-    view: [],
-    minutes_watched: [],
-    problem_corrects: [],
-    problem_attempts: [],
-    certification: []
+    // view: [],
+    // minutes_watched: [],
+    // problem_corrects: [],
+    // problem_attempts: [],
+    // certification: []
   });
 }
-
 Template.course_summary.rendered = function(){
   // Update data based on initial filter options
   Template.course_summary.updateData();
@@ -23,12 +22,10 @@ Template.course_summary.rendered = function(){
   // Establish graph dependency on data
   Deps.autorun(Template.course_summary.renderGraphs);
 }
-
 Template.course_summary.updateData = function(){
   var filters = Session.get('filters');
 
   var match = {};
-  console.log(filters);
   var end_date = moment().format('YYYY-MM-DD hh:mm:ss');
   var start_date = moment(end_date);
   var date = {};
@@ -57,8 +54,6 @@ Template.course_summary.updateData = function(){
     }
   }
 
-  console.log(match);
-
   if (filters['cc'].length > 0){
     match['cc'] = {$in: filters['cc']};
   }
@@ -75,7 +70,6 @@ Template.course_summary.updateData = function(){
   Template.course_summary.updateProblemCorrects(match);
   Template.course_summary.updateCertification(match);
 };
-
 Template.course_summary.events = {
   // Video Enagement: Views
   'click #chart1': function (event) {
@@ -96,9 +90,9 @@ Template.course_summary.events = {
     var viz = Visualizations.findOne({name:"Certifications"});
     Session.set("selected", viz._id);
   },
-};
-
+}
 Template.course_summary.updateVideoViews = function(match){
+  Progress.add();
   match['event_type'] = 'view'
 
   params = {
@@ -129,10 +123,11 @@ Template.course_summary.updateVideoViews = function(match){
     streams = Session.get('streams');
     streams['view'] = stream
     Session.set('streams', streams);
+    Progress.finish();
   }); 
 }
-
 Template.course_summary.updateMinutesWatched = function(match){
+  Progress.add();
   match['event_type'] = 'minutes_watched'
 
   params = {
@@ -163,9 +158,11 @@ Template.course_summary.updateMinutesWatched = function(match){
     streams = Session.get('streams');
     streams['minutes_watched'] = stream
     Session.set('streams', streams);
+    Progress.finish();
   }); 
 }
 Template.course_summary.updateProblemAttempts = function(match){
+  Progress.add();
   match['event_type'] = 'problem_attempts'
 
   params = {
@@ -196,9 +193,11 @@ Template.course_summary.updateProblemAttempts = function(match){
     streams = Session.get('streams');
     streams['problem_attempts'] = stream
     Session.set('streams', streams);
+    Progress.finish();
   }); 
 }
 Template.course_summary.updateProblemCorrects = function(match){
+  Progress.add();
   match['event_type'] = 'problem_corrects'
 
   params = {
@@ -229,10 +228,11 @@ Template.course_summary.updateProblemCorrects = function(match){
     streams = Session.get('streams');
     streams['problem_corrects'] = stream
     Session.set('streams', streams);
+    Progress.finish();
   }); 
 }
-
 Template.course_summary.updateCertification = function(match){
+  Progress.add();
   match['module_id'] = undefined;
   match['event_type'] = undefined;
 
@@ -264,124 +264,36 @@ Template.course_summary.updateCertification = function(match){
     streams = Session.get('streams');
     streams['certification'] = stream
     Session.set('streams', streams);
+    Progress.finish();
   }); 
 }
-
-
 Template.course_summary.renderGraphs = function () {
-  streams = Session.get('streams');
-  var data = [{
-    "key": "DOWN",
-    "values": streams['view'],
-    "color": "#2F73BC"
-  }];
-
-  nv.addGraph(function () {
-    var chart = nv.models.lineChart()
-      .options({
-        margin: {
-          left: 50,
-          bottom: 50,
-          right: 50
-        },
-        showXAxis: true,
-        showYAxis: true,
-        transitionDuration: 250,
-        showLegend: false,
-      })
-      .tooltipContent(function (key, x, y, e, graph) {
-        return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " views" + '</p>';
-      });;
-
-    // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
-    chart.xAxis
-      .axisLabel("Date")
-      .axisLabelDistance(30)
-    .tickFormat(function (d) {
-      return d3.time.format('%x')(new Date(d))
-    });;
-
-    chart.yAxis
-      .axisLabel("Views")
-      .tickFormat(d3.format(',.f'))
-      .axisLabelDistance(40);
-
-    d3.select('#chart1 svg')
-      .datum(data)
-      .call(chart);
-
-    //TODO: Figure out a good way to do this automatically
-    nv.utils.windowResize(chart.update);
-    //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart) });
-
-    chart.dispatch.on('stateChange', function (e) {
-      nv.log('New State:', JSON.stringify(e));
-    });
-
-    return chart;
-  });
-
-
-  // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
-
-  var line_data = [{
-    "key": "Minutes",
-    "values": streams['minutes_watched'],
-    "color": "#2F73BC"
-  }];
-
-  nv.addGraph(function () {
-    var chart = nv.models.lineChart()
-      .options({
-        margin: {
-          left: 50,
-          bottom: 50,
-          right: 50
-        },
-        showXAxis: true,
-        showYAxis: true,
-        transitionDuration: 250,
-        showLegend: false
-      })
-      .tooltipContent(function (key, x, y, e, graph) {
-        return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " minutes" + '</p>';
-      });;
-
-    // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
-    chart.xAxis
-      .axisLabel("Date")
-      .axisLabelDistance(30)
-      .tickFormat(function (d) {
-        return d3.time.format('%x')(new Date(d))
-      });;
-
-    chart.yAxis
-      .axisLabel("Minutes")
-      .axisLabelDistance(40)
-      .tickFormat(d3.format(',.f'));
-
-    d3.select('#chart2 svg')
-      .datum(line_data)
-      .call(chart);
-
-    //TODO: Figure out a good way to do this automatically
-    nv.utils.windowResize(chart.update);
-    //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart) });
-
-    chart.dispatch.on('stateChange', function (e) {
-      nv.log('New State:', JSON.stringify(e));
-    });
-
-    return chart;
-  });
-
+  var streams = Session.get('streams');
+  if (typeof(streams['view']) != 'undefined'){
+    Template.course_summary.renderVideoViewsGraph(streams['view']);
+  }
+  if (typeof(streams['minutes_watched']) != 'undefined'){
+    Template.course_summary.renderMinutesWatchedGraph(streams['minutes_watched']);
+  }
+  if((typeof(streams['problem_attempts']) != 'undefined')&
+    (typeof(streams['problem_corrects']) != 'undefined')){
+    Template.course_summary.renderPerformanceGraph(
+      streams['problem_attempts'],
+      streams['problem_corrects']
+    );
+  }
+  if (typeof(streams['certification']) != 'undefined'){
+    Template.course_summary.renderCertificationGraph(streams['certification']);
+  }
+}
+Template.course_summary.renderPerformanceGraph = function(attempts, corrects){
   var set3_data = [{
     "key": "Attempts",
-    "values":streams['problem_attempts'],
+    "values": attempts,
     "color": "#d21673"
   }, {
     "key": "Correct",
-    "values": streams['problem_corrects'],
+    "values": corrects,
     "color": "#2F73BC"
   }];
 
@@ -429,12 +341,114 @@ Template.course_summary.renderGraphs = function () {
 
     return chart;
   });
+}
+Template.course_summary.renderVideoViewsGraph = function(stream){
+  var data = [{
+    "key": "DOWN",
+    "values": stream,
+    "color": "#2F73BC"
+  }];
+  nv.addGraph(function () {
+    var chart = nv.models.lineChart()
+      .options({
+        margin: {
+          left: 50,
+          bottom: 50,
+          right: 50
+        },
+        showXAxis: true,
+        showYAxis: true,
+        transitionDuration: 250,
+        showLegend: false,
+      })
+      .tooltipContent(function (key, x, y, e, graph) {
+        return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " views" + '</p>';
+      });;
 
+    // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
+    chart.xAxis
+      .axisLabel("Date")
+      .axisLabelDistance(30)
+    .tickFormat(function (d) {
+      return d3.time.format('%x')(new Date(d))
+    });;
 
+    chart.yAxis
+      .axisLabel("Views")
+      .tickFormat(d3.format(',.f'))
+      .axisLabelDistance(40);
 
+    d3.select('#chart1 svg')
+      .datum(data)
+      .call(chart);
+
+    //TODO: Figure out a good way to do this automatically
+    nv.utils.windowResize(chart.update);
+    //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart) });
+
+    chart.dispatch.on('stateChange', function (e) {
+      nv.log('New State:', JSON.stringify(e));
+    });
+
+    return chart;
+  });
+}
+Template.course_summary.renderMinutesWatchedGraph = function(stream){
+  var line_data = [{
+    "key": "Minutes",
+    "values": stream,
+    "color": "#2F73BC"
+  }];
+
+  nv.addGraph(function () {
+    var chart = nv.models.lineChart()
+      .options({
+        margin: {
+          left: 50,
+          bottom: 50,
+          right: 50
+        },
+        showXAxis: true,
+        showYAxis: true,
+        transitionDuration: 250,
+        showLegend: false
+      })
+      .tooltipContent(function (key, x, y, e, graph) {
+        return "<h3 class='tool-tip'>" + x + '</h3>' + "<p class='tool-tip'>" + y + " minutes" + '</p>';
+      });;
+
+    // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
+    chart.xAxis
+      .axisLabel("Date")
+      .axisLabelDistance(30)
+      .tickFormat(function (d) {
+        return d3.time.format('%x')(new Date(d))
+      });;
+
+    chart.yAxis
+      .axisLabel("Minutes")
+      .axisLabelDistance(40)
+      .tickFormat(d3.format(',.f'));
+
+    d3.select('#chart2 svg')
+      .datum(line_data)
+      .call(chart);
+
+    //TODO: Figure out a good way to do this automatically
+    nv.utils.windowResize(chart.update);
+    //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart) });
+
+    chart.dispatch.on('stateChange', function (e) {
+      nv.log('New State:', JSON.stringify(e));
+    });
+
+    return chart;
+  });
+}
+Template.course_summary.renderCertificationGraph = function(stream){
   var set5_data = [{
     "key": "Certifications",
-    "values": streams['certification'],
+    "values": stream,
     "color": "#d21673"
   }];
 
@@ -482,4 +496,4 @@ Template.course_summary.renderGraphs = function () {
 
     return chart;
   });
-};
+}

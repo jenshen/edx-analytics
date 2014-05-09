@@ -8,8 +8,8 @@ Template.video_activity.created = function(){
   });
   // Initialize data streams
   Session.set('streams', {
-    view: [],
-    minutes_watched: []
+    // view: [],
+    // minutes_watched: []
   });
 }
 Template.video_activity.rendered = function(){
@@ -69,6 +69,7 @@ Template.video_activity.events = {
   'updatedFilters': Template.video_activity.updateData
 }
 Template.video_activity.updateViews = function(match) {
+    Progress.add();
     match['event_type'] = 'view'
     var params = {
       pipe: [{
@@ -95,12 +96,14 @@ Template.video_activity.updateViews = function(match) {
                 y: result[i]['count']
             });
         }
-        streams = Session.get('streams');
+        var streams = Session.get('streams');
         streams['view'] = stream
         Session.set('streams', streams);
+        Progress.finish();
     }); 
 }
 Template.video_activity.updateMinutesWatched = function(match) {
+    Progress.add();
     match['event_type'] = 'minutes_watched'
     var params = {
       pipe: [{
@@ -127,18 +130,27 @@ Template.video_activity.updateMinutesWatched = function(match) {
                 y: result[i]['count']
             });
         }
-        streams = Session.get('streams');
+        var streams = Session.get('streams');
         streams['minutes_watched'] = stream
         Session.set('streams', streams);
+        Progress.finish();
     }); 
 }
 Template.video_activity.renderGraphs = function() {
-  streams = Session.get('streams');
-
+  var streams = Session.get('streams');
+  console.log(streams);
+  if (typeof(streams['view']) != 'undefined'){
+    Template.video_activity.renderVideoViewsGraph(streams['view']);
+  }
+  if (typeof(streams['minutes_watched']) != 'undefined'){
+    Template.video_activity.renderMinutesWatchedGraph(streams['minutes_watched']);
+  }
+}
+Template.video_activity.renderVideoViewsGraph = function(stream){
   // Views graph
   var data = [{
     "key":"DOWN",
-    "values": streams['view'],
+    "values": stream,
     "color": "#2F73BC"
   }];
 
@@ -182,12 +194,12 @@ Template.video_activity.renderGraphs = function() {
 
     return chart;
   });
-
-
+}
+Template.video_activity.renderMinutesWatchedGraph = function(stream){
   // minutes graph  
   var data_2 = [{
     "key":"DOWN",
-    "values": streams['minutes_watched'],
+    "values": stream,
     "color": "#d21673"
   }];
 
@@ -231,5 +243,4 @@ Template.video_activity.renderGraphs = function() {
 
     return chart;
   });
-
 }

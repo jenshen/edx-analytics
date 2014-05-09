@@ -8,8 +8,8 @@ Template.demographics.created = function(){
 
   // Initialize data streams
   Session.set('streams', {
-    enrollment: [],
-    gender: []
+    // enrollment: [],
+    // gender: []
   });
 }
 
@@ -70,6 +70,7 @@ Template.demographics.events = {
 }
 
 Template.demographics.updateEnrollment = function(match){
+  Progress.add();
   var params = {
     pipe: [{
       $match: match
@@ -98,10 +99,12 @@ Template.demographics.updateEnrollment = function(match){
       streams = Session.get('streams');
       streams['enrollment'] = stream
       Session.set('streams', streams);
+      Progress.finish();
   }); 
 }
 
 Template.demographics.updateGender = function(match){
+  Progress.add();
   var params = {
     pipe: [{
       $match: match
@@ -129,16 +132,62 @@ Template.demographics.updateGender = function(match){
       streams = Session.get('streams');
       streams['gender'] = stream
       Session.set('streams', streams);
+      Progress.finish();
   }); 
 }
 
 Template.demographics.renderGraphs = function() {
   streams = Session.get('streams');
 
+  if(typeof(streams['enrollment']) != 'undefined'){
+    Template.demographics.renderEnrollmentGraph(streams['enrollment']);
+  }
+  if(typeof(streams['gender']) != 'undefined'){
+    Template.demographics.renderGenderGraph(streams['gender']);
+  }
+
+  var bar_data = [{"key":"Age","values":[{"label":"A","value":13},{"label":"B","value":15}]}];
+  nv.addGraph(function() {  
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .options({
+              margin: {left: 60, bottom: 50, right: 40},
+              showXAxis: true,
+              showYAxis: true,
+              showValues: true,
+              transitionDuration: 250,
+              showLegend: false,
+              tootips: false,
+            })
+            ;
+
+        chart.xAxis
+          .axisLabel("Age")
+          .axisLabelDistance(20)
+          ;
+
+        chart.yAxis
+          .axisLabel("Students Enrolled")
+          .axisLabelDistance(30)
+          ;
+
+        d3.select('#age_chart svg')
+            .datum(bar_data)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+
+      return chart;
+    });
+    //World Map
+    //var map = new Datamap({element: document.getElementById('map_chart')});
+}
+Template.demographics.renderEnrollmentGraph = function(stream){
   // Enrollment graph  
   var data = [{
     "key":"DOWN",
-    "values": streams['enrollment'],
+    "values": stream,
     "color": "#2F73BC"
   }];
 
@@ -182,9 +231,10 @@ Template.demographics.renderGraphs = function() {
 
     return chart;
   });
-
+}
+Template.demographics.renderGenderGraph = function(stream){
   // Gender Donut Graph
-  var pie_data = streams['gender'];
+  var pie_data = stream;
 
   nv.addGraph(function() {
     var chart = nv.models.pieChart()
@@ -209,41 +259,4 @@ Template.demographics.renderGraphs = function() {
     return chart;
   });
 
-  var bar_data = [{"key":"Age","values":[{"label":"A","value":13},{"label":"B","value":15}]}];
-  nv.addGraph(function() {  
-        var chart = nv.models.discreteBarChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .options({
-              margin: {left: 60, bottom: 50, right: 40},
-              showXAxis: true,
-              showYAxis: true,
-              showValues: true,
-              transitionDuration: 250,
-              showLegend: false,
-              tootips: false,
-            })
-            ;
-
-        chart.xAxis
-          .axisLabel("Age")
-          .axisLabelDistance(20)
-          ;
-
-        chart.yAxis
-          .axisLabel("Students Enrolled")
-          .axisLabelDistance(30)
-          ;
-
-        d3.select('#age_chart svg')
-            .datum(bar_data)
-            .call(chart);
-
-        nv.utils.windowResize(chart.update);
-
-      return chart;
-    });
-
-    //World Map
-    //var map = new Datamap({element: document.getElementById('map_chart')});
 }

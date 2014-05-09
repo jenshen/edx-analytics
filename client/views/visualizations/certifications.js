@@ -6,9 +6,8 @@ Template.certifications.created = function(){
     time: ['lw']
   });
   // Initialize data streams
-  Session.set('streams', {certification: []});
+  Session.set('streams', {});
 }
-
 Template.certifications.rendered = function(){
   // Update data based on initial filter options
   Template.certifications.updateData();
@@ -17,11 +16,10 @@ Template.certifications.rendered = function(){
   Deps.autorun(Template.certifications.renderGraphs);
 
 }
-
 Template.certifications.updateData = function(){
-  filters = Session.get('filters');
+  Progress.add();
+  var filters = Session.get('filters');
   var match = {};
-  console.log(filters);
   var end_date = moment().format('YYYY-MM-DD hh:mm:ss');
   var start_date = moment(end_date);
   var date = {};
@@ -84,18 +82,23 @@ Template.certifications.updateData = function(){
       streams = Session.get('streams');
       streams['certification'] = stream
       Session.set('streams', streams);
+      Progress.finish();
   }); 
 }
 
 Template.certifications.events = {
   'updatedFilters': Template.certifications.updateData
 }
-
 Template.certifications.renderGraphs = function(){
   var streams = Session.get('streams');
+  if (typeof(streams['certification']) != 'undefined'){
+    Template.certifications.renderCertificationGraph(streams['certification']);
+  }
+}
+Template.certifications.renderCertificationGraph = function(stream){
   var data = [{
     "key":"DOWN",
-    "values": streams['certification'],
+    "values": stream,
     "color": "#2F73BC"
   }];
 
